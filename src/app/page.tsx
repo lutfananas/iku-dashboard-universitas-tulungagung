@@ -1380,6 +1380,258 @@ export default function IKUDashboard() {
             </CardContent>
           </Card>
         )}
+
+        {/* Penilaian Wajib SPMI */}
+        <Card className="border-2 border-gold/40 bg-gradient-to-br from-white to-amber-50/30">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-bold text-navy flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-gold" />
+              Penilaian Wajib (Syarat Perlu) Indikator Akreditasi
+            </CardTitle>
+            <CardDescription className="text-xs">
+              Ketentuan mutlak yang harus dipenuhi agar institusi dapat meraih status &quot;Terakreditasi&quot; atau &quot;Terakreditasi Unggul&quot; berdasarkan 7 IKU Wajib sesuai Kepmendiktisaintek No. 358/M/KEP/2026
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-amber-50 border border-gold/30 rounded-lg p-3.5 mb-5">
+              <p className="text-xs text-amber-900 leading-relaxed">
+                Berdasarkan pilihan institusi Anda untuk berfokus pada <strong>7 IKU Wajib</strong>, terdapat beberapa <strong>penilaian wajib (Syarat Perlu)</strong> dalam indikator akreditasi yang harus dipenuhi agar institusi Anda dapat meraih status <strong>&quot;Terakreditasi&quot;</strong> atau <strong>&quot;Terakreditasi Unggul&quot;</strong>. Berikut adalah daftar penilaian wajib dan ketentuan mutlak yang harus dipenuhi pada indikator-indikator tersebut.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {/* 1. Aspek SDM */}
+              <div className="border border-slate-200 rounded-lg overflow-hidden">
+                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
+                  <Users className="w-4 h-4 text-gold shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-bold">Penilaian Wajib pada Aspek SDM</h4>
+                    <p className="text-[10px] text-white/70">IKU 12 &amp; Indikator 6, 11</p>
+                  </div>
+                  {hasAnyData && (
+                    <Badge className={`ml-auto text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku12))}`}>
+                      IKU 12: {ikuValues.iku12.toFixed(1)}%
+                    </Badge>
+                  )}
+                </div>
+                <div className="p-4 space-y-3 bg-white">
+                  <p className="text-xs text-slate-600 italic">Untuk mendukung kriteria ini, institusi Anda memiliki kewajiban penilaian sebagai berikut:</p>
+                  <div className="space-y-2.5">
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Dokumen Perencanaan Strategis</p>
+                        <p className="text-[11px] text-slate-600">Wajib memiliki Renstra atau Rencana Induk SDM yang telah ditetapkan secara resmi oleh pimpinan dan dapat diverifikasi.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Standar Penghasilan Minimum</p>
+                        <p className="text-[11px] text-slate-600">Dokumen tersebut secara eksplisit wajib memuat target peningkatan kesejahteraan dosen dengan standar berbasis jenjang jabatan akademik, contohnya: <strong>Asisten Ahli ≥ 1,5× UMP</strong> dan <strong>Lektor ≥ 3× UMP</strong>.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Kecukupan Dosen Tetap</p>
+                        <p className="text-[11px] text-slate-600">Perguruan tinggi wajib membuktikan kecukupan jumlah dosen tetap yang memiliki jabatan akademik di setiap program studi.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Luaran Pendidikan */}
+              <div className="border border-slate-200 rounded-lg overflow-hidden">
+                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
+                  <GraduationCap className="w-4 h-4 text-gold shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-bold">Penilaian Wajib pada Luaran Pendidikan</h4>
+                    <p className="text-[10px] text-white/70">IKU 1, 2 &amp; Indikator 14, 15</p>
+                  </div>
+                  {hasAnyData && (
+                    <div className="ml-auto flex gap-1.5">
+                      <Badge className={`text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku1))}`}>
+                        IKU 1: {ikuValues.iku1.toFixed(1)}%
+                      </Badge>
+                      <Badge className={`text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku2))}`}>
+                        IKU 2: {ikuValues.iku2.toFixed(1)}%
+                      </Badge>
+                    </div>
+                  )}
+                </div>
+                <div className="p-4 space-y-3 bg-white">
+                  <p className="text-xs text-slate-600 italic">Aspek ini merupakan inti dari kriteria Relevansi yang menilai dampak nyata institusi:</p>
+                  <div className="space-y-2.5">
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Validitas Tracer Study (IKU 2)</p>
+                        <p className="text-[11px] text-slate-600">Penilaian wajib dilakukan melalui penelusuran lulusan (D1-S1) dalam jangka waktu maksimal 1 tahun setelah lulus.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Responden Minimum</p>
+                        <p className="text-[11px] text-slate-600">Wajib mengumpulkan jumlah responden minimum sesuai formula <code className="bg-navy/10 text-navy px-1 py-0.5 rounded text-[10px] font-mono">n = N / (N×d² + 1)</code> dengan tingkat galat (error) sebesar <strong>2,3%</strong> agar data dianggap sah.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Efisiensi Masa Studi (IKU 1)</p>
+                        <p className="text-[11px] text-slate-600">Wajib menghitung Angka Efisiensi Edukasi (AEE) berdasarkan jumlah mahasiswa yang lulus tepat waktu (misalnya 8 semester untuk Sarjana) dibandingkan total mahasiswa masuk.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Hilirisasi & Kerja Sama */}
+              <div className="border border-slate-200 rounded-lg overflow-hidden">
+                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
+                  <Handshake className="w-4 h-4 text-gold shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-bold">Penilaian Wajib pada Hilirisasi &amp; Kerja Sama</h4>
+                    <p className="text-[10px] text-white/70">IKU 5 &amp; Indikator 18, 22, 34</p>
+                  </div>
+                  {hasAnyData && (
+                    <Badge className={`ml-auto text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku5))}`}>
+                      IKU 5: {ikuValues.iku5.toFixed(1)}%
+                    </Badge>
+                  )}
+                </div>
+                <div className="p-4 space-y-3 bg-white">
+                  <p className="text-xs text-slate-600 italic">Penjaminan mutu harus memastikan setiap kerja sama memiliki bukti legalitas dan dampak:</p>
+                  <div className="space-y-2.5">
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Legalitas Kerja Sama</p>
+                        <p className="text-[11px] text-slate-600">Setiap luaran wajib didukung oleh dokumen resmi seperti MoU atau MoA yang masih aktif dengan mitra industri atau lembaga.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Bukti Pemanfaatan (Hilirisasi)</p>
+                        <p className="text-[11px] text-slate-600">Luaran (jurnal, produk terapan, atau seni) wajib dibuktikan telah dimanfaatkan melalui surat penerapan, laporan implementasi, atau bukti komersialisasi/lisensi dari mitra.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Tata Kelola & Keuangan */}
+              <div className="border border-slate-200 rounded-lg overflow-hidden">
+                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
+                  <Wallet className="w-4 h-4 text-gold shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-bold">Penilaian Wajib pada Tata Kelola &amp; Keuangan</h4>
+                    <p className="text-[10px] text-white/70">IKU 9 &amp; Indikator 33, 35</p>
+                  </div>
+                  {hasAnyData && (
+                    <Badge className={`ml-auto text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku9))}`}>
+                      IKU 9: {ikuValues.iku9.toFixed(1)}%
+                    </Badge>
+                  )}
+                </div>
+                <div className="p-4 space-y-3 bg-white">
+                  <p className="text-xs text-slate-600 italic">Untuk PTS, akuntabilitas keuangan memiliki standar penilaian yang spesifik:</p>
+                  <div className="space-y-2.5">
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Audit Eksternal Independen</p>
+                        <p className="text-[11px] text-slate-600">Laporan keuangan institusi wajib diaudit oleh auditor independen terdaftar untuk memastikan kewajaran penyajian data.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Opini Audit</p>
+                        <p className="text-[11px] text-slate-600">Hasil audit yang diakui minimal berstatus <strong>Wajar Tanpa Pengecualian (WTP)</strong> atau <strong>Wajar Dengan Pengecualian (WDP)</strong>.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Diversifikasi Pendapatan</p>
+                        <p className="text-[11px] text-slate-600">Wajib mencatatkan pendapatan dari sumber non-akademik (hibah riset, unit bisnis, jasa layanan) di dalam laporan keuangan resmi.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 5. Diferensiasi Misi */}
+              <div className="border border-slate-200 rounded-lg overflow-hidden">
+                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
+                  <Globe className="w-4 h-4 text-gold shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-bold">Penilaian Wajib pada Diferensiasi Misi</h4>
+                    <p className="text-[10px] text-white/70">IKU 7 &amp; Indikator 36, 38</p>
+                  </div>
+                  {hasAnyData && (
+                    <Badge className={`ml-auto text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku7))}`}>
+                      IKU 7: {ikuValues.iku7.toFixed(1)}%
+                    </Badge>
+                  )}
+                </div>
+                <div className="p-4 space-y-3 bg-white">
+                  <p className="text-xs text-slate-600 italic">Kewajiban dalam pemilihan tema strategis untuk keunikan institusi:</p>
+                  <div className="space-y-2.5">
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Pemilihan 2 SDGs Tambahan</p>
+                        <p className="text-[11px] text-slate-600">Selain wajib berkontribusi pada <strong>SDG 1, 4, dan 17</strong>, institusi wajib memilih <strong>2 tujuan SDGs lain</strong> yang sesuai dengan keunggulan kampus.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Formalitas dalam Renstra</p>
+                        <p className="text-[11px] text-slate-600">Penetapan 2 SDGs pilihan tersebut wajib dituangkan secara formal dalam dokumen Renstra atau laporan kinerja tahunan untuk dapat dinilai oleh asesor.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 6. Budaya Mutu */}
+              <div className="border border-slate-200 rounded-lg overflow-hidden">
+                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
+                  <ShieldCheck className="w-4 h-4 text-gold shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-bold">Penilaian Wajib Budaya Mutu</h4>
+                    <p className="text-[10px] text-white/70">Indikator 3</p>
+                  </div>
+                </div>
+                <div className="p-4 space-y-3 bg-white">
+                  <div className="space-y-2.5">
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Pelaporan Berkala</p>
+                        <p className="text-[11px] text-slate-600">Institusi wajib memiliki laporan implementasi SPMI tingkat perguruan tinggi secara berkala melalui PD Dikti.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
+                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-xs font-semibold text-navy">Siklus PPEPP</p>
+                        <p className="text-[11px] text-slate-600">Penilaian wajib menunjukkan keberfungsian siklus <strong>Penetapan, Pelaksanaan, Evaluasi, Pengendalian, dan Peningkatan</strong> standar pendidikan tinggi secara terencana dan berkelanjutan.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   };
