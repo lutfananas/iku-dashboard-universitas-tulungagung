@@ -2139,37 +2139,72 @@ export default function IKUDashboard() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "linear-gradient(180deg, #F8FAFC 0%, #EEF2F7 100%)" }}>
-      {/* Header Banner with Wave */}
-      <header className="relative text-white overflow-hidden" style={{ background: "linear-gradient(135deg, #8B1A1A 0%, #B91C1C 30%, #1E3A5F 70%, #1E40AF 100%)" }}>
-        {/* Decorative geometric shapes */}
+      {/* Header Banner — Premium Animated */}
+      <header className="header-premium relative text-white overflow-hidden">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 header-gradient-bg" />
+
+        {/* Animated floating orbs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-10" style={{ background: "radial-gradient(circle, rgba(212,168,67,0.3), transparent)" }} />
-          <div className="absolute top-2 right-20 w-20 h-20 rounded-full opacity-10" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.2), transparent)" }} />
-          <div className="absolute -bottom-5 left-20 w-32 h-32 rounded-full opacity-5" style={{ background: "radial-gradient(circle, rgba(212,168,67,0.3), transparent)" }} />
-          <div className="absolute top-0 left-0 w-full h-full" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0)", backgroundSize: "24px 24px" }} />
+          <div className="header-orb header-orb-1" />
+          <div className="header-orb header-orb-2" />
+          <div className="header-orb header-orb-3" />
+          <div className="header-orb header-orb-4" />
         </div>
-        <div className="relative flex items-center justify-between h-16 px-4 sm:px-6">
-          <div className="flex items-center gap-3">
+
+        {/* Animated grid lines */}
+        <div className="absolute inset-0 header-grid pointer-events-none" />
+
+        {/* Animated particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="header-particle" style={{ left: "10%", animationDelay: "0s" }} />
+          <div className="header-particle" style={{ left: "25%", animationDelay: "1.5s" }} />
+          <div className="header-particle" style={{ left: "40%", animationDelay: "0.8s" }} />
+          <div className="header-particle" style={{ left: "55%", animationDelay: "2.2s" }} />
+          <div className="header-particle" style={{ left: "70%", animationDelay: "0.3s" }} />
+          <div className="header-particle" style={{ left: "85%", animationDelay: "1.8s" }} />
+          <div className="header-particle" style={{ left: "95%", animationDelay: "2.5s" }} />
+        </div>
+
+        {/* Main header content */}
+        <div className="relative flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             {/* Mobile menu button */}
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all duration-300 header-btn-glow">
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <div className="hidden sm:flex items-center gap-2.5">
-              <img src="/logo-unita.png" alt="UNITA" className="w-9 h-9 object-contain rounded-lg bg-white/10 p-1" />
+
+            {/* Logo with glow animation */}
+            <div className="header-logo-wrap">
+              <div className="header-logo-ring" />
+              <img src="/logo-unita.png" alt="UNITA" className="w-10 h-10 sm:w-11 sm:h-11 object-contain relative z-10" />
             </div>
-            <div>
-              <h1 className="text-base sm:text-lg font-bold tracking-tight">Universitas Tulungagung</h1>
-              <p className="text-[10px] sm:text-xs text-white/70 font-medium">Dashboard Indikator Kinerja Utama</p>
+
+            {/* Title with typing-like reveal */}
+            <div className="header-title-area">
+              <h1 className="text-base sm:text-lg font-bold tracking-tight header-title-text">
+                Universitas Tulungagung
+              </h1>
+              <p className="text-[10px] sm:text-xs font-medium header-subtitle-text">
+                Dashboard Indikator Kinerja Utama
+              </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Badge className="font-bold text-xs px-3 py-1 border-0" style={{ background: "linear-gradient(135deg, #D4A843, #C9952E)", color: "#1a1a1a" }}>IKU WAJIB</Badge>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Badge className="header-iku-badge font-bold text-xs px-3 py-1 border-0">
+              IKU WAJIB
+            </Badge>
           </div>
         </div>
-        {/* Wave bottom edge */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0 32L48 26.7C96 21.3 192 10.7 288 8C384 5.3 480 10.7 576 14.7C672 18.7 768 21.3 864 20C960 18.7 1056 13.3 1152 10.7C1248 8 1344 8 1392 8L1440 8V32H1392C1344 32 1248 32 1152 32C1056 32 960 32 864 32C768 32 672 32 576 32C480 32 384 32 288 32C192 32 96 32 48 32H0Z" fill="#EEF2F7"/>
+
+        {/* Animated wave bottom edge */}
+        <div className="absolute bottom-0 left-0 right-0 h-8 sm:h-10">
+          <svg viewBox="0 0 1440 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full header-wave-1">
+            <path d="M0 40L60 35C120 30 240 20 360 16.7C480 13.3 600 16.7 720 20C840 23.3 960 26.7 1080 25C1200 23.3 1320 16.7 1380 13.3L1440 10V40H1380C1320 40 1200 40 1080 40C960 40 840 40 720 40C600 40 480 40 360 40C240 40 120 40 60 40H0Z" fill="#EEF2F7"/>
+          </svg>
+          <svg viewBox="0 0 1440 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full header-wave-2 absolute bottom-0 left-0">
+            <path d="M0 40L60 36.7C120 33.3 240 26.7 360 25C480 23.3 600 26.7 720 30C840 33.3 960 36.7 1080 35C1200 33.3 1320 26.7 1380 23.3L1440 20V40H1380C1320 40 1200 40 1080 40C960 40 840 40 720 40C600 40 480 40 360 40C240 40 120 40 60 40H0Z" fill="rgba(238,242,247,0.5)"/>
           </svg>
         </div>
       </header>

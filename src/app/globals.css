@@ -273,3 +273,262 @@
   transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
   filter: drop-shadow(0 0 6px var(--card-accent));
 }
+
+/* =============================================
+   PREMIUM ANIMATED HEADER STYLES
+   ============================================= */
+
+/* Header container */
+.header-premium {
+  min-height: 72px;
+  position: relative;
+  z-index: 30;
+}
+
+/* Animated gradient background */
+.header-gradient-bg {
+  background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 20%, #991B1B 35%, #1E3A5F 60%, #1E40AF 80%, #1E3A8A 100%);
+  background-size: 300% 300%;
+  animation: headerGradientShift 8s ease-in-out infinite;
+}
+
+@keyframes headerGradientShift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating orbs */
+.header-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.header-orb-1 {
+  width: 120px;
+  height: 120px;
+  top: -30px;
+  right: 10%;
+  background: rgba(212, 168, 67, 0.25);
+  animation: orbFloat1 6s ease-in-out infinite;
+}
+
+.header-orb-2 {
+  width: 80px;
+  height: 80px;
+  bottom: -20px;
+  left: 15%;
+  background: rgba(255, 255, 255, 0.12);
+  animation: orbFloat2 5s ease-in-out infinite 1s;
+}
+
+.header-orb-3 {
+  width: 60px;
+  height: 60px;
+  top: 10px;
+  left: 45%;
+  background: rgba(185, 28, 28, 0.2);
+  animation: orbFloat3 7s ease-in-out infinite 0.5s;
+}
+
+.header-orb-4 {
+  width: 100px;
+  height: 100px;
+  bottom: -40px;
+  right: 30%;
+  background: rgba(30, 64, 175, 0.2);
+  animation: orbFloat4 6s ease-in-out infinite 2s;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-15px, 10px) scale(1.1); }
+  66% { transform: translate(10px, -8px) scale(0.95); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -12px) scale(1.15); }
+}
+
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(-10px, 8px) scale(1.2); opacity: 1; }
+}
+
+@keyframes orbFloat4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(15px, -5px) scale(1.1); }
+  80% { transform: translate(-8px, 10px) scale(0.9); }
+}
+
+/* Animated grid overlay */
+.header-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  animation: gridScroll 20s linear infinite;
+}
+
+@keyframes gridScroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 32px 32px; }
+}
+
+/* Floating particles */
+.header-particle {
+  position: absolute;
+  bottom: -5px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(212, 168, 67, 0.6);
+  animation: particleRise 4s ease-out infinite;
+  box-shadow: 0 0 6px rgba(212, 168, 67, 0.4);
+}
+
+@keyframes particleRise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-80px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Logo wrapper with pulse ring */
+.header-logo-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .header-logo-wrap {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+.header-logo-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #D4A843, #B91C1C, #1E40AF);
+  background-size: 200% 200%;
+  animation: logoRingRotate 3s linear infinite;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.header-logo-ring::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8B1A1A, #1E3A5F);
+}
+
+@keyframes logoRingRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Title animation */
+.header-title-area {
+  position: relative;
+}
+
+.header-title-text {
+  animation: titleSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.header-subtitle-text {
+  color: rgba(255, 255, 255, 0.7);
+  animation: subtitleSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+  opacity: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes titleSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes subtitleSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* IKU Badge animation */
+.header-iku-badge {
+  background: linear-gradient(135deg, #D4A843, #C9952E, #D4A843);
+  background-size: 200% 200%;
+  color: #1a1a1a;
+  animation: badgeShimmer 3s ease-in-out infinite;
+  box-shadow: 0 2px 10px rgba(212, 168, 67, 0.4);
+}
+
+@keyframes badgeShimmer {
+  0%, 100% { background-position: 0% 50%; box-shadow: 0 2px 10px rgba(212, 168, 67, 0.4); }
+  50% { background-position: 100% 50%; box-shadow: 0 2px 20px rgba(212, 168, 67, 0.7); }
+}
+
+/* Button glow */
+.header-btn-glow {
+  transition: all 0.3s ease;
+}
+
+.header-btn-glow:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Animated waves */
+.header-wave-1 {
+  animation: waveShift1 4s ease-in-out infinite;
+}
+
+.header-wave-2 {
+  animation: waveShift2 5s ease-in-out infinite;
+}
+
+@keyframes waveShift1 {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-8px); }
+}
+
+@keyframes waveShift2 {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
