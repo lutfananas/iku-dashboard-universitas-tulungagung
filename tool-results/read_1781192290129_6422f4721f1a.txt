@@ -1,0 +1,1038 @@
+     1→     1→"use client";
+     2→     2→
+     3→     3→import React, { useState, useEffect, useCallback } from "react";
+     4→     4→import {
+     5→     5→  GraduationCap, Briefcase, Trophy, Handshake, Globe, Wallet, Users,
+     6→     6→  BarChart3, ChevronRight, ChevronDown, Building2, Calendar, BookOpen,
+     7→     7→  Save, CheckCircle2, AlertCircle, Plus, Trash2, RotateCcw, Info, Calculator
+     8→     8→} from "lucide-react";
+     9→     9→import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+    10→    10→import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+    11→    11→import { Badge } from "@/components/ui/badge";
+    12→    12→import { Button } from "@/components/ui/button";
+    13→    13→import { Input } from "@/components/ui/input";
+    14→    14→import { Label } from "@/components/ui/label";
+    15→    15→import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+    16→    16→import { Separator } from "@/components/ui/separator";
+    17→    17→import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+    18→    18→import { toast } from "sonner";
+    19→    19→import {
+    20→    20→  ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent,
+    21→    21→  type ChartConfig,
+    22→    22→} from "@/components/ui/chart";
+    23→    23→import {
+    24→    24→  BarChart, Bar, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis,
+    25→    25→  PolarRadiusAxis, Radar, XAxis, YAxis, CartesianGrid,
+    26→    26→} from "recharts";
+    27→    27→import {
+    28→    28→  FAKULTAS_LIST, ALL_PRODI, getProdiById, getFakultasById, getProdiByFakultas,
+    29→    29→  IKU_LIST, IKU_FIELDS, type IkuId,
+    30→    30→} from "@/lib/iku-config";
+    31→    31→import {
+    32→    32→  calcAEE_Realisation, calcAEE_AchievementRate, calcAEE_PT,
+    33→    33→  calcIKU2, calcIKU2_Aggregate, calcIKU3, calcIKU3_Aggregate,
+    34→    34→  calcIKU5, calcIKU5_Aggregate, calcIKU7, calcIKU7_Aggregate,
+    35→    35→  calcIKU9, calcIKU9_Aggregate, calcIKU12_Skor, calcIKU12_Aggregate,
+    36→    36→  calcIKU12_DokumenSummary, hasData,
+    37→    37→} from "@/lib/iku-calculations";
+    38→    38→import type { Iku1Data, Iku2Data, Iku3Data, Iku5Data, Iku7Data, Iku9Data, Iku12Data } from "@/lib/iku-calculations";
+    39→    39→
+    40→    40→// ============ COLORS ============
+    41→    41→const NAVY = "#1a2744";
+    42→    42→const NAVY_LIGHT = "#243558";
+    43→    43→const TEAL = "#2d8a7e";
+    44→    44→const GOLD = "#c9a84c";
+    45→    45→const CORAL = "#c75c5c";
+    46→    46→const CHART_COLORS = [NAVY, TEAL, GOLD, CORAL, "#3d5a8a", "#5bb5ab", "#e0c873"];
+    47→    47→
+    48→    48→// ============ TYPES ============
+    49→    49→type ViewMode = "global" | "fakultas" | "prodi";
+    50→    50→interface NavSelection { mode: ViewMode; id: string; }
+    51→    51→
+    52→    52→interface IkuRecord {
+    53→    53→  id: string;
+    54→    54→  prodi: string;
+    55→    55→  fakultas: string;
+    56→    56→  tahun: number;
+    57→    57→  iku1: Iku1Data | null;
+    58→    58→  iku2: Iku2Data | null;
+    59→    59→  iku3: Iku3Data | null;
+    60→    60→  iku5: Iku5Data | null;
+    61→    61→  iku7: Iku7Data | null;
+    62→    62→  iku9: Iku9Data | null;
+    63→    63→  iku12: Iku12Data | null;
+    64→    64→}
+    65→    65→
+    66→    66→// ============ MAIN COMPONENT ============
+    67→    67→export default function IKUDashboard() {
+    68→    68→  const [navSelection, setNavSelection] = useState<NavSelection>({ mode: "global", id: "global" });
+    69→    69→  const [tahun, setTahun] = useState(2025);
+    70→    70→  const [allData, setAllData] = useState<IkuRecord[]>([]);
+    71→    71→  const [loading, setLoading] = useState(true);
+    72→    72→  const [expandedFakultas, setExpandedFakultas] = useState<Set<string>>(new Set());
+    73→    73→  const [saving, setSaving] = useState<string | null>(null);
+    74→    74→  const [saveSuccess, setSaveSuccess] = useState<string | null>(null);
+    75→    75→
+    76→    76→  // Form state for current prodi+tahun
+    77→    77→  const [formData, setFormData] = useState<Record<string, Record<string, number | string>>>({});
+    78→    78→
+    79→    79→  // Fetch data
+    80→    80→  const fetchData = useCallback(async () => {
+    81→    81→    try {
+    82→    82→      const res = await fetch(`/api/iku?tahun=${tahun}`);
+    83→    83→      const data = await res.json();
+    84→    84→      setAllData(data);
+    85→    85→    } catch (e) {
+    86→    86→      console.error("Fetch error:", e);
+    87→    87→    } finally {
+    88→    88→      setLoading(false);
+    89→    89→    }
+    90→    90→  }, [tahun]);
+    91→    91→
+    92→    92→  useEffect(() => { fetchData(); }, [fetchData]);
+    93→    93→
+    94→    94→  // Get data for a specific prodi
+    95→    95→  const getProdiData = useCallback((prodiId: string): IkuRecord | undefined => {
+    96→    96→    return allData.find((d) => d.prodi === prodiId);
+    97→    97→  }, [allData]);
+    98→    98→
+    99→    99→  // Initialize form data when prodi/tahun changes
+   100→   100→  useEffect(() => {
+   101→   101→    if (navSelection.mode !== "prodi") return;
+   102→   102→    const prodiData = getProdiData(navSelection.id);
+   103→   103→    const newFormData: Record<string, Record<string, number | string>> = {};
+   104→   104→
+   105→   105→    IKU_LIST.forEach((iku) => {
+   106→   106→      const existingData = prodiData?.[iku.id as keyof IkuRecord] as Record<string, unknown> | null;
+   107→   107→      const fields = IKU_FIELDS[iku.id];
+   108→   108→      const ikuFormData: Record<string, number | string> = {};
+   109→   109→      fields.forEach((field) => {
+   110→   110→        if (existingData && existingData[field.key] !== undefined && existingData[field.key] !== null) {
+   111→   111→          ikuFormData[field.key] = existingData[field.key] as number | string;
+   112→   112→        } else {
+   113→   113→          ikuFormData[field.key] = field.defaultValue ?? (field.type === "number" ? 0 : "");
+   114→   114→        }
+   115→   115→      });
+   116→   116→      newFormData[iku.id] = ikuFormData;
+   117→   117→    });
+   118→   118→
+   119→   119→    setFormData(newFormData);
+   120→   120→  }, [navSelection, tahun, allData, getProdiData]);
+   121→   121→
+   122→   122→  // Save handler
+   123→   123→  const handleSave = async (ikuId: string) => {
+   124→   124→    if (navSelection.mode !== "prodi") return;
+   125→   125→    const prodi = getProdiById(navSelection.id);
+   126→   126→    if (!prodi) return;
+   127→   127→
+   128→   128→    setSaving(ikuId);
+   129→   129→    try {
+   130→   130→      const res = await fetch("/api/iku", {
+   131→   131→        method: "POST",
+   132→   132→        headers: { "Content-Type": "application/json" },
+   133→   133→        body: JSON.stringify({
+   134→   134→          prodi: prodi.id,
+   135→   135→          fakultas: prodi.fakultasId,
+   136→   136→          tahun,
+   137→   137→          ikuId,
+   138→   138→          data: formData[ikuId],
+   139→   139→        }),
+   140→   140→      });
+   141→   141→      if (res.ok) {
+   142→   142→        setSaveSuccess(ikuId);
+   143→   143→        setTimeout(() => setSaveSuccess(null), 2000);
+   144→   144→        await fetchData();
+   145→   145→        toast.success("Data berhasil disimpan", { description: `${IKU_LIST.find((i) => i.id === ikuId)?.label} - ${prodi.nama} (${tahun})` });
+   146→   146→      }
+   147→   147→    } catch (e) {
+   148→   148→      console.error("Save error:", e);
+   149→   149→    } finally {
+   150→   150→      setSaving(null);
+   151→   151→    }
+   152→   152→  };
+   153→   153→
+   154→   154→  // Form input change
+   155→   155→  const handleFormChange = (ikuId: string, key: string, value: number | string) => {
+   156→   156→    setFormData((prev) => ({
+   157→   157→      ...prev,
+   158→   158→      [ikuId]: { ...prev[ikuId], [key]: value },
+   159→   159→    }));
+   160→   160→  };
+   161→   161→
+   162→   162→  // Toggle fakultas expansion
+   163→   163→  const toggleFakultas = (fakultasId: string) => {
+   164→   164→    setExpandedFakultas((prev) => {
+   165→   165→      const next = new Set(prev);
+   166→   166→      if (next.has(fakultasId)) next.delete(fakultasId);
+   167→   167→      else next.add(fakultasId);
+   168→   168→      return next;
+   169→   169→    });
+   170→   170→  };
+   171→   171→
+   172→   172→  // ============ CALCULATION HELPERS ============
+   173→   173→  const calcProdiValue = (ikuId: string, prodiId: string): number => {
+   174→   174→    const prodiData = getProdiData(prodiId);
+   175→   175→    if (!prodiData) return 0;
+   176→   176→    const data = prodiData[ikuId as keyof IkuRecord];
+   177→   177→    if (!data || !hasData(data as Record<string, unknown>)) return 0;
+   178→   178→
+   179→   179→    const prodi = getProdiById(prodiId);
+   180→   180→    switch (ikuId) {
+   181→   181→      case "iku1": return calcAEE_AchievementRate(data as Iku1Data, prodi?.jenjang || "S1");
+   182→   182→      case "iku2": return calcIKU2(data as Iku2Data);
+   183→   183→      case "iku3": return calcIKU3(data as Iku3Data);
+   184→   184→      case "iku5": return calcIKU5(data as Iku5Data);
+   185→   185→      case "iku7": return calcIKU7(data as Iku7Data);
+   186→   186→      case "iku9": return calcIKU9(data as Iku9Data);
+   187→   187→      case "iku12": return calcIKU12_Skor(data as Iku12Data);
+   188→   188→      default: return 0;
+   189→   189→    }
+   190→   190→  };
+   191→   191→
+   192→   192→  const calcAggregatedValue = (ikuId: string, prodiIds: string[]): number => {
+   193→   193→    const dataList: Record<string, unknown>[] = [];
+   194→   194→    const prodiJenjangs: string[] = [];
+   195→   195→
+   196→   196→    prodiIds.forEach((pid) => {
+   197→   197→      const prodiData = getProdiData(pid);
+   198→   198→      if (prodiData) {
+   199→   199→        const data = prodiData[ikuId as keyof IkuRecord];
+   200→   200→        if (data && hasData(data as Record<string, unknown>)) {
+   201→   201→          dataList.push(data as Record<string, unknown>);
+   202→   202→          const prodi = getProdiById(pid);
+   203→   203→          if (prodi) prodiJenjangs.push(prodi.jenjang);
+   204→   204→        }
+   205→   205→      }
+   206→   206→    });
+   207→   207→
+   208→   208→    if (dataList.length === 0) return 0;
+   209→   209→
+   210→   210→    switch (ikuId) {
+   211→   211→      case "iku1": {
+   212→   212→        const validData = dataList.map((d, i) => ({ data: d as Iku1Data, jenjang: prodiJenjangs[i] || "S1" }));
+   213→   213→        return calcAEE_PT(validData);
+   214→   214→      }
+   215→   215→      case "iku2": return calcIKU2_Aggregate(dataList as Iku2Data[]);
+   216→   216→      case "iku3": return calcIKU3_Aggregate(dataList as Iku3Data[]);
+   217→   217→      case "iku5": return calcIKU5_Aggregate(dataList as Iku5Data[]);
+   218→   218→      case "iku7": return calcIKU7_Aggregate(dataList as Iku7Data[]);
+   219→   219→      case "iku9": return calcIKU9_Aggregate(dataList as Iku9Data[]);
+   220→   220→      case "iku12": return calcIKU12_Aggregate(dataList as Iku12Data[]);
+   221→   221→      default: return 0;
+   222→   222→    }
+   223→   223→  };
+   224→   224→
+   225→   225→  const getProdiHasData = (prodiId: string): boolean => {
+   226→   226→    const d = getProdiData(prodiId);
+   227→   227→    if (!d) return false;
+   228→   228→    return IKU_LIST.some((iku) => d[iku.id as keyof IkuRecord] !== null && hasData(d[iku.id as keyof IkuRecord] as Record<string, unknown>));
+   229→   229→  };
+   230→   230→
+   231→   231→  const getFakultasHasData = (fakultasId: string): boolean => {
+   232→   232→    return getProdiByFakultas(fakultasId).some((p) => getProdiHasData(p.id));
+   233→   233→  };
+   234→   234→
+   235→   235→  // ============ RENDER: SIDEBAR ============
+   236→   236→  const renderSidebar = () => (
+   237→   237→    <aside className="w-64 lg:w-72 shrink-0 bg-white border-r border-slate-200 overflow-y-auto custom-scrollbar">
+   238→   238→      {/* University Header */}
+   239→   239→      <div className="p-4 bg-navy text-white">
+   240→   240→        <div className="flex items-center gap-2 mb-1">
+   241→   241→          <Building2 className="w-5 h-5 text-gold" />
+   242→   242→          <span className="font-bold text-sm">Universitas Tulungagung</span>
+   243→   243→        </div>
+   244→   244→        <p className="text-xs text-white/60">Dashboard IKU Perguruan Tinggi</p>
+   245→   245→      </div>
+   246→   246→
+   247→   247→      {/* Year Selector */}
+   248→   248→      <div className="p-3 border-b border-slate-100">
+   249→   249→        <Label className="text-xs font-medium text-slate-500 mb-1.5 block">Tahun Akademik</Label>
+   250→   250→        <Select value={tahun.toString()} onValueChange={(v) => setTahun(parseInt(v))}>
+   251→   251→          <SelectTrigger className="h-9 text-sm border-slate-200">
+   252→   252→            <Calendar className="w-3.5 h-3.5 mr-1.5 text-slate-400" />
+   253→   253→            <SelectValue />
+   254→   254→          </SelectTrigger>
+   255→   255→          <SelectContent>
+   256→   256→            {[2025, 2026, 2027, 2028, 2029, 2030].map((y) => (
+   257→   257→              <SelectItem key={y} value={y.toString()}>{y}</SelectItem>
+   258→   258→            ))}
+   259→   259→          </SelectContent>
+   260→   260→        </Select>
+   261→   261→      </div>
+   262→   262→
+   263→   263→      {/* Navigation Tree */}
+   264→   264→      <nav className="p-2">
+   265→   265→        {/* Global */}
+   266→   266→        <button
+   267→   267→          onClick={() => setNavSelection({ mode: "global", id: "global" })}
+   268→   268→          className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+   269→   269→            navSelection.mode === "global"
+   270→   270→              ? "bg-navy text-white shadow-md"
+   271→   271→              : "text-slate-600 hover:bg-slate-50"
+   272→   272→          }`}
+   273→   273→        >
+   274→   274→          <BarChart3 className="w-4 h-4 shrink-0" />
+   275→   275→          <span>Global Universitas</span>
+   276→   276→          {allData.length > 0 && (
+   277→   277→            <Badge className="ml-auto text-[10px] bg-teal text-white px-1.5 py-0">
+   278→   278→              {allData.filter((d) => IKU_LIST.some((iku) => d[iku.id as keyof IkuRecord] !== null && hasData(d[iku.id as keyof IkuRecord] as Record<string, unknown>))).length} prodi
+   279→   279→            </Badge>
+   280→   280→          )}
+   281→   281→        </button>
+   282→   282→
+   283→   283→        <Separator className="my-2" />
+   284→   284→
+   285→   285→        {/* Fakultas List */}
+   286→   286→        {FAKULTAS_LIST.map((fakultas) => {
+   287→   287→          const isExpanded = expandedFakultas.has(fakultas.id);
+   288→   288→          const isSelected = navSelection.mode === "fakultas" && navSelection.id === fakultas.id;
+   289→   289→          const hasD = getFakultasHasData(fakultas.id);
+   290→   290→
+   291→   291→          return (
+   292→   292→            <div key={fakultas.id} className="mb-0.5">
+   293→   293→              <button
+   294→   294→                onClick={() => {
+   295→   295→                  toggleFakultas(fakultas.id);
+   296→   296→                  setNavSelection({ mode: "fakultas", id: fakultas.id });
+   297→   297→                }}
+   298→   298→                className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all ${
+   299→   299→                  isSelected ? "bg-navy/10 text-navy font-semibold" : "text-slate-600 hover:bg-slate-50"
+   300→   300→                }`}
+   301→   301→              >
+   302→   302→                {isExpanded ? <ChevronDown className="w-3.5 h-3.5 shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 shrink-0" />}
+   303→   303→                <span className="truncate flex-1 text-left">{fakultas.nama.replace("Fakultas ", "F. ")}</span>
+   304→   304→                {hasD && <div className="w-2 h-2 rounded-full bg-teal shrink-0" />}
+   305→   305→              </button>
+   306→   306→
+   307→   307→              {isExpanded && (
+   308→   308→                <div className="ml-5 mt-0.5 space-y-0.5">
+   309→   309→                  {fakultas.prodiList.map((prodi) => {
+   310→   310→                    const isProdiSelected = navSelection.mode === "prodi" && navSelection.id === prodi.id;
+   311→   311→                    const prodiHasD = getProdiHasData(prodi.id);
+   312→   312→                    return (
+   313→   313→                      <button
+   314→   314→                        key={prodi.id}
+   315→   315→                        onClick={() => setNavSelection({ mode: "prodi", id: prodi.id })}
+   316→   316→                        className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-md text-xs transition-all ${
+   317→   317→                          isProdiSelected
+   318→   318→                            ? "bg-navy text-white font-medium"
+   319→   319→                            : "text-slate-500 hover:bg-slate-50 hover:text-slate-700"
+   320→   320→                        }`}
+   321→   321→                      >
+   322→   322→                        <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+   323→   323→                        <span className="truncate flex-1 text-left">{prodi.nama}</span>
+   324→   324→                        {prodiHasD && <div className="w-1.5 h-1.5 rounded-full bg-teal shrink-0" />}
+   325→   325→                      </button>
+   326→   326→                    );
+   327→   327→                  })}
+   328→   328→                </div>
+   329→   329→              )}
+   330→   330→            </div>
+   331→   331→          );
+   332→   332→        })}
+   333→   333→      </nav>
+   334→   334→    </aside>
+   335→   335→  );
+   336→   336→
+   337→   337→  // ============ RENDER: IKU FORM FOR PRODI ============
+   338→   338→  const renderProdiForm = () => {
+   339→   339→    const prodi = getProdiById(navSelection.id);
+   340→   340→    if (!prodi) return null;
+   341→   341→    const fakultas = getFakultasById(prodi.fakultasId);
+   342→   342→
+   343→   343→    return (
+   344→   344→      <div className="space-y-6">
+   345→   345→        {/* Header */}
+   346→   346→        <Card className="border-l-4 border-l-navy">
+   347→   347→          <CardContent className="p-5">
+   348→   348→            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+   349→   349→              <div>
+   350→   350→                <h2 className="text-lg font-bold text-navy">{prodi.nama}</h2>
+   351→   351→                <p className="text-sm text-slate-500">{fakultas?.nama} • Tahun Akademik {tahun}</p>
+   352→   352→              </div>
+   353→   353→              <Badge variant="outline" className="w-fit text-xs">{prodi.jenjang}</Badge>
+   354→   354→            </div>
+   355→   355→          </CardContent>
+   356→   356→        </Card>
+   357→   357→
+   358→   358→        {/* IKU Tabs */}
+   359→   359→        <Tabs defaultValue="iku1" className="space-y-4">
+   360→   360→          <TabsList className="iku-tabs w-full flex h-auto p-1 bg-slate-100/80 rounded-lg gap-0.5 overflow-x-auto">
+   361→   361→            {IKU_LIST.map((iku) => (
+   362→   362→              <TabsTrigger key={iku.id} value={iku.id} className="text-xs font-semibold px-3 py-2 rounded-md whitespace-nowrap data-[state=active]:shadow-md transition-all">
+   363→   363→                {iku.label}
+   364→   364→              </TabsTrigger>
+   365→   365→            ))}
+   366→   366→          </TabsList>
+   367→   367→
+   368→   368→          {IKU_LIST.map((iku) => {
+   369→   369→            const fields = IKU_FIELDS[iku.id];
+   370→   370→            const currentData = formData[iku.id] || {};
+   371→   371→            const isSaving = saving === iku.id;
+   372→   372→            const isSuccess = saveSuccess === iku.id;
+   373→   373→
+   374→   374→            // Calculate preview
+   375→   375→            let previewValue = 0;
+   376→   376→            let previewLabel = "";
+   377→   377→            try {
+   378→   378→              switch (iku.id) {
+   379→   379→                case "iku1": {
+   380→   380→                  const d = currentData as unknown as Iku1Data;
+   381→   381→                  previewValue = calcAEE_Realisation(d);
+   382→   382→                  previewLabel = `AEE Realisasi: ${previewValue.toFixed(2)}% | Tingkat Pencapaian: ${calcAEE_AchievementRate(d, prodi.jenjang).toFixed(2)}%`;
+   383→   383→                  previewValue = calcAEE_AchievementRate(d, prodi.jenjang);
+   384→   384→                  break;
+   385→   385→                }
+   386→   386→                case "iku2": {
+   387→   387→                  previewValue = calcIKU2(currentData as unknown as Iku2Data);
+   388→   388→                  previewLabel = `Persentase: ${previewValue.toFixed(2)}%`;
+   389→   389→                  break;
+   390→   390→                }
+   391→   391→                case "iku3": {
+   392→   392→                  previewValue = calcIKU3(currentData as unknown as Iku3Data);
+   393→   393→                  previewLabel = `Persentase: ${previewValue.toFixed(2)}%`;
+   394→   394→                  break;
+   395→   395→                }
+   396→   396→                case "iku5": {
+   397→   397→                  previewValue = calcIKU5(currentData as unknown as Iku5Data);
+   398→   398→                  previewLabel = `Persentase: ${previewValue.toFixed(2)}%`;
+   399→   399→                  break;
+   400→   400→                }
+   401→   401→                case "iku7": {
+   402→   402→                  previewValue = calcIKU7(currentData as unknown as Iku7Data);
+   403→   403→                  previewLabel = `Persentase: ${previewValue.toFixed(2)}%`;
+   404→   404→                  break;
+   405→   405→                }
+   406→   406→                case "iku9": {
+   407→   407→                  previewValue = calcIKU9(currentData as unknown as Iku9Data);
+   408→   408→                  previewLabel = `Persentase: ${previewValue.toFixed(2)}%`;
+   409→   409→                  break;
+   410→   410→                }
+   411→   411→                case "iku12": {
+   412→   412→                  previewValue = calcIKU12_Skor(currentData as unknown as Iku12Data);
+   413→   413→                  previewLabel = `Skor: ${previewValue.toFixed(2)}`;
+   414→   414→                  break;
+   415→   415→                }
+   416→   416→              }
+   417→   417→            } catch { /* empty */ }
+   418→   418→
+   419→   419→            return (
+   420→   420→              <TabsContent key={iku.id} value={iku.id} className="mt-4">
+   421→   421→                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+   422→   422→                  {/* Input Form */}
+   423→   423→                  <Card className="lg:col-span-2 border border-slate-200">
+   424→   424→                    <CardHeader className="pb-3">
+   425→   425→                      <CardTitle className="text-base font-semibold text-navy">{iku.title}</CardTitle>
+   426→   426→                      <CardDescription className="text-xs">Masukkan data untuk {prodi.nama} tahun {tahun}</CardDescription>
+   427→   427→                    </CardHeader>
+   428→   428→                    <CardContent className="space-y-4">
+   429→   429→                      {iku.id === "iku1" && (
+   430→   430→                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+   431→   431→                          <div className="flex items-start gap-2">
+   432→   432→                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+   433→   433→                            <div className="text-xs text-slate-600">
+   434→   434→                              <p className="font-semibold text-navy mb-1">Rumus IKU 1 (AEE PT):</p>
+   435→   435→                              <p>AEE = (Lulus Tepat Waktu / Total Masuk) × 100%</p>
+   436→   436→                              <p>Tingkat Pencapaian = (AEE Realisasi / AEE Ideal) × 100%</p>
+   437→   437→                              <p>AEE Ideal {prodi.jenjang} = {(() => { const v = { D3: 33, D4: 25, S1: 25, S2: 50, S3: 33 } as Record<string, number>; return v[prodi.jenjang] || 25; })()}%</p>
+   438→   438→                            </div>
+   439→   439→                          </div>
+   440→   440→                        </div>
+   441→   441→                      )}
+   442→   442→                      {iku.id === "iku2" && (
+   443→   443→                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+   444→   444→                          <div className="flex items-start gap-2">
+   445→   445→                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+   446→   446→                            <div className="text-xs text-slate-600">
+   447→   447→                              <p className="font-semibold text-navy mb-1">Rumus IKU 2:</p>
+   448→   448→                              <p>Persentase = Σ(n × k) / t × 100%</p>
+   449→   449→                              <p>n: Jumlah responden per kategori; k: Konstanta bobot; t: Total responden</p>
+   450→   450→                            </div>
+   451→   451→                          </div>
+   452→   452→                        </div>
+   453→   453→                      )}
+   454→   454→                      {iku.id === "iku3" && (
+   455→   455→                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+   456→   456→                          <div className="flex items-start gap-2">
+   457→   457→                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+   458→   458→                            <div className="text-xs text-slate-600">
+   459→   459→                              <p className="font-semibold text-navy mb-1">Rumus IKU 3:</p>
+   460→   460→                              <p>Persentase = (Jumlah Mhs Kegiatan × Bobot) / Total Mahasiswa × 100%</p>
+   461→   461→                            </div>
+   462→   462→                          </div>
+   463→   463→                        </div>
+   464→   464→                      )}
+   465→   465→                      {iku.id === "iku5" && (
+   466→   466→                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+   467→   467→                          <div className="flex items-start gap-2">
+   468→   468→                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+   469→   469→                            <div className="text-xs text-slate-600">
+   470→   470→                              <p className="font-semibold text-navy mb-1">Rumus IKU 5:</p>
+   471→   471→                              <p>Persentase = Jumlah Luaran / Total Kerja Sama × 100%</p>
+   472→   472→                            </div>
+   473→   473→                          </div>
+   474→   474→                        </div>
+   475→   475→                      )}
+   476→   476→                      {iku.id === "iku7" && (
+   477→   477→                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+   478→   478→                          <div className="flex items-start gap-2">
+   479→   479→                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+   480→   480→                            <div className="text-xs text-slate-600">
+   481→   481→                              <p className="font-semibold text-navy mb-1">Rumus IKU 7:</p>
+   482→   482→                              <p>Persentase = Jumlah Program SDG / Total Program × 100%</p>
+   483→   483→                            </div>
+   484→   484→                          </div>
+   485→   485→                        </div>
+   486→   486→                      )}
+   487→   487→                      {iku.id === "iku9" && (
+   488→   488→                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+   489→   489→                          <div className="flex items-start gap-2">
+   490→   490→                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+   491→   491→                            <div className="text-xs text-slate-600">
+   492→   492→                              <p className="font-semibold text-navy mb-1">Rumus IKU 9:</p>
+   493→   493→                              <p>Persentase = Pendapatan Non-Akademik / Total Pendapatan × 100%</p>
+   494→   494→                            </div>
+   495→   495→                          </div>
+   496→   496→                        </div>
+   497→   497→                      )}
+   498→   498→                      {iku.id === "iku12" && (
+   499→   499→                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+   500→   500→                          <div className="flex items-start gap-2">
+   501→   501→                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+   502→   502→                            <div className="text-xs text-slate-600">
+   503→   503→                              <p className="font-semibold text-navy mb-1">Rumus IKU 12:</p>
+   504→   504→                              <p>Ketersediaan Dokumen Perencanaan Strategis resmi peningkatan kesejahteraan dosen</p>
+   505→   505→                            </div>
+   506→   506→                          </div>
+   507→   507→                        </div>
+   508→   508→                      )}
+   509→   509→
+   510→   510→                      {fields.map((field) => (
+   511→   511→                        <div key={field.key} className="space-y-1.5">
+   512→   512→                          <div className="flex items-center gap-2">
+   513→   513→                            <Label htmlFor={`${iku.id}-${field.key}`} className="text-sm font-medium text-slate-700">
+   514→   514→                              {field.label}
+   515→   515→                            </Label>
+   516→   516→                            {field.helperText && (
+   517→   517→                              <TooltipProvider>
+   518→   518→                                <Tooltip>
+   519→   519→                                  <TooltipTrigger><Info className="w-3.5 h-3.5 text-slate-400" /></TooltipTrigger>
+   520→   520→                                  <TooltipContent className="max-w-xs"><p className="text-xs">{field.helperText}</p></TooltipContent>
+   521→   521→                                </Tooltip>
+   522→   522→                              </TooltipProvider>
+   523→   523→                            )}
+   524→   524→                          </div>
+   525→   525→                          {field.type === "select" ? (
+   526→   526→                            <Select
+   527→   527→                              value={(currentData[field.key] as string) || ""}
+   528→   528→                              onValueChange={(v) => handleFormChange(iku.id, field.key, v)}
+   529→   529→                            >
+   530→   530→                              <SelectTrigger className="h-9 text-sm border-slate-200">
+   531→   531→                                <SelectValue placeholder="Pilih..." />
+   532→   532→                              </SelectTrigger>
+   533→   533→                              <SelectContent>
+   534→   534→                                {field.options?.map((opt) => (
+   535→   535→                                  <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+   536→   536→                                ))}
+   537→   537→                              </SelectContent>
+   538→   538→                            </Select>
+   539→   539→                          ) : (
+   540→   540→                            <Input
+   541→   541→                              id={`${iku.id}-${field.key}`}
+   542→   542→                              type="number"
+   543→   543→                              value={currentData[field.key] ?? 0}
+   544→   544→                              onChange={(e) => handleFormChange(iku.id, field.key, parseFloat(e.target.value) || 0)}
+   545→   545→                              placeholder={field.placeholder}
+   546→   546→                              min={field.min}
+   547→   547→                              step={field.step ?? 1}
+   548→   548→                              className="h-9 text-sm border-slate-200"
+   549→   549→                            />
+   550→   550→                          )}
+   551→   551→                        </div>
+   552→   552→                      ))}
+   553→   553→
+   554→   554→                      <Separator className="my-4" />
+   555→   555→
+   556→   556→                      <div className="flex items-center gap-3">
+   557→   557→                        <Button
+   558→   558→                          onClick={() => handleSave(iku.id)}
+   559→   559→                          disabled={isSaving}
+   560→   560→                          className="bg-navy hover:bg-navy-light text-white text-sm"
+   561→   561→                        >
+   562→   562→                          {isSaving ? (
+   563→   563→                            <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />Menyimpan...</>
+   564→   564→                          ) : isSuccess ? (
+   565→   565→                            <><CheckCircle2 className="w-4 h-4 mr-2" />Tersimpan!</>
+   566→   566→                          ) : (
+   567→   567→                            <><Save className="w-4 h-4 mr-2" />Simpan Data</>
+   568→   568→                          )}
+   569→   569→                        </Button>
+   570→   570→                      </div>
+   571→   571→                    </CardContent>
+   572→   572→                  </Card>
+   573→   573→
+   574→   574→                  {/* Calculation Preview */}
+   575→   575→                  <Card className="border border-slate-200">
+   576→   576→                    <CardHeader className="pb-3">
+   577→   577→                      <CardTitle className="text-sm font-semibold text-navy flex items-center gap-2">
+   578→   578→                        <Calculator className="w-4 h-4" />
+   579→   579→                        Hasil Perhitungan
+   580→   580→                      </CardTitle>
+   581→   581→                    </CardHeader>
+   582→   582→                    <CardContent>
+   583→   583→                      <div className="text-center py-4">
+   584→   584→                        <p className="text-4xl font-bold text-navy">{previewValue.toFixed(1)}%</p>
+   585→   585→                        <p className="text-xs text-slate-500 mt-2">{iku.shortTitle}</p>
+   586→   586→                        {iku.id === "iku1" && (
+   587→   587→                          <p className="text-xs text-slate-400 mt-1">Tingkat Pencapaian AEE</p>
+   588→   588→                        )}
+   589→   589→                      </div>
+   590→   590→                      <Separator className="my-3" />
+   591→   591→                      <div className="space-y-2 text-xs">
+   592→   592→                        {iku.id === "iku1" && (() => {
+   593→   593→                          const d = currentData as unknown as Iku1Data;
+   594→   594→                          const aeeReal = calcAEE_Realisation(d);
+   595→   595→                          const aeeIdeal = { D3: 33, D4: 25, S1: 25, S2: 50, S3: 33 } as Record<string, number>;
+   596→   596→                          const ideal = aeeIdeal[prodi.jenjang] || 25;
+   597→   597→                          return (
+   598→   598→                            <>
+   599→   599→                              <div className="flex justify-between"><span className="text-slate-500">AEE Realisasi:</span><span className="font-medium">{aeeReal.toFixed(2)}%</span></div>
+   600→   600→                              <div className="flex justify-between"><span className="text-slate-500">AEE Ideal ({prodi.jenjang}):</span><span className="font-medium">{ideal}%</span></div>
+   601→   601→                              <div className="flex justify-between"><span className="text-slate-500">Tingkat Pencapaian:</span><span className="font-bold text-navy">{previewValue.toFixed(2)}%</span></div>
+   602→   602→                              <div className="flex justify-between"><span className="text-slate-500">Mahasiswa Masuk:</span><span className="font-medium">{d.jumlahMasuk || 0}</span></div>
+   603→   603→                              <div className="flex justify-between"><span className="text-slate-500">Lulus Tepat Waktu:</span><span className="font-medium">{d.lulusTepatWaktu || 0}</span></div>
+   604→   604→                            </>
+   605→   605→                          );
+   606→   606→                        })()}
+   607→   607→                        {iku.id === "iku2" && (() => {
+   608→   608→                          const d = currentData as unknown as Iku2Data;
+   609→   609→                          const weighted = d.bekerjaJumlah * d.bekerjaBobot + d.wirausahaJumlah * d.wirausahaBobot + d.studiJumlah * 0.6 + d.sudahBekerjaJumlah * d.sudahBekerjaBobot;
+   610→   610→                          return (
+   611→   611→                            <>
+   612→   612→                              <div className="flex justify-between"><span className="text-slate-500">Σ(n × k) Bekerja:</span><span className="font-medium">{(d.bekerjaJumlah * d.bekerjaBobot).toFixed(1)}</span></div>
+   613→   613→                              <div className="flex justify-between"><span className="text-slate-500">Σ(n × k) Wirausaha:</span><span className="font-medium">{(d.wirausahaJumlah * d.wirausahaBobot).toFixed(1)}</span></div>
+   614→   614→                              <div className="flex justify-between"><span className="text-slate-500">Σ(n × k) Studi:</span><span className="font-medium">{(d.studiJumlah * 0.6).toFixed(1)}</span></div>
+   615→   615→                              <div className="flex justify-between"><span className="text-slate-500">Σ(n × k) Sudah Bekerja:</span><span className="font-medium">{(d.sudahBekerjaJumlah * d.sudahBekerjaBobot).toFixed(1)}</span></div>
+   616→   616→                              <Separator className="my-1" />
+   617→   617→                              <div className="flex justify-between"><span className="text-slate-500">Total Σ(n × k):</span><span className="font-medium">{weighted.toFixed(1)}</span></div>
+   618→   618→                              <div className="flex justify-between"><span className="text-slate-500">Total Responden:</span><span className="font-medium">{d.totalResponden || 0}</span></div>
+   619→   619→                            </>
+   620→   620→                          );
+   621→   621→                        })()}
+   622→   622→                        {iku.id === "iku3" && (() => {
+   623→   623→                          const d = currentData as unknown as Iku3Data;
+   624→   624→                          return (
+   625→   625→                            <>
+   626→   626→                              <div className="flex justify-between"><span className="text-slate-500">Mhs Kegiatan (tertimbang):</span><span className="font-medium">{d.mahasiswaKegiatan || 0}</span></div>
+   627→   627→                              <div className="flex justify-between"><span className="text-slate-500">Bobot Rata-rata:</span><span className="font-medium">{d.bobotKegiatan || 0}</span></div>
+   628→   628→                              <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa:</span><span className="font-medium">{d.totalMahasiswa || 0}</span></div>
+   629→   629→                            </>
+   630→   630→                          );
+   631→   631→                        })()}
+   632→   632→                        {iku.id === "iku5" && (() => {
+   633→   633→                          const d = currentData as unknown as Iku5Data;
+   634→   634→                          return (
+   635→   635→                            <>
+   636→   636→                              <div className="flex justify-between"><span className="text-slate-500">Jumlah Luaran:</span><span className="font-medium">{d.jumlahLuaran || 0}</span></div>
+   637→   637→                              <div className="flex justify-between"><span className="text-slate-500">Total Kerja Sama:</span><span className="font-medium">{d.totalKerjasama || 0}</span></div>
+   638→   638→                            </>
+   639→   639→                          );
+   640→   640→                        })()}
+   641→   641→                        {iku.id === "iku7" && (() => {
+   642→   642→                          const d = currentData as unknown as Iku7Data;
+   643→   643→                          return (
+   644→   644→                            <>
+   645→   645→                              <div className="flex justify-between"><span className="text-slate-500">Program SDG:</span><span className="font-medium">{d.jumlahProgramSDG || 0}</span></div>
+   646→   646→                              <div className="flex justify-between"><span className="text-slate-500">Total Program:</span><span className="font-medium">{d.totalProgram || 0}</span></div>
+   647→   647→                            </>
+   648→   648→                          );
+   649→   649→                        })()}
+   650→   650→                        {iku.id === "iku9" && (() => {
+   651→   651→                          const d = currentData as unknown as Iku9Data;
+   652→   652→                          return (
+   653→   653→                            <>
+   654→   654→                              <div className="flex justify-between"><span className="text-slate-500">Pendapatan Non-Akademik:</span><span className="font-medium">Rp {(d.pendapatanNonAkademik || 0).toLocaleString("id-ID")}</span></div>
+   655→   655→                              <div className="flex justify-between"><span className="text-slate-500">Total Pendapatan:</span><span className="font-medium">Rp {(d.totalPendapatan || 0).toLocaleString("id-ID")}</span></div>
+   656→   656→                            </>
+   657→   657→                          );
+   658→   658→                        })()}
+   659→   659→                        {iku.id === "iku12" && (() => {
+   660→   660→                          const d = currentData as unknown as Iku12Data;
+   661→   661→                          const labels: Record<string, string> = { ya: "Tersedia & Terimplementasi", sebagian: "Sebagian Terimplementasi", tidak: "Belum Tersedia" };
+   662→   662→                          return (
+   663→   663→                            <>
+   664→   664→                              <div className="flex justify-between"><span className="text-slate-500">Dokumen:</span><span className="font-medium">{labels[d.dokumenTersedia] || "-"}</span></div>
+   665→   665→                              <div className="flex justify-between"><span className="text-slate-500">Skor Komposit:</span><span className="font-medium">{d.skorKomposit || 0}%</span></div>
+   666→   666→                            </>
+   667→   667→                          );
+   668→   668→                        })()}
+   669→   669→                      </div>
+   670→   670→                    </CardContent>
+   671→   671→                  </Card>
+   672→   672→                </div>
+   673→   673→              </TabsContent>
+   674→   674→            );
+   675→   675→          })}
+   676→   676→        </Tabs>
+   677→   677→      </div>
+   678→   678→    );
+   679→   679→  };
+   680→   680→
+   681→   681→  // ============ RENDER: GLOBAL/FAKULTAS DASHBOARD ============
+   682→   682→  const renderAggregatedDashboard = () => {
+   683→   683→    const isGlobal = navSelection.mode === "global";
+   684→   684→    const fakultas = !isGlobal ? getFakultasById(navSelection.id) : null;
+   685→   685→    const prodiIds = isGlobal
+   686→   686→      ? ALL_PRODI.map((p) => p.id)
+   687→   687→      : getProdiByFakultas(navSelection.id).map((p) => p.id);
+   688→   688→
+   689→   689→    const title = isGlobal ? "Global Universitas" : fakultas?.nama || "";
+   690→   690→    const subtitle = isGlobal
+   691→   691→      ? "Akumulasi pencapaian IKU dari seluruh program studi"
+   692→   692→      : `Akumulasi pencapaian IKU dari ${getProdiByFakultas(navSelection.id).map((p) => p.nama).join(", ")}`;
+   693→   693→
+   694→   694→    // Calculate values per IKU
+   695→   695→    const ikuValues = IKU_LIST.map((iku) => ({
+   696→   696→      ...iku,
+   697→   697→      value: calcAggregatedValue(iku.id, prodiIds),
+   698→   698→    }));
+   699→   699→
+   700→   700→    // Per-prodi comparison data
+   701→   701→    const prodiComparison = prodiIds.map((pid) => {
+   702→   702→      const prodi = getProdiById(pid);
+   703→   703→      return {
+   704→   704→        id: pid,
+   705→   705→        nama: prodi?.nama || pid,
+   706→   706→        shortName: prodi?.nama.replace("S1 ", "").replace("D3 ", "") || pid,
+   707→   707→        values: IKU_LIST.map((iku) => ({
+   708→   708→          ikuId: iku.id,
+   709→   709→          label: iku.label,
+   710→   710→          value: calcProdiValue(iku.id, pid),
+   711→   711→        })),
+   712→   712→      };
+   713→   713→    });
+   714→   714→
+   715→   715→    // Bar chart data for each IKU
+   716→   716→    const ikuBarData = IKU_LIST.map((iku) => ({
+   717→   717→      name: iku.label,
+   718→   718→      shortTitle: iku.shortTitle,
+   719→   719→      value: calcAggregatedValue(iku.id, prodiIds),
+   720→   720→      prodiCount: prodiIds.filter((pid) => {
+   721→   721→        const d = getProdiData(pid);
+   722→   722→        return d && d[iku.id as keyof IkuRecord] !== null && hasData(d[iku.id as keyof IkuRecord] as Record<string, unknown>);
+   723→   723→      }).length,
+   724→   724→    }));
+   725→   725→
+   726→   726→    const barConfig: ChartConfig = {
+   727→   727→      value: { label: "Capaian (%)", color: NAVY },
+   728→   728→    };
+   729→   729→
+   730→   730→    const radarConfig: ChartConfig = {
+   731→   731→      value: { label: "Capaian", color: NAVY },
+   732→   732→    };
+   733→   733→
+   734→   734→    const hasAnyData = ikuValues.some((v) => v.value > 0);
+   735→   735→
+   736→   736→    return (
+   737→   737→      <div className="space-y-6">
+   738→   738→        {/* Header */}
+   739→   739→        <Card className="border-l-4 border-l-navy">
+   740→   740→          <CardContent className="p-5">
+   741→   741→            <h2 className="text-lg font-bold text-navy">{title}</h2>
+   742→   742→            <p className="text-sm text-slate-500 mt-1">{subtitle}</p>
+   743→   743→            <p className="text-xs text-slate-400 mt-0.5">Tahun Akademik {tahun}</p>
+   744→   744→          </CardContent>
+   745→   745→        </Card>
+   746→   746→
+   747→   747→        {!hasAnyData ? (
+   748→   748→          <Card className="border border-slate-200">
+   749→   749→            <CardContent className="p-12 text-center">
+   750→   750→              <AlertCircle className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+   751→   751→              <h3 className="text-lg font-semibold text-slate-500 mb-2">Belum Ada Data</h3>
+   752→   752→              <p className="text-sm text-slate-400 max-w-md mx-auto">
+   753→   753→                Silakan pilih program studi di sidebar kiri dan masukkan data IKU terlebih dahulu.
+   754→   754→                Data yang diinput akan otomatis diagregasi di halaman ini.
+   755→   755→              </p>
+   756→   756→            </CardContent>
+   757→   757→          </Card>
+   758→   758→        ) : (
+   759→   759→          <>
+   760→   760→            {/* KPI Summary Cards */}
+   761→   761→            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+   762→   762→              {ikuValues.map((iku, idx) => (
+   763→   763→                <Card key={iku.id} className="border border-slate-200 animate-fade-in" style={{ animationDelay: `${idx * 80}ms` }}>
+   764→   764→                  <CardContent className="p-4">
+   765→   765→                    <div className="flex items-center gap-2 mb-2">
+   766→   766→                      <div className="p-1.5 rounded-md bg-navy/10">
+   767→   767→                        {iku.id === "iku1" && <GraduationCap className="w-3.5 h-3.5 text-navy" />}
+   768→   768→                        {iku.id === "iku2" && <Briefcase className="w-3.5 h-3.5 text-navy" />}
+   769→   769→                        {iku.id === "iku3" && <Trophy className="w-3.5 h-3.5 text-navy" />}
+   770→   770→                        {iku.id === "iku5" && <Handshake className="w-3.5 h-3.5 text-navy" />}
+   771→   771→                        {iku.id === "iku7" && <Globe className="w-3.5 h-3.5 text-navy" />}
+   772→   772→                        {iku.id === "iku9" && <Wallet className="w-3.5 h-3.5 text-navy" />}
+   773→   773→                        {iku.id === "iku12" && <Users className="w-3.5 h-3.5 text-navy" />}
+   774→   774→                      </div>
+   775→   775→                      <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">{iku.shortTitle}</span>
+   776→   776→                    </div>
+   777→   777→                    <p className={`text-3xl font-bold ${iku.value > 0 ? "text-navy" : "text-slate-300"}`}>
+   778→   778→                      {iku.value.toFixed(1)}%
+   779→   779→                    </p>
+   780→   780→                    <div className="mt-2 w-full bg-slate-100 rounded-full h-1.5">
+   781→   781→                      <div className="bg-navy h-1.5 rounded-full transition-all" style={{ width: `${Math.min(iku.value, 100)}%` }} />
+   782→   782→                    </div>
+   783→   783→                  </CardContent>
+   784→   784→                </Card>
+   785→   785→              ))}
+   786→   786→            </div>
+   787→   787→
+   788→   788→            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+   789→   789→              {/* Radar Chart */}
+   790→   790→              <Card className="border border-slate-200">
+   791→   791→                <CardHeader className="pb-2">
+   792→   792→                  <CardTitle className="text-base font-semibold text-navy">Radar Pencapaian IKU</CardTitle>
+   793→   793→                  <CardDescription>Gabungan dari {prodiIds.length} program studi</CardDescription>
+   794→   794→                </CardHeader>
+   795→   795→                <CardContent>
+   796→   796→                  <ChartContainer config={radarConfig} className="h-[300px] w-full">
+   797→   797→                    <RadarChart data={ikuValues.map((v) => ({ iku: v.shortTitle, value: v.value }))}>
+   798→   798→                      <PolarGrid stroke="#e2e8f0" />
+   799→   799→                      <PolarAngleAxis dataKey="iku" tick={{ fontSize: 10, fill: "#475569" }} />
+   800→   800→                      <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 10, fill: "#94a3b8" }} />
+   801→   801→                      <Radar name="Capaian" dataKey="value" stroke={NAVY} fill={NAVY} fillOpacity={0.2} strokeWidth={2} />
+   802→   802→                      <ChartTooltip content={<ChartTooltipContent />} />
+   803→   803→                    </RadarChart>
+   804→   804→                  </ChartContainer>
+   805→   805→                </CardContent>
+   806→   806→              </Card>
+   807→   807→
+   808→   808→              {/* Bar Chart */}
+   809→   809→              <Card className="border border-slate-200">
+   810→   810→                <CardHeader className="pb-2">
+   811→   811→                  <CardTitle className="text-base font-semibold text-navy">Capaian per IKU</CardTitle>
+   812→   812→                  <CardDescription>Persentase capaian setiap indikator</CardDescription>
+   813→   813→                </CardHeader>
+   814→   814→                <CardContent>
+   815→   815→                  <ChartContainer config={barConfig} className="h-[300px] w-full">
+   816→   816→                    <BarChart data={ikuBarData}>
+   817→   817→                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+   818→   818→                      <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#475569" }} />
+   819→   819→                      <YAxis domain={[0, 100]} tick={{ fontSize: 11, fill: "#64748b" }} />
+   820→   820→                      <ChartTooltip content={<ChartTooltipContent />} />
+   821→   821→                      <Bar dataKey="value" fill={NAVY} radius={[4, 4, 0, 0]} barSize={35} />
+   822→   822→                    </BarChart>
+   823→   823→                  </ChartContainer>
+   824→   824→                </CardContent>
+   825→   825→              </Card>
+   826→   826→            </div>
+   827→   827→
+   828→   828→            {/* Per-Prodi Comparison */}
+   829→   829→            {prodiComparison.length > 1 && (
+   830→   830→              <Card className="border border-slate-200">
+   831→   831→                <CardHeader className="pb-2">
+   832→   832→                  <CardTitle className="text-base font-semibold text-navy">Perbandingan per Program Studi</CardTitle>
+   833→   833→                  <CardDescription>Capaian IKU setiap program studi dalam {isGlobal ? "universitas" : fakultas?.nama}</CardDescription>
+   834→   834→                </CardHeader>
+   835→   835→                <CardContent className="overflow-x-auto">
+   836→   836→                  <table className="w-full text-sm">
+   837→   837→                    <thead>
+   838→   838→                      <tr className="border-b border-slate-200 bg-slate-50">
+   839→   839→                        <th className="text-left py-2.5 px-3 font-semibold text-navy text-xs">Program Studi</th>
+   840→   840→                        {IKU_LIST.map((iku) => (
+   841→   841→                          <th key={iku.id} className="text-center py-2.5 px-2 font-semibold text-navy text-xs">{iku.label}</th>
+   842→   842→                        ))}
+   843→   843→                      </tr>
+   844→   844→                    </thead>
+   845→   845→                    <tbody>
+   846→   846→                      {prodiComparison.map((prodi) => (
+   847→   847→                        <tr key={prodi.id} className="border-b border-slate-100 hover:bg-slate-50">
+   848→   848→                          <td className="py-2 px-3 font-medium text-slate-700 text-xs">{prodi.nama}</td>
+   849→   849→                          {prodi.values.map((v) => (
+   850→   850→                            <td key={v.ikuId} className="py-2 px-2 text-center">
+   851→   851→                              <span className={`text-xs font-semibold ${v.value > 0 ? "text-navy" : "text-slate-300"}`}>
+   852→   852→                                {v.value > 0 ? `${v.value.toFixed(1)}%` : "-"}
+   853→   853→                              </span>
+   854→   854→                            </td>
+   855→   855→                          ))}
+   856→   856→                        </tr>
+   857→   857→                      ))}
+   858→   858→                    </tbody>
+   859→   859→                  </table>
+   860→   860→                </CardContent>
+   861→   861→              </Card>
+   862→   862→            )}
+   863→   863→
+   864→   864→            {/* Per-IKU per-prodi bar charts */}
+   865→   865→            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+   866→   866→              {IKU_LIST.map((iku) => {
+   867→   867→                const data = prodiComparison.map((p) => ({
+   868→   868→                  name: p.shortName,
+   869→   869→                  value: p.values.find((v) => v.ikuId === iku.id)?.value || 0,
+   870→   870→                }));
+   871→   871→                const prodiConfig: ChartConfig = { value: { label: iku.shortTitle, color: CHART_COLORS[IKU_LIST.indexOf(iku) % CHART_COLORS.length] } };
+   872→   872→
+   873→   873→                return (
+   874→   874→                  <Card key={iku.id} className="border border-slate-200">
+   875→   875→                    <CardHeader className="pb-2">
+   876→   876→                      <CardTitle className="text-sm font-semibold text-navy">{iku.label} - {iku.shortTitle}</CardTitle>
+   877→   877→                      <CardDescription className="text-xs">Perbandingan antar program studi</CardDescription>
+   878→   878→                    </CardHeader>
+   879→   879→                    <CardContent>
+   880→   880→                      <ChartContainer config={prodiConfig} className="h-[200px] w-full">
+   881→   881→                        <BarChart data={data}>
+   882→   882→                          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+   883→   883→                          <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#475569" }} />
+   884→   884→                          <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: "#64748b" }} />
+   885→   885→                          <ChartTooltip content={<ChartTooltipContent />} />
+   886→   886→                          <Bar dataKey="value" fill={CHART_COLORS[IKU_LIST.indexOf(iku) % CHART_COLORS.length]} radius={[4, 4, 0, 0]} barSize={30} />
+   887→   887→                        </BarChart>
+   888→   888→                      </ChartContainer>
+   889→   889→                    </CardContent>
+   890→   890→                  </Card>
+   891→   891→                );
+   892→   892→              })}
+   893→   893→            </div>
+   894→   894→
+   895→   895→            {/* IKU 12 Special: Dokumen Summary */}
+   896→   896→            {(() => {
+   897→   897→              const iku12DataList: Iku12Data[] = [];
+   898→   898→              prodiIds.forEach((pid) => {
+   899→   899→                const d = getProdiData(pid);
+   900→   900→                if (d?.iku12) iku12DataList.push(d.iku12);
+   901→   901→              });
+   902→   902→              if (iku12DataList.length === 0) return null;
+   903→   903→              const summary = calcIKU12_DokumenSummary(iku12DataList);
+   904→   904→              const pieData = [
+   905→   905→                { name: "Tersedia", value: summary.ya, fill: TEAL },
+   906→   906→                { name: "Sebagian", value: summary.sebagian, fill: GOLD },
+   907→   907→                { name: "Belum Tersedia", value: summary.tidak, fill: CORAL },
+   908→   908→              ];
+   909→   909→              const pieConfig: ChartConfig = { value: { label: "Jumlah Prodi" } };
+   910→   910→
+   911→   911→              return (
+   912→   912→                <Card className="border border-slate-200">
+   913→   913→                  <CardHeader className="pb-2">
+   914→   914→                    <CardTitle className="text-base font-semibold text-navy">IKU 12 - Ketersediaan Dokumen Perencanaan</CardTitle>
+   915→   915→                  </CardHeader>
+   916→   916→                  <CardContent>
+   917→   917→                    <div className="max-w-sm mx-auto">
+   918→   918→                      <ChartContainer config={pieConfig} className="h-[250px] w-full">
+   919→   919→                        <PieChart>
+   920→   920→                          <Pie data={pieData.filter((d) => d.value > 0)} cx="50%" cy="50%" outerRadius={90} innerRadius={50} dataKey="value" nameKey="name" label={({ name, value }) => `${name}: ${value}`}>
+   921→   921→                            {pieData.filter((d) => d.value > 0).map((d, idx) => (
+   922→   922→                              <Cell key={idx} fill={d.fill} />
+   923→   923→                            ))}
+   924→   924→                          </Pie>
+   925→   925→                          <ChartTooltip content={<ChartTooltipContent />} />
+   926→   926→                          <ChartLegend content={<ChartLegendContent />} />
+   927→   927→                        </PieChart>
+   928→   928→                      </ChartContainer>
+   929→   929→                    </div>
+   930→   930→                  </CardContent>
+   931→   931→                </Card>
+   932→   932→              );
+   933→   933→            })()}
+   934→   934→          </>
+   935→   935→        )}
+   936→   936→      </div>
+   937→   937→    );
+   938→   938→  };
+   939→   939→
+   940→   940→  // ============ RENDER: MAIN ============
+   941→   941→  if (loading) {
+   942→   942→    return (
+   943→   943→      <div className="min-h-screen flex items-center justify-center bg-white">
+   944→   944→        <div className="text-center">
+   945→   945→          <div className="w-12 h-12 border-4 border-navy border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+   946→   946→          <p className="text-slate-500 font-medium">Memuat Dashboard IKU...</p>
+   947→   947→        </div>
+   948→   948→      </div>
+   949→   949→    );
+   950→   950→  }
+   951→   951→
+   952→   952→  return (
+   953→   953→    <div className="min-h-screen flex flex-col bg-white">
+   954→   954→      {/* Header */}
+   955→   955→      <header className="bg-navy text-white shadow-lg sticky top-0 z-50">
+   956→   956→        <div className="flex items-center justify-between h-14 px-4">
+   957→   957→          <div className="flex items-center gap-3">
+   958→   958→            <div className="p-1.5 bg-white/10 rounded-lg">
+   959→   959→              <Building2 className="w-5 h-5 text-gold" />
+   960→   960→            </div>
+   961→   961→            <div>
+   962→   962→              <h1 className="text-base font-bold tracking-tight">Universitas Tulungagung</h1>
+   963→   963→              <p className="text-[10px] text-white/60">Dashboard Indikator Kinerja Utama</p>
+   964→   964→            </div>
+   965→   965→          </div>
+   966→   966→          <div className="flex items-center gap-3">
+   967→   967→            <Badge className="bg-gold text-navy font-semibold text-xs px-2.5 py-0.5">IKU WAJIB</Badge>
+   968→   968→          </div>
+   969→   969→        </div>
+   970→   970→      </header>
+   971→   971→
+   972→   972→      {/* Content */}
+   973→   973→      <div className="flex-1 flex">
+   974→   974→        {/* Sidebar */}
+   975→   975→        <div className="hidden md:block">{renderSidebar()}</div>
+   976→   976→
+   977→   977→        {/* Mobile nav */}
+   978→   978→        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 p-2">
+   979→   979→          <div className="flex items-center gap-2 overflow-x-auto">
+   980→   980→            <button
+   981→   981→              onClick={() => setNavSelection({ mode: "global", id: "global" })}
+   982→   982→              className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${navSelection.mode === "global" ? "bg-navy text-white" : "bg-slate-100 text-slate-600"}`}
+   983→   983→            >
+   984→   984→              Global
+   985→   985→            </button>
+   986→   986→            {FAKULTAS_LIST.map((f) => (
+   987→   987→              <button
+   988→   988→                key={f.id}
+   989→   989→                onClick={() => setNavSelection({ mode: "fakultas", id: f.id })}
+   990→   990→                className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${navSelection.mode === "fakultas" && navSelection.id === f.id ? "bg-navy text-white" : "bg-slate-100 text-slate-600"}`}
+   991→   991→              >
+   992→   992→                {f.nama.replace("Fakultas ", "F. ")}
+   993→   993→              </button>
+   994→   994→            ))}
+   995→   995→          </div>
+   996→   996→        </div>
+   997→   997→
+   998→   998→        {/* Main Content */}
+   999→   999→        <main className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 pb-20 md:pb-6">
+  1000→  1000→          {/* Breadcrumb */}
+  1001→  1001→          <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-4">
+  1002→  1002→            <button onClick={() => setNavSelection({ mode: "global", id: "global" })} className="hover:text-navy transition-colors">Global</button>
+  1003→  1003→            {navSelection.mode === "fakultas" && (
+  1004→  1004→              <>
+  1005→  1005→                <ChevronRight className="w-3 h-3" />
+  1006→  1006→                <span className="text-navy font-medium">{getFakultasById(navSelection.id)?.nama}</span>
+  1007→  1007→              </>
+  1008→  1008→            )}
+  1009→  1009→            {navSelection.mode === "prodi" && (
+  1010→  1010→              <>
+  1011→  1011→                <ChevronRight className="w-3 h-3" />
+  1012→  1012→                <button onClick={() => setNavSelection({ mode: "fakultas", id: getProdiById(navSelection.id)?.fakultasId || "" })} className="hover:text-navy transition-colors">
+  1013→  1013→                  {getFakultasById(getProdiById(navSelection.id)?.fakultasId || "")?.nama}
+  1014→  1014→                </button>
+  1015→  1015→                <ChevronRight className="w-3 h-3" />
+  1016→  1016→                <span className="text-navy font-medium">{getProdiById(navSelection.id)?.nama}</span>
+  1017→  1017→              </>
+  1018→  1018→            )}
+  1019→  1019→          </div>
+  1020→  1020→
+  1021→  1021→          {navSelection.mode === "prodi" ? renderProdiForm() : renderAggregatedDashboard()}
+  1022→  1022→        </main>
+  1023→  1023→      </div>
+  1024→  1024→
+  1025→  1025→      {/* Footer */}
+  1026→  1026→      <footer className="mt-auto bg-navy text-white/70 py-3">
+  1027→  1027→        <div className="flex items-center justify-between px-4">
+  1028→  1028→          <div className="flex items-center gap-2">
+  1029→  1029→            <BookOpen className="w-3.5 h-3.5 text-gold" />
+  1030→  1030→            <span className="text-xs">Dashboard IKU - Universitas Tulungagung</span>
+  1031→  1031→          </div>
+  1032→  1032→          <p className="text-[10px] text-white/40">Kepmendiktisaintek No. 358/M/KEP/2026</p>
+  1033→  1033→        </div>
+  1034→  1034→      </footer>
+  1035→  1035→    </div>
+  1036→  1036→  );
+  1037→  1037→}
+  1038→  1038→

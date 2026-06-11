@@ -21,3 +21,31 @@ Stage Summary:
 - Data persists in SQLite via Prisma
 - Aggregated views show calculated summaries with charts
 - All formulas match Kepmendiktisaintek No. 358/M/KEP/2026 specifications
+---
+Task ID: 1
+Agent: Main Agent
+Task: Add SPMI tab to IKU Dashboard with narrative and assessment
+
+Work Log:
+- Read existing codebase: page.tsx, iku-config.ts, iku-calculations.ts, api route, prisma schema, globals.css
+- Added new icon imports: ShieldCheck, Target, FileText, TrendingUp, Award, AlertTriangle, CircleCheck, CircleX, CircleDot
+- Added Progress and Accordion component imports
+- Added `mainTab` state for Dashboard/SPMI tab switching
+- Implemented SPMI assessment helpers: getSpmiStatus, getSpmiStatusLabel, getSpmiStatusColor, getSpmiStatusBg, getSpmiStatusBadge, getSpmiProgressColor, getSpmiIcon
+- Built `renderSpmiTab` function with:
+  - SPMI header card with gold left border
+  - Overall SPMI Score section with radar chart
+  - Per-IKU SPMI Assessment grid with progress bars and status badges
+  - Narasi accordion with 4 Kriteria (Budaya Mutu, Relevansi, Akuntabilitas, Diferensiasi Misi)
+  - SPMI Summary Table with recommendations
+  - Detail IAPT 4.1 Indicator Mapping table (19 rows)
+- Wrapped aggregated dashboard in Tabs component with "Dashboard IKU" and "SPMI" tabs
+- Assessed SPMI criteria based on IKU data: Budaya Mutu (reporting compliance), Relevansi (IKU 1,2,3,5 avg), Akuntabilitas (IKU 9,12 avg), Diferensiasi (IKU 7)
+- Status thresholds: Baik (≥75%), Cukup (50-74%), Perlu Perhatian (25-49%), Belum Tercapai (<25%)
+- Ran lint: passed with 0 errors
+- Browser verification: all checks passed
+
+Stage Summary:
+- SPMI tab successfully added to Global/Fakultas dashboard views
+- Tab contains narrative (Keterkaitan IKU dengan IAPT 4.1), SPMI assessment scoring, accordion mapping, summary table with recommendations, and detailed IAPT indicator mapping
+- All rendering verified via browser: tab clickable, accordion works, charts render, no JS errors
