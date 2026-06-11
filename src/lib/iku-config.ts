@@ -114,7 +114,7 @@ export interface IkuFieldDef {
 
 export const IKU_FIELDS: Record<string, IkuFieldDef[]> = {
   iku1: [
-    { key: "jumlahMasuk", label: "Jumlah Mahasiswa Masuk Tahun Akademik", type: "number", placeholder: "0", helperText: "Total mahasiswa yang terdaftar pada tahun akademik tersebut", min: 0 },
+    { key: "jumlahMasuk", label: "Total Mahasiswa Terdaftar Tahun Akademik", type: "number", placeholder: "0", helperText: "Total mahasiswa yang terdaftar pada tahun akademik tersebut", min: 0 },
     { key: "lulusTepatWaktu", label: "Jumlah Mahasiswa Lulus Tepat Waktu", type: "number", placeholder: "0", helperText: "Mahasiswa lulus sesuai masa tempuh kurikulum standar", min: 0 },
   ],
   iku2: [

@@ -605,7 +605,7 @@ export default function IKUDashboard() {
                               <div className="flex justify-between"><span className="text-slate-500">AEE Realisasi:</span><span className="font-medium">{aeeReal.toFixed(2)}%</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">AEE Ideal ({prodi.jenjang}):</span><span className="font-medium">{ideal}%</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Tingkat Pencapaian:</span><span className="font-bold text-navy">{previewValue.toFixed(2)}%</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Mahasiswa Masuk:</span><span className="font-medium">{d.jumlahMasuk || 0}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa Terdaftar:</span><span className="font-medium">{d.jumlahMasuk || 0}</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Lulus Tepat Waktu:</span><span className="font-medium">{d.lulusTepatWaktu || 0}</span></div>
                             </>
                           );
