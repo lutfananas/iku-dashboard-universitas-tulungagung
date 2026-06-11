@@ -82,18 +82,61 @@ export default function IKUDashboard() {
   // Form state for current prodi+tahun
   const [formData, setFormData] = useState<Record<string, Record<string, number | string>>>({});
 
-  // Fetch data
+  // localStorage key
+  const STORAGE_KEY = "iku-unita-data";
+
+  // Load data from localStorage
+  const loadDataFromStorage = useCallback((): IkuRecord[] => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (e) {
+      console.error("localStorage read error:", e);
+    }
+    return [];
+  }, []);
+
+  // Save data to localStorage
+  const saveDataToStorage = useCallback((data: IkuRecord[]) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.error("localStorage write error:", e);
+    }
+  }, []);
+
+  // Fetch data (localStorage primary, API fallback)
   const fetchData = useCallback(async () => {
     try {
+      // Try API first
       const res = await fetch(`/api/iku?tahun=${tahun}`);
-      const data = await res.json();
-      setAllData(data);
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setAllData(data);
+          saveDataToStorage(data);
+          setLoading(false);
+          return;
+        }
+      }
     } catch (e) {
-      console.error("Fetch error:", e);
-    } finally {
-      setLoading(false);
+      console.error("API fetch error:", e);
     }
-  }, [tahun]);
+
+    // Fallback to localStorage
+    const stored = loadDataFromStorage();
+    const filtered = stored.filter((d: IkuRecord) => d.tahun === tahun);
+    if (filtered.length > 0) {
+      setAllData(filtered);
+    } else {
+      // Use all stored data (cross-year)
+      setAllData(stored);
+    }
+    setLoading(false);
+  }, [tahun, saveDataToStorage, loadDataFromStorage]);
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
@@ -125,7 +168,7 @@ export default function IKUDashboard() {
     setFormData(newFormData);
   }, [navSelection, tahun, allData, getProdiData]);
 
-  // Save handler
+  // Save handler (localStorage primary, API sync)
   const handleSave = async (ikuId: string) => {
     if (navSelection.mode !== "prodi") return;
     const prodi = getProdiById(navSelection.id);
@@ -133,7 +176,34 @@ export default function IKUDashboard() {
 
     setSaving(ikuId);
     try {
-      const res = await fetch("/api/iku", {
+      // Update local state immediately
+      const existingIdx = allData.findIndex((d) => d.prodi === prodi.id && d.tahun === tahun);
+      const ikuData = formData[ikuId];
+
+      let updatedData: IkuRecord[];
+      if (existingIdx >= 0) {
+        updatedData = [...allData];
+        updatedData[existingIdx] = { ...updatedData[existingIdx], [ikuId]: ikuData };
+      } else {
+        const newRecord: IkuRecord = {
+          id: `local-${Date.now()}`,
+          prodi: prodi.id,
+          fakultas: prodi.fakultasId,
+          tahun,
+          iku1: null, iku2: null, iku3: null, iku5: null, iku7: null, iku9: null, iku12: null,
+          [ikuId]: ikuData,
+        };
+        updatedData = [...allData, newRecord];
+      }
+
+      setAllData(updatedData);
+      saveDataToStorage(updatedData);
+      setSaveSuccess(ikuId);
+      setTimeout(() => setSaveSuccess(null), 2000);
+      toast.success("Data berhasil disimpan", { description: `${IKU_LIST.find((i) => i.id === ikuId)?.label} - ${prodi.nama} (${tahun})` });
+
+      // Try API sync in background (non-blocking)
+      fetch("/api/iku", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -141,15 +211,9 @@ export default function IKUDashboard() {
           fakultas: prodi.fakultasId,
           tahun,
           ikuId,
-          data: formData[ikuId],
+          data: ikuData,
         }),
-      });
-      if (res.ok) {
-        setSaveSuccess(ikuId);
-        setTimeout(() => setSaveSuccess(null), 2000);
-        await fetchData();
-        toast.success("Data berhasil disimpan", { description: `${IKU_LIST.find((i) => i.id === ikuId)?.label} - ${prodi.nama} (${tahun})` });
-      }
+      }).catch(() => { /* API sync failed silently - data is safe in localStorage */ });
     } catch (e) {
       console.error("Save error:", e);
     } finally {
