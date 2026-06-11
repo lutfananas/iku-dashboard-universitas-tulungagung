@@ -41,12 +41,16 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-navy: #1a2744;
-  --color-navy-light: #243558;
-  --color-navy-lighter: #2d4170;
-  --color-navy-dark: #111b30;
-  --color-gold: #c9a84c;
-  --color-gold-light: #e0c873;
+  --color-navy: #0F172A;
+  --color-navy-light: #1E293B;
+  --color-navy-lighter: #334155;
+  --color-navy-dark: #020617;
+  --color-gold: #D4A843;
+  --color-gold-light: #E8C76A;
+  --color-primary-custom: #B91C1C;
+  --color-secondary-custom: #1E40AF;
+  --color-teal: #059669;
+  --color-coral: #DB2777;
 }
 
 :root {
@@ -133,27 +137,62 @@
   height: 6px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
   border-radius: 3px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: rgba(0,0,0,0.15);
   border-radius: 3px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #a1a1a1;
+  background: rgba(0,0,0,0.25);
 }
 
-/* Tab styling for navy theme */
+/* Tab styling for academic prestige theme */
 .iku-tabs [data-state="active"] {
-  background-color: #1a2744 !important;
-  color: white !important;
-  border-color: #1a2744 !important;
+  background: white !important;
+  color: #0F172A !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
 }
 
 .iku-tabs [data-state="inactive"]:hover {
-  background-color: #f0f4f8 !important;
-  color: #1a2744 !important;
+  background-color: rgba(255,255,255,0.5) !important;
+  color: #0F172A !important;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #B91C1C, #1E40AF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.glass-card:hover {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04);
+}
+
+/* Sidebar pattern */
+.sidebar-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Animated gradient border */
+@keyframes gradient-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Fade in animation */
@@ -163,6 +202,17 @@
 }
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, rgba(0,0,0,0.04) 25%, rgba(0,0,0,0.08) 50%, rgba(0,0,0,0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
 }
 
 /* Gauge chart styles */

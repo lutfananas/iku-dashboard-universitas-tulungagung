@@ -5,7 +5,8 @@ import {
   GraduationCap, Briefcase, Trophy, Handshake, Globe, Wallet, Users,
   BarChart3, ChevronRight, ChevronDown, Building2, Calendar, BookOpen,
   Save, CheckCircle2, AlertCircle, Plus, Trash2, RotateCcw, Info, Calculator,
-  ShieldCheck, Target, FileText, TrendingUp, Award, AlertTriangle, CircleCheck, CircleX, CircleDot
+  ShieldCheck, Target, FileText, TrendingUp, Award, AlertTriangle, CircleCheck, CircleX, CircleDot,
+  Menu, X
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -43,12 +44,27 @@ import {
 import type { Iku1Data, Iku2Data, Iku3Data, Iku5Data, Iku7Data, Iku9Data, Iku12Data } from "@/lib/iku-calculations";
 
 // ============ COLORS ============
-const NAVY = "#1a2744";
-const NAVY_LIGHT = "#243558";
-const TEAL = "#2d8a7e";
-const GOLD = "#c9a84c";
-const CORAL = "#c75c5c";
-const CHART_COLORS = [NAVY, TEAL, GOLD, CORAL, "#3d5a8a", "#5bb5ab", "#e0c873"];
+const PRIMARY = "#B91C1C";       // Deep crimson
+const PRIMARY_DARK = "#8B1A1A";  // Darker crimson
+const SECONDARY = "#1E40AF";     // Royal blue
+const SECONDARY_DARK = "#1E3A5F";// Darker royal blue
+const GOLD = "#D4A843";          // Gold accent
+const NAVY = "#0F172A";          // Dark sidebar base
+const NAVY_LIGHT = "#1E293B";    // Dark sidebar lighter
+const TEAL = "#059669";          // Emerald/teal for success
+const CORAL = "#DB2777";         // Pink for alerts
+const CHART_COLORS = ["#B91C1C", "#1E40AF", "#D4A843", "#059669", "#7C3AED", "#DB2777", "#0891B2"];
+
+// IKU-specific colors for KPI cards
+const IKU_COLORS: Record<string, string> = {
+  iku1: "#B91C1C",  // Crimson
+  iku2: "#1E40AF",  // Royal blue
+  iku3: "#D4A843",  // Gold
+  iku5: "#059669",  // Emerald
+  iku7: "#7C3AED",  // Violet
+  iku9: "#0891B2",  // Cyan
+  iku12: "#DB2777", // Pink
+};
 
 // ============ TYPES ============
 type ViewMode = "global" | "fakultas" | "prodi";
@@ -78,6 +94,7 @@ export default function IKUDashboard() {
   const [saving, setSaving] = useState<string | null>(null);
   const [saveSuccess, setSaveSuccess] = useState<string | null>(null);
   const [mainTab, setMainTab] = useState<string>("dashboard");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Form state for current prodi+tahun
   const [formData, setFormData] = useState<Record<string, Record<string, number | string>>>({});
@@ -287,22 +304,24 @@ export default function IKUDashboard() {
 
   // ============ RENDER: SIDEBAR ============
   const renderSidebar = () => (
-    <aside className="w-64 lg:w-72 shrink-0 bg-white border-r border-slate-200 overflow-y-auto custom-scrollbar">
-      {/* University Header */}
-      <div className="p-4 bg-navy text-white">
-        <div className="flex items-center gap-2 mb-1">
-          <Building2 className="w-5 h-5 text-gold" />
-          <span className="font-bold text-sm">Universitas Tulungagung</span>
+    <aside className="w-64 lg:w-72 shrink-0 sidebar-pattern overflow-y-auto custom-scrollbar" style={{ background: "linear-gradient(180deg, #0F172A 0%, #1E293B 100%)" }}>
+      {/* University Header with Logo */}
+      <div className="p-5 text-center border-b border-white/10">
+        <div className="flex justify-center mb-3">
+          <div className="w-[60px] h-[60px] rounded-xl bg-white/10 p-1.5 flex items-center justify-center backdrop-blur-sm border border-white/10">
+            <img src="/logo-unita.png" alt="UNITA" className="w-full h-full object-contain" />
+          </div>
         </div>
-        <p className="text-xs text-white/60">Dashboard IKU Perguruan Tinggi</p>
+        <h2 className="font-bold text-sm text-white tracking-wide">UNIVERSITAS TULUNGAGUNG</h2>
+        <p className="text-[11px] mt-1 font-semibold" style={{ color: GOLD }}>Dashboard IKU</p>
       </div>
 
       {/* Year Selector */}
-      <div className="p-3 border-b border-slate-100">
-        <Label className="text-xs font-medium text-slate-500 mb-1.5 block">Tahun Akademik</Label>
+      <div className="p-3 border-b border-white/10">
+        <Label className="text-[10px] font-medium text-white/40 mb-1.5 block uppercase tracking-widest">Tahun Akademik</Label>
         <Select value={tahun.toString()} onValueChange={(v) => setTahun(parseInt(v))}>
-          <SelectTrigger className="h-9 text-sm border-slate-200">
-            <Calendar className="w-3.5 h-3.5 mr-1.5 text-slate-400" />
+          <SelectTrigger className="h-9 text-sm border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+            <Calendar className="w-3.5 h-3.5 mr-1.5 text-white/50" />
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -317,23 +336,24 @@ export default function IKUDashboard() {
       <nav className="p-2">
         {/* Global */}
         <button
-          onClick={() => setNavSelection({ mode: "global", id: "global" })}
-          className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+          onClick={() => { setNavSelection({ mode: "global", id: "global" }); setMobileMenuOpen(false); }}
+          className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
             navSelection.mode === "global"
-              ? "bg-navy text-white shadow-md"
-              : "text-slate-600 hover:bg-slate-50"
+              ? "text-white shadow-lg"
+              : "text-white/60 hover:text-white hover:bg-white/5"
           }`}
+          style={navSelection.mode === "global" ? { background: "linear-gradient(135deg, #B91C1C, #8B1A1A)", boxShadow: "0 4px 15px rgba(185,28,28,0.3)" } : {}}
         >
           <BarChart3 className="w-4 h-4 shrink-0" />
           <span>Global Universitas</span>
           {allData.length > 0 && (
-            <Badge className="ml-auto text-[10px] bg-teal text-white px-1.5 py-0">
+            <Badge className="ml-auto text-[10px] px-1.5 py-0" style={{ backgroundColor: "rgba(5,150,105,0.8)", color: "white" }}>
               {allData.filter((d) => IKU_LIST.some((iku) => d[iku.id as keyof IkuRecord] !== null && hasData(d[iku.id as keyof IkuRecord] as Record<string, unknown>))).length} prodi
             </Badge>
           )}
         </button>
 
-        <Separator className="my-2" />
+        <Separator className="my-2 bg-white/10" />
 
         {/* Fakultas List */}
         {FAKULTAS_LIST.map((fakultas) => {
@@ -348,33 +368,34 @@ export default function IKUDashboard() {
                   toggleFakultas(fakultas.id);
                   setNavSelection({ mode: "fakultas", id: fakultas.id });
                 }}
-                className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all ${
-                  isSelected ? "bg-navy/10 text-navy font-semibold" : "text-slate-600 hover:bg-slate-50"
+                className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm transition-all duration-200 ${
+                  isSelected ? "text-white bg-white/10 font-semibold" : "text-white/60 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {isExpanded ? <ChevronDown className="w-3.5 h-3.5 shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 shrink-0" />}
                 <span className="truncate flex-1 text-left">{fakultas.nama.replace("Fakultas ", "F. ")}</span>
-                {hasD && <div className="w-2 h-2 rounded-full bg-teal shrink-0" />}
+                {hasD && <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: TEAL }} />}
               </button>
 
               {isExpanded && (
-                <div className="ml-5 mt-0.5 space-y-0.5">
+                <div className="ml-4 mt-0.5 space-y-0.5 pl-2 border-l border-white/10">
                   {fakultas.prodiList.map((prodi) => {
                     const isProdiSelected = navSelection.mode === "prodi" && navSelection.id === prodi.id;
                     const prodiHasD = getProdiHasData(prodi.id);
                     return (
                       <button
                         key={prodi.id}
-                        onClick={() => setNavSelection({ mode: "prodi", id: prodi.id })}
-                        className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-md text-xs transition-all ${
+                        onClick={() => { setNavSelection({ mode: "prodi", id: prodi.id }); setMobileMenuOpen(false); }}
+                        className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 ${
                           isProdiSelected
-                            ? "bg-navy text-white font-medium"
-                            : "text-slate-500 hover:bg-slate-50 hover:text-slate-700"
+                            ? "text-white font-medium"
+                            : "text-white/40 hover:text-white hover:bg-white/5"
                         }`}
+                        style={isProdiSelected ? { background: "linear-gradient(135deg, #1E40AF, #1E3A5F)", boxShadow: "0 2px 10px rgba(30,64,175,0.3)" } : {}}
                       >
                         <GraduationCap className="w-3.5 h-3.5 shrink-0" />
                         <span className="truncate flex-1 text-left">{prodi.nama}</span>
-                        {prodiHasD && <div className="w-1.5 h-1.5 rounded-full bg-teal shrink-0" />}
+                        {prodiHasD && <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: TEAL }} />}
                       </button>
                     );
                   })}
@@ -396,23 +417,23 @@ export default function IKUDashboard() {
     return (
       <div className="space-y-6">
         {/* Header */}
-        <Card className="border-l-4 border-l-navy">
+        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl" style={{ borderTop: `3px solid ${PRIMARY}` }}>
           <CardContent className="p-5">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
               <div>
-                <h2 className="text-lg font-bold text-navy">{prodi.nama}</h2>
+                <h2 className="text-lg font-bold gradient-text">{prodi.nama}</h2>
                 <p className="text-sm text-slate-500">{fakultas?.nama} • Tahun Akademik {tahun}</p>
               </div>
-              <Badge variant="outline" className="w-fit text-xs">{prodi.jenjang}</Badge>
+              <Badge className="w-fit text-xs border-0 font-bold" style={{ background: "linear-gradient(135deg, #1E40AF, #1E3A5F)", color: "white" }}>{prodi.jenjang}</Badge>
             </div>
           </CardContent>
         </Card>
 
         {/* IKU Tabs */}
         <Tabs defaultValue="iku1" className="space-y-4">
-          <TabsList className="iku-tabs w-full flex h-auto p-1 bg-slate-100/80 rounded-lg gap-0.5 overflow-x-auto">
+          <TabsList className="iku-tabs w-full flex h-auto p-1.5 rounded-xl gap-1 overflow-x-auto" style={{ background: "linear-gradient(135deg, rgba(15,23,42,0.05), rgba(30,41,59,0.08))" }}>
             {IKU_LIST.map((iku) => (
-              <TabsTrigger key={iku.id} value={iku.id} className="text-xs font-semibold px-3 py-2 rounded-md whitespace-nowrap data-[state=active]:shadow-md transition-all">
+              <TabsTrigger key={iku.id} value={iku.id} className="text-xs font-semibold px-3 py-2 rounded-lg whitespace-nowrap data-[state=active]:shadow-lg transition-all duration-200" style={{ color: IKU_COLORS[iku.id] }}>
                 {iku.label}
               </TabsTrigger>
             ))}
@@ -472,18 +493,19 @@ export default function IKUDashboard() {
               <TabsContent key={iku.id} value={iku.id} className="mt-4">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {/* Input Form */}
-                  <Card className="lg:col-span-2 border border-slate-200">
+                  <Card className="lg:col-span-2 glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
+                    <div className="h-1.5" style={{ background: `linear-gradient(90deg, ${IKU_COLORS[iku.id]}, ${IKU_COLORS[iku.id]}88)` }} />
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base font-semibold text-navy">{iku.title}</CardTitle>
+                      <CardTitle className="text-base font-semibold" style={{ color: IKU_COLORS[iku.id] }}>{iku.title}</CardTitle>
                       <CardDescription className="text-xs">Masukkan data untuk {prodi.nama} tahun {tahun}</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       {iku.id === "iku1" && (
-                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+                        <div className="rounded-lg p-3 mb-3 border-l-4" style={{ background: `linear-gradient(135deg, ${IKU_COLORS[iku.id]}08, ${IKU_COLORS[iku.id]}03)`, borderLeftColor: IKU_COLORS[iku.id] }}>
                           <div className="flex items-start gap-2">
-                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                            <Info className="w-4 h-4 mt-0.5 shrink-0" style={{ color: IKU_COLORS[iku.id] }} />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 1 (AEE PT):</p>
+                              <p className="font-semibold mb-1" style={{ color: IKU_COLORS[iku.id] }}>Rumus IKU 1 (AEE PT):</p>
                               <p>AEE Realisasi = (Lulusan Tepat Waktu / Total Mahasiswa) × 100%</p>
                               <p>Tingkat Pencapaian = (AEE Realisasi / AEE Ideal) × 100%</p>
                               <p>AEE Ideal {prodi.jenjang} = {(() => { const v = { D3: 33, D4: 25, S1: 25, S2: 50, S3: 33 } as Record<string, number>; return v[prodi.jenjang] || 25; })()}%</p>
@@ -492,11 +514,11 @@ export default function IKUDashboard() {
                         </div>
                       )}
                       {iku.id === "iku2" && (
-                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+                        <div className="rounded-lg p-3 mb-3 border-l-4" style={{ background: `linear-gradient(135deg, ${IKU_COLORS[iku.id]}08, ${IKU_COLORS[iku.id]}03)`, borderLeftColor: IKU_COLORS[iku.id] }}>
                           <div className="flex items-start gap-2">
-                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                            <Info className="w-4 h-4 mt-0.5 shrink-0" style={{ color: IKU_COLORS[iku.id] }} />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 2:</p>
+                              <p className="font-semibold mb-1" style={{ color: IKU_COLORS[iku.id] }}>Rumus IKU 2:</p>
                               <p>Persentase = Σ(n × k) / t × 100%</p>
                               <p>n: Jumlah lulusan per kategori; k: Konstanta bobot; t: Total responden</p>
                               <p className="mt-1 text-slate-500">Pastikan setiap lulusan hanya tercatat di 1 kategori (tidak tumpang tindih)</p>
@@ -505,29 +527,29 @@ export default function IKUDashboard() {
                         </div>
                       )}
                       {iku.id === "iku3" && (
-                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+                        <div className="rounded-lg p-3 mb-3 border-l-4" style={{ background: `linear-gradient(135deg, ${IKU_COLORS[iku.id]}08, ${IKU_COLORS[iku.id]}03)`, borderLeftColor: IKU_COLORS[iku.id] }}>
                           <div className="flex items-start gap-2">
-                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                            <Info className="w-4 h-4 mt-0.5 shrink-0" style={{ color: IKU_COLORS[iku.id] }} />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 3 (2 Komponen Terakumulasi):</p>
-                              <p className="font-medium text-navy">Komponen A — Mobilitas Akademik:</p>
+                              <p className="font-semibold mb-1" style={{ color: IKU_COLORS[iku.id] }}>Rumus IKU 3 (2 Komponen Terakumulasi):</p>
+                              <p className="font-medium" style={{ color: IKU_COLORS[iku.id] }}>Komponen A — Mobilitas Akademik:</p>
                               <p>A = (n₁ × k₁) / t × 100% &nbsp;|&nbsp; n₁: ≥10 SKS di luar prodi, k₁ = 1.0</p>
-                              <p className="font-medium text-navy mt-1">Komponen B — Prestasi:</p>
+                              <p className="font-medium mt-1" style={{ color: IKU_COLORS[iku.id] }}>Komponen B — Prestasi:</p>
                               <p>B = Σ(nᵢ × kᵢ) / t × 100%</p>
                               <p>n₂: Juara Nasional, k₂ = 0.6 &nbsp;|&nbsp; n₃: Juara Provinsi, k₃ = 0.3</p>
                               <Separator className="my-1.5" />
-                              <p className="font-semibold text-navy">Total IKU 3 = Komponen A + Komponen B</p>
+                              <p className="font-semibold" style={{ color: IKU_COLORS[iku.id] }}>Total IKU 3 = Komponen A + Komponen B</p>
                               <p className="mt-1 text-slate-500">Komponen A &amp; B dihitung terpisah — mahasiswa yang ambil SKS luar prodi sekaligus berprestasi dihitung di kedua komponen.</p>
                             </div>
                           </div>
                         </div>
                       )}
                       {iku.id === "iku5" && (
-                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+                        <div className="rounded-lg p-3 mb-3 border-l-4" style={{ background: `linear-gradient(135deg, ${IKU_COLORS[iku.id]}08, ${IKU_COLORS[iku.id]}03)`, borderLeftColor: IKU_COLORS[iku.id] }}>
                           <div className="flex items-start gap-2">
-                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                            <Info className="w-4 h-4 mt-0.5 shrink-0" style={{ color: IKU_COLORS[iku.id] }} />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 5 (Level Prodi):</p>
+                              <p className="font-semibold mb-1" style={{ color: IKU_COLORS[iku.id] }}>Rumus IKU 5 (Level Prodi):</p>
                               <p>Persentase = Luaran Hasil Kerjasama Prodi / Total Kerjasama Prodi × 100%</p>
                               <p className="mt-1 text-slate-500">Isi data kerjasama prodi ini. Rasio universitas dihitung otomatis di Global Universitas.</p>
                             </div>
@@ -535,11 +557,11 @@ export default function IKUDashboard() {
                         </div>
                       )}
                       {iku.id === "iku7" && (
-                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+                        <div className="rounded-lg p-3 mb-3 border-l-4" style={{ background: `linear-gradient(135deg, ${IKU_COLORS[iku.id]}08, ${IKU_COLORS[iku.id]}03)`, borderLeftColor: IKU_COLORS[iku.id] }}>
                           <div className="flex items-start gap-2">
-                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                            <Info className="w-4 h-4 mt-0.5 shrink-0" style={{ color: IKU_COLORS[iku.id] }} />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 7 (Level Prodi):</p>
+                              <p className="font-semibold mb-1" style={{ color: IKU_COLORS[iku.id] }}>Rumus IKU 7 (Level Prodi):</p>
                               <p>Persentase = Program SDGs Prodi / Total Program SDGs Prodi × 100%</p>
                               <p className="mt-1 text-slate-500">Isi data SDGs prodi ini. Rasio universitas dihitung otomatis di Global Universitas.</p>
                             </div>
@@ -547,11 +569,11 @@ export default function IKUDashboard() {
                         </div>
                       )}
                       {iku.id === "iku9" && (
-                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+                        <div className="rounded-lg p-3 mb-3 border-l-4" style={{ background: `linear-gradient(135deg, ${IKU_COLORS[iku.id]}08, ${IKU_COLORS[iku.id]}03)`, borderLeftColor: IKU_COLORS[iku.id] }}>
                           <div className="flex items-start gap-2">
-                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                            <Info className="w-4 h-4 mt-0.5 shrink-0" style={{ color: IKU_COLORS[iku.id] }} />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 9 (Level Prodi):</p>
+                              <p className="font-semibold mb-1" style={{ color: IKU_COLORS[iku.id] }}>Rumus IKU 9 (Level Prodi):</p>
                               <p>Persentase = Pendapatan Non-Akademik Prodi / Total Pendapatan Prodi × 100%</p>
                               <p className="mt-1 text-slate-500">Isi data pendapatan prodi ini. Rasio universitas dihitung otomatis di Global Universitas.</p>
                             </div>
@@ -559,11 +581,11 @@ export default function IKUDashboard() {
                         </div>
                       )}
                       {iku.id === "iku12" && (
-                        <div className="bg-slate-50 rounded-lg p-3 mb-3 border border-slate-100">
+                        <div className="rounded-lg p-3 mb-3 border-l-4" style={{ background: `linear-gradient(135deg, ${IKU_COLORS[iku.id]}08, ${IKU_COLORS[iku.id]}03)`, borderLeftColor: IKU_COLORS[iku.id] }}>
                           <div className="flex items-start gap-2">
-                            <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                            <Info className="w-4 h-4 mt-0.5 shrink-0" style={{ color: IKU_COLORS[iku.id] }} />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 12:</p>
+                              <p className="font-semibold mb-1" style={{ color: IKU_COLORS[iku.id] }}>Rumus IKU 12:</p>
                               <p>Capaian = Ketersediaan Dokumen Perencanaan Strategis Kesejahteraan Dosen</p>
                               <p className="mt-1 text-slate-500">Syarat validasi: AA ≥1,5× UMP; Lektor ≥3× UMP; Lektor Kepala ≥4× UMP; Profesor ≥6× UMP</p>
                             </div>
@@ -591,7 +613,7 @@ export default function IKUDashboard() {
                               value={(currentData[field.key] as string) || ""}
                               onValueChange={(v) => handleFormChange(iku.id, field.key, v)}
                             >
-                              <SelectTrigger className="h-9 text-sm border-slate-200">
+                              <SelectTrigger className="h-9 text-sm rounded-lg border-slate-200 focus:ring-2 transition-shadow" style={{ '--tw-ring-color': `${IKU_COLORS[iku.id]}40` } as React.CSSProperties}>
                                 <SelectValue placeholder="Pilih..." />
                               </SelectTrigger>
                               <SelectContent>
@@ -609,7 +631,7 @@ export default function IKUDashboard() {
                               placeholder={field.placeholder}
                               min={field.min}
                               step={field.step ?? 1}
-                              className="h-9 text-sm border-slate-200"
+                              className="h-9 text-sm rounded-lg border-slate-200 transition-shadow"
                             />
                           )}
                         </div>
@@ -621,7 +643,8 @@ export default function IKUDashboard() {
                         <Button
                           onClick={() => handleSave(iku.id)}
                           disabled={isSaving}
-                          className="bg-navy hover:bg-navy-light text-white text-sm"
+                          className="text-white text-sm border-0 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+                          style={{ background: `linear-gradient(135deg, ${IKU_COLORS[iku.id]}, ${IKU_COLORS[iku.id]}cc)` }}
                         >
                           {isSaving ? (
                             <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />Menyimpan...</>
@@ -636,16 +659,17 @@ export default function IKUDashboard() {
                   </Card>
 
                   {/* Calculation Preview */}
-                  <Card className="border border-slate-200">
+                  <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
+                    <div className="h-1.5" style={{ background: `linear-gradient(90deg, ${IKU_COLORS[iku.id]}88, ${IKU_COLORS[iku.id]})` }} />
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-sm font-semibold text-navy flex items-center gap-2">
+                      <CardTitle className="text-sm font-semibold flex items-center gap-2" style={{ color: IKU_COLORS[iku.id] }}>
                         <Calculator className="w-4 h-4" />
                         Hasil Perhitungan
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="text-center py-4">
-                        <p className="text-4xl font-bold text-navy">{previewValue.toFixed(1)}%</p>
+                        <p className="text-4xl font-bold gradient-text">{previewValue.toFixed(1)}%</p>
                         <p className="text-xs text-slate-500 mt-2">{iku.id === "iku1" ? "AEE Realisasi" : iku.shortTitle}</p>
                         {iku.id === "iku1" && (
                           <p className="text-xs text-slate-400 mt-1">TP: {calcAEE_AchievementRate(currentData as unknown as Iku1Data, prodi.jenjang).toFixed(1)}%</p>
@@ -660,7 +684,7 @@ export default function IKUDashboard() {
                           const ideal = aeeIdeal[prodi.jenjang] || 25;
                           return (
                             <>
-                              <div className="flex justify-between"><span className="text-slate-500">AEE Realisasi:</span><span className="font-bold text-navy">{aeeReal.toFixed(2)}%</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">AEE Realisasi:</span><span className="font-bold text-slate-700">{aeeReal.toFixed(2)}%</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">AEE Ideal ({prodi.jenjang}):</span><span className="font-medium">{ideal}%</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Tingkat Pencapaian:</span><span className="font-medium">{calcAEE_AchievementRate(d, prodi.jenjang).toFixed(2)}%</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa Terdaftar:</span><span className="font-medium">{d.jumlahMasuk || 0}</span></div>
@@ -688,19 +712,19 @@ export default function IKUDashboard() {
                           const kompB = calcIKU3_KomponenB(d);
                           return (
                             <>
-                              <p className="text-xs font-semibold text-navy mt-1">Komponen A — Mobilitas:</p>
+                              <p className="text-xs font-semibold text-slate-700 mt-1">Komponen A — Mobilitas:</p>
                               <div className="flex justify-between"><span className="text-slate-500">Mhs Luar Prodi (n₁):</span><span className="font-medium">{d.mhsLuarProdi || 0}</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">× Bobot k₁:</span><span className="font-medium">1.0</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">÷ Total Mahasiswa (t):</span><span className="font-medium">{d.totalMahasiswa || 0}</span></div>
-                              <div className="flex justify-between font-medium"><span className="text-navy">Komponen A:</span><span className="text-navy">{kompA.toFixed(2)}%</span></div>
+                              <div className="flex justify-between font-medium"><span className="text-slate-700">Komponen A:</span><span className="text-slate-700">{kompA.toFixed(2)}%</span></div>
                               <Separator className="my-1" />
-                              <p className="text-xs font-semibold text-navy">Komponen B — Prestasi:</p>
+                              <p className="text-xs font-semibold text-slate-700">Komponen B — Prestasi:</p>
                               <div className="flex justify-between"><span className="text-slate-500">Mhs Juara Nasional (n₂):</span><span className="font-medium">{d.mhsJuaraNasional || 0} × 0.6 = {((d.mhsJuaraNasional || 0) * 0.6).toFixed(1)}</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Mhs Juara Provinsi (n₃):</span><span className="font-medium">{d.mhsJuaraProvinsi || 0} × 0.3 = {((d.mhsJuaraProvinsi || 0) * 0.3).toFixed(1)}</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">÷ Total Mahasiswa (t):</span><span className="font-medium">{d.totalMahasiswa || 0}</span></div>
-                              <div className="flex justify-between font-medium"><span className="text-navy">Komponen B:</span><span className="text-navy">{kompB.toFixed(2)}%</span></div>
+                              <div className="flex justify-between font-medium"><span className="text-slate-700">Komponen B:</span><span className="text-slate-700">{kompB.toFixed(2)}%</span></div>
                               <Separator className="my-1" />
-                              <div className="flex justify-between font-bold"><span className="text-navy">Total IKU 3 (A + B):</span><span className="text-navy">{(kompA + kompB).toFixed(2)}%</span></div>
+                              <div className="flex justify-between font-bold"><span className="text-slate-700">Total IKU 3 (A + B):</span><span className="text-slate-700">{(kompA + kompB).toFixed(2)}%</span></div>
                             </>
                           );
                         })()}
@@ -864,7 +888,7 @@ export default function IKUDashboard() {
     ];
 
     const spmiRadarConfig: ChartConfig = {
-      nilai: { label: "Nilai SPMI (%)", color: NAVY },
+      nilai: { label: "Nilai SPMI (%)", color: PRIMARY },
     };
 
     const hasAnyData = Object.values(ikuValues).some((v) => v > 0);
@@ -872,14 +896,14 @@ export default function IKUDashboard() {
     return (
       <div className="space-y-6">
         {/* Header */}
-        <Card className="border-l-4 border-l-gold">
+        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl" style={{ borderLeft: `4px solid ${GOLD}` }}>
           <CardContent className="p-5">
             <div className="flex items-start gap-3">
-              <div className="p-2 bg-gold/10 rounded-lg shrink-0">
-                <ShieldCheck className="w-6 h-6 text-gold" />
+              <div className="p-2.5 rounded-xl" style={{ backgroundColor: `${GOLD}15` }}>
+                <ShieldCheck className="w-6 h-6" style={{ color: GOLD }} />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-navy">SPMI - Sistem Penjaminan Mutu Internal</h2>
+                <h2 className="text-lg font-bold gradient-text">SPMI - Sistem Penjaminan Mutu Internal</h2>
                 <p className="text-sm text-slate-500 mt-1">Keterkaitan Pencapaian IKU dengan Standar Akreditasi (IAPT 4.1)</p>
                 <p className="text-xs text-slate-400 mt-0.5">
                   {isGlobal ? "Universitas Tulungagung" : getFakultasById(navSelection.id)?.nama} • Tahun Akademik {tahun}
@@ -890,14 +914,14 @@ export default function IKUDashboard() {
         </Card>
 
         {/* Overall SPMI Score */}
-        <Card className="border border-slate-200">
+        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
           <CardContent className="p-6">
             <div className="flex flex-col md:flex-row md:items-center gap-6">
               <div className="flex-1">
-                <h3 className="text-base font-semibold text-navy mb-1">Penilaian Keseluruhan SPMI</h3>
+                <h3 className="text-base font-semibold gradient-text mb-1">Penilaian Keseluruhan SPMI</h3>
                 <p className="text-xs text-slate-500 mb-4">Berdasarkan agregasi pencapaian 7 IKU Wajib terhadap 4 kriteria IAPT 4.1</p>
                 <div className="flex items-end gap-3 mb-3">
-                  <span className={`text-5xl font-bold ${overallSpmiScore > 0 ? "text-navy" : "text-slate-300"}`}>
+                  <span className="text-5xl font-bold gradient-text">
                     {overallSpmiScore.toFixed(1)}%
                   </span>
                   {hasAnyData && (
@@ -921,7 +945,7 @@ export default function IKUDashboard() {
                           <div className="flex items-center justify-between">
                             <span className="text-xs font-medium text-slate-600">{labels[key]}</span>
                             <div className="flex items-center gap-1.5">
-                              <span className="text-xs font-bold text-navy">{value.toFixed(1)}%</span>
+                              <span className="text-xs font-bold text-slate-700">{value.toFixed(1)}%</span>
                               {getSpmiIcon(status)}
                             </div>
                           </div>
@@ -941,7 +965,7 @@ export default function IKUDashboard() {
                       <PolarGrid stroke="#e2e8f0" />
                       <PolarAngleAxis dataKey="kriteria" tick={{ fontSize: 9, fill: "#475569" }} />
                       <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 9, fill: "#94a3b8" }} />
-                      <Radar name="Nilai SPMI" dataKey="nilai" stroke={NAVY} fill={NAVY} fillOpacity={0.2} strokeWidth={2} />
+                      <Radar name="Nilai SPMI" dataKey="nilai" stroke={PRIMARY} fill={PRIMARY} fillOpacity={0.15} strokeWidth={2} />
                       <ChartTooltip content={<ChartTooltipContent />} />
                     </RadarChart>
                   </ChartContainer>
@@ -952,9 +976,9 @@ export default function IKUDashboard() {
         </Card>
 
         {/* Per-IKU SPMI Assessment */}
-        <Card className="border border-slate-200">
+        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold text-navy flex items-center gap-2">
+            <CardTitle className="text-base font-semibold gradient-text flex items-center gap-2">
               <Target className="w-4 h-4" />
               Penilaian Indikator SPMI per IKU
             </CardTitle>
@@ -974,12 +998,12 @@ export default function IKUDashboard() {
                   return (
                     <div key={iku.id} className={`p-4 rounded-lg border ${getSpmiStatusBg(status)}`}>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-bold text-navy">{iku.label}</span>
+                        <span className="text-sm font-bold text-slate-700">{iku.label}</span>
                         {getSpmiIcon(status)}
                       </div>
                       <p className="text-xs text-slate-600 mb-1">{iku.shortTitle}</p>
                       <div className="flex items-end gap-2 mb-2">
-                        <span className="text-2xl font-bold text-navy">{value.toFixed(1)}%</span>
+                        <span className="text-2xl font-bold gradient-text">{value.toFixed(1)}%</span>
                         <Badge className={`text-[10px] font-semibold border mb-1 ${getSpmiStatusBadge(status)}`}>
                           {getSpmiStatusLabel(status)}
                         </Badge>
@@ -994,9 +1018,9 @@ export default function IKUDashboard() {
         </Card>
 
         {/* Narrative: IKU-to-IAPT Mapping */}
-        <Card className="border border-slate-200">
+        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold text-navy flex items-center gap-2">
+            <CardTitle className="text-base font-semibold gradient-text flex items-center gap-2">
               <FileText className="w-4 h-4" />
               Narasi: Keterkaitan Pencapaian IKU dengan Standar Akreditasi
             </CardTitle>
@@ -1005,7 +1029,7 @@ export default function IKUDashboard() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="bg-slate-50 rounded-lg p-4 mb-5 border border-slate-100">
+            <div className="rounded-lg p-4 mb-5 border-l-4" style={{ background: "linear-gradient(135deg, #F8FAFC, #EEF2F7)", borderLeftColor: GOLD }}>
               <p className="text-sm text-slate-700 leading-relaxed">
                 Berdasarkan fokus institusi pada <strong>7 IKU Wajib</strong> sesuai Keputusan Menteri Pendidikan Tinggi, Sains, dan Teknologi Nomor 358/M/KEP/2026, berikut adalah pemetaan lengkap indikator pada Instrumen Akreditasi Perguruan Tinggi (IAPT) Versi 4.1 yang secara langsung maupun tidak langsung dipengaruhi oleh pencapaian IKU tersebut. Sebagai tim Penjaminan Mutu, daftar ini dapat digunakan untuk memastikan bahwa setiap data IKU yang dikumpulkan juga memenuhi syarat bukti (eviden) untuk butir-butir indikator akreditasi.
               </p>
@@ -1013,21 +1037,21 @@ export default function IKUDashboard() {
 
             <Accordion type="multiple" className="space-y-3">
               {/* Kriteria 1: Budaya Mutu */}
-              <AccordionItem value="budaya-mutu" className="border border-slate-200 rounded-lg overflow-hidden">
-                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-slate-50 group">
+              <AccordionItem value="budaya-mutu" className="glass-card rounded-xl overflow-hidden border-0 transition-all duration-300">
+                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-white/50 group">
                   <div className="flex items-center gap-3 text-left">
                     <div className={`p-1.5 rounded-md ${getSpmiStatusBg(getSpmiStatus(kriteriaScores.budayaMutu))}`}>
                       {getSpmiIcon(getSpmiStatus(kriteriaScores.budayaMutu))}
                     </div>
                     <div>
-                      <span className="text-sm font-semibold text-navy">1. Kriteria Budaya Mutu</span>
+                      <span className="text-sm font-semibold gradient-text">1. Kriteria Budaya Mutu</span>
                       <p className="text-xs text-slate-500">Fokus pada Tata Kelola Mutu</p>
                     </div>
                     <Badge variant="outline" className="ml-2 text-[10px]">{kriteriaScores.budayaMutu.toFixed(1)}%</Badge>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4">
-                  <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 mb-3">
+                  <div className="rounded-lg p-4 border-l-4 mb-3" style={{ background: "linear-gradient(135deg, #F8FAFC, #EEF2F7)", borderLeftColor: GOLD }}>
                     <p className="text-xs text-slate-600 leading-relaxed">
                       Pemenuhan IKU ini menunjang sistem penjaminan mutu internal (SPMI) dalam mengelola data kinerja.
                     </p>
@@ -1035,7 +1059,7 @@ export default function IKUDashboard() {
                   <div className="space-y-3">
                     <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku1))}`}>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-bold text-navy">IKU 1 (AEE PT) → Indikator 3</span>
+                        <span className="text-xs font-bold text-slate-700">IKU 1 (AEE PT) → Indikator 3</span>
                         <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku1))}`}>
                           {ikuValues.iku1.toFixed(1)}% - {getSpmiStatusLabel(getSpmiStatus(ikuValues.iku1))}
                         </Badge>
@@ -1049,21 +1073,21 @@ export default function IKUDashboard() {
               </AccordionItem>
 
               {/* Kriteria 2: Relevansi */}
-              <AccordionItem value="relevansi" className="border border-slate-200 rounded-lg overflow-hidden">
-                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-slate-50 group">
+              <AccordionItem value="relevansi" className="glass-card rounded-xl overflow-hidden border-0 transition-all duration-300">
+                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-white/50 group">
                   <div className="flex items-center gap-3 text-left">
                     <div className={`p-1.5 rounded-md ${getSpmiStatusBg(getSpmiStatus(kriteriaScores.relevansi))}`}>
                       {getSpmiIcon(getSpmiStatus(kriteriaScores.relevansi))}
                     </div>
                     <div>
-                      <span className="text-sm font-semibold text-navy">2. Kriteria Relevansi</span>
+                      <span className="text-sm font-semibold gradient-text">2. Kriteria Relevansi</span>
                       <p className="text-xs text-slate-500">Fokus pada Luaran Tridharma</p>
                     </div>
                     <Badge variant="outline" className="ml-2 text-[10px]">{kriteriaScores.relevansi.toFixed(1)}%</Badge>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4">
-                  <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 mb-3">
+                  <div className="rounded-lg p-4 border-l-4 mb-3" style={{ background: "linear-gradient(135deg, #F8FAFC, #EEF2F7)", borderLeftColor: GOLD }}>
                     <p className="text-xs text-slate-600 leading-relaxed">
                       Kriteria ini memiliki kaitan paling banyak dengan 7 IKU Wajib, terutama terkait dampak dan luaran pendidikan serta penelitian.
                     </p>
@@ -1072,17 +1096,17 @@ export default function IKUDashboard() {
                     {/* IKU 1 */}
                     <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku1))}`}>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-bold text-navy">IKU 1 (AEE PT)</span>
+                        <span className="text-xs font-bold text-slate-700">IKU 1 (AEE PT)</span>
                         <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku1))}`}>
                           {ikuValues.iku1.toFixed(1)}%
                         </Badge>
                       </div>
                       <div className="space-y-1.5 ml-2">
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 10 (Perbaikan Proses Pembelajaran):</strong> Data efisiensi edukasi menunjukkan apakah proses pembelajaran diperbaiki secara berkelanjutan berdasarkan evaluasi masa studi mahasiswa.
+                          <strong className="text-slate-700">→ Indikator 10 (Perbaikan Proses Pembelajaran):</strong> Data efisiensi edukasi menunjukkan apakah proses pembelajaran diperbaiki secara berkelanjutan berdasarkan evaluasi masa studi mahasiswa.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 15 (Analisis Prestasi & Kelulusan):</strong> Mengukur keberhasilan lulus tepat waktu sesuai masa tempuh kurikulum yang ditetapkan institusi.
+                          <strong className="text-slate-700">→ Indikator 15 (Analisis Prestasi & Kelulusan):</strong> Mengukur keberhasilan lulus tepat waktu sesuai masa tempuh kurikulum yang ditetapkan institusi.
                         </p>
                       </div>
                     </div>
@@ -1090,17 +1114,17 @@ export default function IKUDashboard() {
                     {/* IKU 2 */}
                     <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku2))}`}>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-bold text-navy">IKU 2 (Kualitas Lulusan)</span>
+                        <span className="text-xs font-bold text-slate-700">IKU 2 (Kualitas Lulusan)</span>
                         <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku2))}`}>
                           {ikuValues.iku2.toFixed(1)}%
                         </Badge>
                       </div>
                       <div className="space-y-1.5 ml-2">
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 14 (Kompetensi Lulusan):</strong> Pengakuan dan apresiasi kompetensi lulusan oleh dunia kerja (DUDIK) yang dibuktikan dengan tingkat upah &gt; 1,2x UMP.
+                          <strong className="text-slate-700">→ Indikator 14 (Kompetensi Lulusan):</strong> Pengakuan dan apresiasi kompetensi lulusan oleh dunia kerja (DUDIK) yang dibuktikan dengan tingkat upah &gt; 1,2x UMP.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 15 (Keterserapan Lapangan Kerja):</strong> Analisis terhadap lulusan yang langsung bekerja atau berwirausaha dalam jangka waktu 1 tahun.
+                          <strong className="text-slate-700">→ Indikator 15 (Keterserapan Lapangan Kerja):</strong> Analisis terhadap lulusan yang langsung bekerja atau berwirausaha dalam jangka waktu 1 tahun.
                         </p>
                       </div>
                     </div>
@@ -1108,17 +1132,17 @@ export default function IKUDashboard() {
                     {/* IKU 3 */}
                     <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku3))}`}>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-bold text-navy">IKU 3 (Kegiatan Mahasiswa)</span>
+                        <span className="text-xs font-bold text-slate-700">IKU 3 (Kegiatan Mahasiswa)</span>
                         <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku3))}`}>
                           {ikuValues.iku3.toFixed(1)}%
                         </Badge>
                       </div>
                       <div className="space-y-1.5 ml-2">
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 15 (Analisis Prestasi Mahasiswa):</strong> Mencakup prestasi di luar program studi baik tingkat provinsi, nasional, maupun internasional.
+                          <strong className="text-slate-700">→ Indikator 15 (Analisis Prestasi Mahasiswa):</strong> Mencakup prestasi di luar program studi baik tingkat provinsi, nasional, maupun internasional.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 32 (Layanan Mahasiswa):</strong> Bukti adanya layanan dan pengakuan resmi bagi mahasiswa untuk belajar di luar program studi.
+                          <strong className="text-slate-700">→ Indikator 32 (Layanan Mahasiswa):</strong> Bukti adanya layanan dan pengakuan resmi bagi mahasiswa untuk belajar di luar program studi.
                         </p>
                       </div>
                     </div>
@@ -1126,20 +1150,20 @@ export default function IKUDashboard() {
                     {/* IKU 5 */}
                     <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku5))}`}>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-bold text-navy">IKU 5 (Hilirisasi & Kerja Sama)</span>
+                        <span className="text-xs font-bold text-slate-700">IKU 5 (Hilirisasi & Kerja Sama)</span>
                         <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku5))}`}>
                           {ikuValues.iku5.toFixed(1)}%
                         </Badge>
                       </div>
                       <div className="space-y-1.5 ml-2">
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 18 (Mutu & Relevansi Penelitian):</strong> Menunjukkan hasil penelitian yang memenuhi kriteria kemanfaatan bagi mitra industri atau masyarakat.
+                          <strong className="text-slate-700">→ Indikator 18 (Mutu & Relevansi Penelitian):</strong> Menunjukkan hasil penelitian yang memenuhi kriteria kemanfaatan bagi mitra industri atau masyarakat.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 22 (Mutu & Relevansi PkM):</strong> Bukti bahwa pengabdian kepada masyarakat memiliki dampak nyata dan mendukung misi institusi.
+                          <strong className="text-slate-700">→ Indikator 22 (Mutu & Relevansi PkM):</strong> Bukti bahwa pengabdian kepada masyarakat memiliki dampak nyata dan mendukung misi institusi.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 34 (Kepuasan Pemangku Kepentingan):</strong> Tingkat kepuasan mitra kerja terhadap kolaborasi tridharma yang dilakukan.
+                          <strong className="text-slate-700">→ Indikator 34 (Kepuasan Pemangku Kepentingan):</strong> Tingkat kepuasan mitra kerja terhadap kolaborasi tridharma yang dilakukan.
                         </p>
                       </div>
                     </div>
@@ -1148,21 +1172,21 @@ export default function IKUDashboard() {
               </AccordionItem>
 
               {/* Kriteria 3: Akuntabilitas */}
-              <AccordionItem value="akuntabilitas" className="border border-slate-200 rounded-lg overflow-hidden">
-                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-slate-50 group">
+              <AccordionItem value="akuntabilitas" className="glass-card rounded-xl overflow-hidden border-0 transition-all duration-300">
+                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-white/50 group">
                   <div className="flex items-center gap-3 text-left">
                     <div className={`p-1.5 rounded-md ${getSpmiStatusBg(getSpmiStatus(kriteriaScores.akuntabilitas))}`}>
                       {getSpmiIcon(getSpmiStatus(kriteriaScores.akuntabilitas))}
                     </div>
                     <div>
-                      <span className="text-sm font-semibold text-navy">3. Kriteria Akuntabilitas</span>
+                      <span className="text-sm font-semibold gradient-text">3. Kriteria Akuntabilitas</span>
                       <p className="text-xs text-slate-500">Fokus pada Manajemen Sumber Daya</p>
                     </div>
                     <Badge variant="outline" className="ml-2 text-[10px]">{kriteriaScores.akuntabilitas.toFixed(1)}%</Badge>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4">
-                  <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 mb-3">
+                  <div className="rounded-lg p-4 border-l-4 mb-3" style={{ background: "linear-gradient(135deg, #F8FAFC, #EEF2F7)", borderLeftColor: GOLD }}>
                     <p className="text-xs text-slate-600 leading-relaxed">
                       Fokus pada IKU 9 dan 12 secara langsung memperkuat aspek pengelolaan keuangan dan SDM yang transparan.
                     </p>
@@ -1171,20 +1195,20 @@ export default function IKUDashboard() {
                     {/* IKU 9 */}
                     <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku9))}`}>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-bold text-navy">IKU 9 (Pendapatan Non-Akademik)</span>
+                        <span className="text-xs font-bold text-slate-700">IKU 9 (Pendapatan Non-Akademik)</span>
                         <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku9))}`}>
                           {ikuValues.iku9.toFixed(1)}%
                         </Badge>
                       </div>
                       <div className="space-y-1.5 ml-2">
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 27 (Renstra Keuangan):</strong> Adanya rencana strategis keuangan 5 tahunan yang mencakup diversifikasi pendanaan dari riset dan unit bisnis.
+                          <strong className="text-slate-700">→ Indikator 27 (Renstra Keuangan):</strong> Adanya rencana strategis keuangan 5 tahunan yang mencakup diversifikasi pendanaan dari riset dan unit bisnis.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 33 (Pola Pengelolaan Keuangan):</strong> Menjalankan pola pengelolaan keuangan yang sehat sesuai status penyelenggaraan institusi.
+                          <strong className="text-slate-700">→ Indikator 33 (Pola Pengelolaan Keuangan):</strong> Menjalankan pola pengelolaan keuangan yang sehat sesuai status penyelenggaraan institusi.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 35 (Audit Keuangan Eksternal):</strong> Terkait kewajiban audit oleh auditor independen untuk memastikan kewajaran laporan keuangan.
+                          <strong className="text-slate-700">→ Indikator 35 (Audit Keuangan Eksternal):</strong> Terkait kewajiban audit oleh auditor independen untuk memastikan kewajaran laporan keuangan.
                         </p>
                       </div>
                     </div>
@@ -1192,20 +1216,20 @@ export default function IKUDashboard() {
                     {/* IKU 12 */}
                     <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku12))}`}>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-bold text-navy">IKU 12 (Kesejahteraan Dosen)</span>
+                        <span className="text-xs font-bold text-slate-700">IKU 12 (Kesejahteraan Dosen)</span>
                         <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku12))}`}>
                           {ikuValues.iku12.toFixed(1)}%
                         </Badge>
                       </div>
                       <div className="space-y-1.5 ml-2">
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 6 (Renstra Pengelolaan SDM):</strong> Bukti adanya perencanaan strategis yang menunjukkan analisis kebutuhan dan pengembangan kesejahteraan dosen.
+                          <strong className="text-slate-700">→ Indikator 6 (Renstra Pengelolaan SDM):</strong> Bukti adanya perencanaan strategis yang menunjukkan analisis kebutuhan dan pengembangan kesejahteraan dosen.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 11 (Dosen Tetap Jabatan Akademik):</strong> Perencanaan kesejahteraan yang dikaitkan dengan jenjang jabatan akademik mendorong dosen untuk terus meningkatkan kualifikasi fungsionalnya.
+                          <strong className="text-slate-700">→ Indikator 11 (Dosen Tetap Jabatan Akademik):</strong> Perencanaan kesejahteraan yang dikaitkan dengan jenjang jabatan akademik mendorong dosen untuk terus meningkatkan kualifikasi fungsionalnya.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 29 (Pengelolaan Fungsional):</strong> Khususnya pada aspek penempatan personil (staffing) dan pengarahan (leading) dalam tata kelola SDM.
+                          <strong className="text-slate-700">→ Indikator 29 (Pengelolaan Fungsional):</strong> Khususnya pada aspek penempatan personil (staffing) dan pengarahan (leading) dalam tata kelola SDM.
                         </p>
                       </div>
                     </div>
@@ -1214,21 +1238,21 @@ export default function IKUDashboard() {
               </AccordionItem>
 
               {/* Kriteria 4: Diferensiasi Misi */}
-              <AccordionItem value="diferensiasi" className="border border-slate-200 rounded-lg overflow-hidden">
-                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-slate-50 group">
+              <AccordionItem value="diferensiasi" className="glass-card rounded-xl overflow-hidden border-0 transition-all duration-300">
+                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-white/50 group">
                   <div className="flex items-center gap-3 text-left">
                     <div className={`p-1.5 rounded-md ${getSpmiStatusBg(getSpmiStatus(kriteriaScores.diferensiasi))}`}>
                       {getSpmiIcon(getSpmiStatus(kriteriaScores.diferensiasi))}
                     </div>
                     <div>
-                      <span className="text-sm font-semibold text-navy">4. Kriteria Diferensiasi Misi</span>
+                      <span className="text-sm font-semibold gradient-text">4. Kriteria Diferensiasi Misi</span>
                       <p className="text-xs text-slate-500">Fokus pada Keunikan Institusi</p>
                     </div>
                     <Badge variant="outline" className="ml-2 text-[10px]">{kriteriaScores.diferensiasi.toFixed(1)}%</Badge>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4">
-                  <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 mb-3">
+                  <div className="rounded-lg p-4 border-l-4 mb-3" style={{ background: "linear-gradient(135deg, #F8FAFC, #EEF2F7)", borderLeftColor: GOLD }}>
                     <p className="text-xs text-slate-600 leading-relaxed">
                       Pengambilan IKU 7 merupakan instrumen utama untuk menunjukkan identitas khas perguruan tinggi.
                     </p>
@@ -1236,20 +1260,20 @@ export default function IKUDashboard() {
                   <div className="space-y-3">
                     <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku7))}`}>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-bold text-navy">IKU 7 (SDGs)</span>
+                        <span className="text-xs font-bold text-slate-700">IKU 7 (SDGs)</span>
                         <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku7))}`}>
                           {ikuValues.iku7.toFixed(1)}%
                         </Badge>
                       </div>
                       <div className="space-y-1.5 ml-2">
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 36 (Penetapan Diferensiasi Misi):</strong> Pemilihan 2 SDGs tambahan di luar tema wajib menjadi bagian dari peta jalan pengembangan institusi yang unik.
+                          <strong className="text-slate-700">→ Indikator 36 (Penetapan Diferensiasi Misi):</strong> Pemilihan 2 SDGs tambahan di luar tema wajib menjadi bagian dari peta jalan pengembangan institusi yang unik.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 38 (Penilaian Kesesuaian Capaian):</strong> Evaluasi tahunan untuk melihat sejauh mana kegiatan tridharma (SDGs 1, 4, 17, dan pilihan) selaras dengan misi yang dijanjikan.
+                          <strong className="text-slate-700">→ Indikator 38 (Penilaian Kesesuaian Capaian):</strong> Evaluasi tahunan untuk melihat sejauh mana kegiatan tridharma (SDGs 1, 4, 17, dan pilihan) selaras dengan misi yang dijanjikan.
                         </p>
                         <p className="text-xs text-slate-600">
-                          <strong className="text-navy">→ Indikator 39 (Pengakuan Keunggulan Eksternal):</strong> Apresiasi dari masyarakat atau lembaga internasional atas kontribusi nyata perguruan tinggi dalam isu-isu pembangunan berkelanjutan.
+                          <strong className="text-slate-700">→ Indikator 39 (Pengakuan Keunggulan Eksternal):</strong> Apresiasi dari masyarakat atau lembaga internasional atas kontribusi nyata perguruan tinggi dalam isu-isu pembangunan berkelanjutan.
                         </p>
                       </div>
                     </div>
@@ -1262,9 +1286,9 @@ export default function IKUDashboard() {
 
         {/* SPMI Summary Table */}
         {hasAnyData && (
-          <Card className="border border-slate-200">
+          <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base font-semibold text-navy flex items-center gap-2">
+              <CardTitle className="text-base font-semibold gradient-text flex items-center gap-2">
                 <Award className="w-4 h-4" />
                 Ringkasan Penilaian SPMI dari Sisi IKU
               </CardTitle>
@@ -1274,12 +1298,12 @@ export default function IKUDashboard() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b-2 border-navy/20 bg-slate-50">
-                      <th className="text-left py-3 px-3 font-semibold text-navy text-xs">Kriteria</th>
-                      <th className="text-left py-3 px-3 font-semibold text-navy text-xs">IKU Terkait</th>
-                      <th className="text-center py-3 px-3 font-semibold text-navy text-xs">Nilai</th>
-                      <th className="text-center py-3 px-3 font-semibold text-navy text-xs">Status</th>
-                      <th className="text-left py-3 px-3 font-semibold text-navy text-xs">Rekomendasi</th>
+                    <tr className="border-b-2" style={{ borderColor: `${PRIMARY}30`, background: "linear-gradient(135deg, #F8FAFC, #EEF2F7)" }}>
+                      <th className="text-left py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Kriteria</th>
+                      <th className="text-left py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>IKU Terkait</th>
+                      <th className="text-center py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Nilai</th>
+                      <th className="text-center py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Status</th>
+                      <th className="text-left py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Rekomendasi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1327,11 +1351,11 @@ export default function IKUDashboard() {
                     ].map((row) => {
                       const status = getSpmiStatus(row.value);
                       return (
-                        <tr key={row.kriteria} className="border-b border-slate-100 hover:bg-slate-50">
-                          <td className="py-3 px-3 font-medium text-navy text-xs">{row.kriteria}</td>
+                        <tr key={row.kriteria} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                          <td className="py-3 px-3 font-medium text-xs" style={{ color: PRIMARY }}>{row.kriteria}</td>
                           <td className="py-3 px-3 text-xs text-slate-600">{row.iku}</td>
                           <td className="py-3 px-3 text-center">
-                            <span className={`text-xs font-bold ${row.value > 0 ? "text-navy" : "text-slate-300"}`}>
+                            <span className="text-xs font-bold" style={{ color: row.value > 0 ? PRIMARY : "#CBD5E1" }}>
                               {row.value.toFixed(1)}%
                             </span>
                           </td>
@@ -1378,9 +1402,9 @@ export default function IKUDashboard() {
 
         {/* IAPT Indicator Mapping Detail */}
         {hasAnyData && (
-          <Card className="border border-slate-200">
+          <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base font-semibold text-navy flex items-center gap-2">
+              <CardTitle className="text-base font-semibold gradient-text flex items-center gap-2">
                 <TrendingUp className="w-4 h-4" />
                 Detail Pemetaan Indikator IAPT 4.1
               </CardTitle>
@@ -1389,13 +1413,13 @@ export default function IKUDashboard() {
             <CardContent>
               <div className="overflow-x-auto custom-scrollbar max-h-96 overflow-y-auto">
                 <table className="w-full text-sm">
-                  <thead className="sticky top-0 bg-white z-10">
-                    <tr className="border-b-2 border-navy/20 bg-slate-50">
-                      <th className="text-left py-2.5 px-3 font-semibold text-navy text-xs">IKU</th>
-                      <th className="text-left py-2.5 px-3 font-semibold text-navy text-xs">Indikator IAPT</th>
-                      <th className="text-left py-2.5 px-3 font-semibold text-navy text-xs">Deskripsi</th>
-                      <th className="text-center py-2.5 px-3 font-semibold text-navy text-xs">Capaian IKU</th>
-                      <th className="text-center py-2.5 px-3 font-semibold text-navy text-xs">Status</th>
+                  <thead className="sticky top-0 z-10" style={{ background: "linear-gradient(135deg, #F8FAFC, #EEF2F7)" }}>
+                    <tr className="border-b-2" style={{ borderColor: `${PRIMARY}30` }}>
+                      <th className="text-left py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>IKU</th>
+                      <th className="text-left py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Indikator IAPT</th>
+                      <th className="text-left py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Deskripsi</th>
+                      <th className="text-center py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Capaian IKU</th>
+                      <th className="text-center py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1423,12 +1447,12 @@ export default function IKUDashboard() {
                       const value = ikuValues[row.ikuId];
                       const status = getSpmiStatus(value);
                       return (
-                        <tr key={idx} className="border-b border-slate-100 hover:bg-slate-50">
-                          <td className="py-2 px-3 font-semibold text-navy text-xs">{row.iku}</td>
+                        <tr key={idx} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                          <td className="py-2 px-3 font-semibold text-xs" style={{ color: IKU_COLORS[row.ikuId] || PRIMARY }}>{row.iku}</td>
                           <td className="py-2 px-3 text-xs text-slate-700 font-medium">{row.indikator}</td>
                           <td className="py-2 px-3 text-xs text-slate-600">{row.deskripsi}</td>
                           <td className="py-2 px-3 text-center">
-                            <span className={`text-xs font-bold ${value > 0 ? "text-navy" : "text-slate-300"}`}>
+                            <span className="text-xs font-bold" style={{ color: value > 0 ? IKU_COLORS[row.ikuId] || PRIMARY : "#CBD5E1" }}>
                               {value.toFixed(1)}%
                             </span>
                           </td>
@@ -1451,10 +1475,10 @@ export default function IKUDashboard() {
         )}
 
         {/* Penilaian Wajib SPMI */}
-        <Card className="border-2 border-gold/40 bg-gradient-to-br from-white to-amber-50/30">
+        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl" style={{ borderTop: `3px solid ${GOLD}` }}>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-bold text-navy flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-gold" />
+            <CardTitle className="text-base font-bold gradient-text flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5" style={{ color: GOLD }} />
               Penilaian Wajib (Syarat Perlu) Indikator Akreditasi
             </CardTitle>
             <CardDescription className="text-xs">
@@ -1462,7 +1486,7 @@ export default function IKUDashboard() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="bg-amber-50 border border-gold/30 rounded-lg p-3.5 mb-5">
+            <div className="rounded-lg p-3.5 mb-5 border-l-4" style={{ background: `linear-gradient(135deg, ${GOLD}08, ${GOLD}03)`, borderLeftColor: GOLD }}>
               <p className="text-xs text-amber-900 leading-relaxed">
                 Berdasarkan pilihan institusi Anda untuk berfokus pada <strong>7 IKU Wajib</strong>, terdapat beberapa <strong>penilaian wajib (Syarat Perlu)</strong> dalam indikator akreditasi yang harus dipenuhi agar institusi Anda dapat meraih status <strong>&quot;Terakreditasi&quot;</strong> atau <strong>&quot;Terakreditasi Unggul&quot;</strong>. Berikut adalah daftar penilaian wajib dan ketentuan mutlak yang harus dipenuhi pada indikator-indikator tersebut.
               </p>
@@ -1470,9 +1494,9 @@ export default function IKUDashboard() {
 
             <div className="space-y-4">
               {/* 1. Aspek SDM */}
-              <div className="border border-slate-200 rounded-lg overflow-hidden">
-                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
-                  <Users className="w-4 h-4 text-gold shrink-0" />
+              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "linear-gradient(135deg, #0F172A, #1E293B)" }}>
+                  <Users className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
                   <div>
                     <h4 className="text-sm font-bold">Penilaian Wajib pada Aspek SDM</h4>
                     <p className="text-[10px] text-white/70">IKU 12 &amp; Indikator 6, 11</p>
@@ -1486,24 +1510,24 @@ export default function IKUDashboard() {
                 <div className="p-4 space-y-3 bg-white">
                   <p className="text-xs text-slate-600 italic">Untuk mendukung kriteria ini, institusi Anda memiliki kewajiban penilaian sebagai berikut:</p>
                   <div className="space-y-2.5">
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Dokumen Perencanaan Strategis</p>
+                        <p className="text-xs font-semibold text-slate-700">Dokumen Perencanaan Strategis</p>
                         <p className="text-[11px] text-slate-600">Wajib memiliki Renstra atau Rencana Induk SDM yang telah ditetapkan secara resmi oleh pimpinan dan dapat diverifikasi.</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Standar Penghasilan Minimum</p>
+                        <p className="text-xs font-semibold text-slate-700">Standar Penghasilan Minimum</p>
                         <p className="text-[11px] text-slate-600">Dokumen tersebut secara eksplisit wajib memuat target peningkatan kesejahteraan dosen dengan standar berbasis jenjang jabatan akademik, contohnya: <strong>Asisten Ahli ≥ 1,5× UMP</strong> dan <strong>Lektor ≥ 3× UMP</strong>.</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Kecukupan Dosen Tetap</p>
+                        <p className="text-xs font-semibold text-slate-700">Kecukupan Dosen Tetap</p>
                         <p className="text-[11px] text-slate-600">Perguruan tinggi wajib membuktikan kecukupan jumlah dosen tetap yang memiliki jabatan akademik di setiap program studi.</p>
                       </div>
                     </div>
@@ -1512,9 +1536,9 @@ export default function IKUDashboard() {
               </div>
 
               {/* 2. Luaran Pendidikan */}
-              <div className="border border-slate-200 rounded-lg overflow-hidden">
-                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
-                  <GraduationCap className="w-4 h-4 text-gold shrink-0" />
+              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "linear-gradient(135deg, #0F172A, #1E293B)" }}>
+                  <GraduationCap className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
                   <div>
                     <h4 className="text-sm font-bold">Penilaian Wajib pada Luaran Pendidikan</h4>
                     <p className="text-[10px] text-white/70">IKU 1, 2 &amp; Indikator 14, 15</p>
@@ -1533,24 +1557,24 @@ export default function IKUDashboard() {
                 <div className="p-4 space-y-3 bg-white">
                   <p className="text-xs text-slate-600 italic">Aspek ini merupakan inti dari kriteria Relevansi yang menilai dampak nyata institusi:</p>
                   <div className="space-y-2.5">
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Validitas Tracer Study (IKU 2)</p>
+                        <p className="text-xs font-semibold text-slate-700">Validitas Tracer Study (IKU 2)</p>
                         <p className="text-[11px] text-slate-600">Penilaian wajib dilakukan melalui penelusuran lulusan (D1-S1) dalam jangka waktu maksimal 1 tahun setelah lulus.</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Responden Minimum</p>
-                        <p className="text-[11px] text-slate-600">Wajib mengumpulkan jumlah responden minimum sesuai formula <code className="bg-navy/10 text-navy px-1 py-0.5 rounded text-[10px] font-mono">n = N / (N×d² + 1)</code> dengan tingkat galat (error) sebesar <strong>2,3%</strong> agar data dianggap sah.</p>
+                        <p className="text-xs font-semibold text-slate-700">Responden Minimum</p>
+                        <p className="text-[11px] text-slate-600">Wajib mengumpulkan jumlah responden minimum sesuai formula <code className="px-1 py-0.5 rounded text-[10px] font-mono" style={{ backgroundColor: `${PRIMARY}15`, color: PRIMARY }}>n = N / (N×d² + 1)</code> dengan tingkat galat (error) sebesar <strong>2,3%</strong> agar data dianggap sah.</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Efisiensi Masa Studi (IKU 1)</p>
+                        <p className="text-xs font-semibold text-slate-700">Efisiensi Masa Studi (IKU 1)</p>
                         <p className="text-[11px] text-slate-600">Wajib menghitung Angka Efisiensi Edukasi (AEE) berdasarkan jumlah mahasiswa yang lulus tepat waktu (misalnya 8 semester untuk Sarjana) dibandingkan total mahasiswa masuk.</p>
                       </div>
                     </div>
@@ -1559,9 +1583,9 @@ export default function IKUDashboard() {
               </div>
 
               {/* 3. Hilirisasi & Kerja Sama */}
-              <div className="border border-slate-200 rounded-lg overflow-hidden">
-                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
-                  <Handshake className="w-4 h-4 text-gold shrink-0" />
+              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "linear-gradient(135deg, #0F172A, #1E293B)" }}>
+                  <Handshake className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
                   <div>
                     <h4 className="text-sm font-bold">Penilaian Wajib pada Hilirisasi &amp; Kerja Sama</h4>
                     <p className="text-[10px] text-white/70">IKU 5 &amp; Indikator 18, 22, 34</p>
@@ -1575,17 +1599,17 @@ export default function IKUDashboard() {
                 <div className="p-4 space-y-3 bg-white">
                   <p className="text-xs text-slate-600 italic">Penjaminan mutu harus memastikan setiap kerja sama memiliki bukti legalitas dan dampak:</p>
                   <div className="space-y-2.5">
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Legalitas Kerja Sama</p>
+                        <p className="text-xs font-semibold text-slate-700">Legalitas Kerja Sama</p>
                         <p className="text-[11px] text-slate-600">Setiap luaran wajib didukung oleh dokumen resmi seperti MoU atau MoA yang masih aktif dengan mitra industri atau lembaga.</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Bukti Pemanfaatan (Hilirisasi)</p>
+                        <p className="text-xs font-semibold text-slate-700">Bukti Pemanfaatan (Hilirisasi)</p>
                         <p className="text-[11px] text-slate-600">Luaran (jurnal, produk terapan, atau seni) wajib dibuktikan telah dimanfaatkan melalui surat penerapan, laporan implementasi, atau bukti komersialisasi/lisensi dari mitra.</p>
                       </div>
                     </div>
@@ -1594,9 +1618,9 @@ export default function IKUDashboard() {
               </div>
 
               {/* 4. Tata Kelola & Keuangan */}
-              <div className="border border-slate-200 rounded-lg overflow-hidden">
-                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
-                  <Wallet className="w-4 h-4 text-gold shrink-0" />
+              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "linear-gradient(135deg, #0F172A, #1E293B)" }}>
+                  <Wallet className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
                   <div>
                     <h4 className="text-sm font-bold">Penilaian Wajib pada Tata Kelola &amp; Keuangan</h4>
                     <p className="text-[10px] text-white/70">IKU 9 &amp; Indikator 33, 35</p>
@@ -1610,24 +1634,24 @@ export default function IKUDashboard() {
                 <div className="p-4 space-y-3 bg-white">
                   <p className="text-xs text-slate-600 italic">Untuk PTS, akuntabilitas keuangan memiliki standar penilaian yang spesifik:</p>
                   <div className="space-y-2.5">
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Audit Eksternal Independen</p>
+                        <p className="text-xs font-semibold text-slate-700">Audit Eksternal Independen</p>
                         <p className="text-[11px] text-slate-600">Laporan keuangan institusi wajib diaudit oleh auditor independen terdaftar untuk memastikan kewajaran penyajian data.</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Opini Audit</p>
+                        <p className="text-xs font-semibold text-slate-700">Opini Audit</p>
                         <p className="text-[11px] text-slate-600">Hasil audit yang diakui minimal berstatus <strong>Wajar Tanpa Pengecualian (WTP)</strong> atau <strong>Wajar Dengan Pengecualian (WDP)</strong>.</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Diversifikasi Pendapatan</p>
+                        <p className="text-xs font-semibold text-slate-700">Diversifikasi Pendapatan</p>
                         <p className="text-[11px] text-slate-600">Wajib mencatatkan pendapatan dari sumber non-akademik (hibah riset, unit bisnis, jasa layanan) di dalam laporan keuangan resmi.</p>
                       </div>
                     </div>
@@ -1636,9 +1660,9 @@ export default function IKUDashboard() {
               </div>
 
               {/* 5. Diferensiasi Misi */}
-              <div className="border border-slate-200 rounded-lg overflow-hidden">
-                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
-                  <Globe className="w-4 h-4 text-gold shrink-0" />
+              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "linear-gradient(135deg, #0F172A, #1E293B)" }}>
+                  <Globe className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
                   <div>
                     <h4 className="text-sm font-bold">Penilaian Wajib pada Diferensiasi Misi</h4>
                     <p className="text-[10px] text-white/70">IKU 7 &amp; Indikator 36, 38</p>
@@ -1652,17 +1676,17 @@ export default function IKUDashboard() {
                 <div className="p-4 space-y-3 bg-white">
                   <p className="text-xs text-slate-600 italic">Kewajiban dalam pemilihan tema strategis untuk keunikan institusi:</p>
                   <div className="space-y-2.5">
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Pemilihan 2 SDGs Tambahan</p>
+                        <p className="text-xs font-semibold text-slate-700">Pemilihan 2 SDGs Tambahan</p>
                         <p className="text-[11px] text-slate-600">Selain wajib berkontribusi pada <strong>SDG 1, 4, dan 17</strong>, institusi wajib memilih <strong>2 tujuan SDGs lain</strong> yang sesuai dengan keunggulan kampus.</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Formalitas dalam Renstra</p>
+                        <p className="text-xs font-semibold text-slate-700">Formalitas dalam Renstra</p>
                         <p className="text-[11px] text-slate-600">Penetapan 2 SDGs pilihan tersebut wajib dituangkan secara formal dalam dokumen Renstra atau laporan kinerja tahunan untuk dapat dinilai oleh asesor.</p>
                       </div>
                     </div>
@@ -1671,9 +1695,9 @@ export default function IKUDashboard() {
               </div>
 
               {/* 6. Budaya Mutu */}
-              <div className="border border-slate-200 rounded-lg overflow-hidden">
-                <div className="bg-navy text-white px-4 py-3 flex items-center gap-2.5">
-                  <ShieldCheck className="w-4 h-4 text-gold shrink-0" />
+              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "linear-gradient(135deg, #0F172A, #1E293B)" }}>
+                  <ShieldCheck className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
                   <div>
                     <h4 className="text-sm font-bold">Penilaian Wajib Budaya Mutu</h4>
                     <p className="text-[10px] text-white/70">Indikator 3</p>
@@ -1681,17 +1705,17 @@ export default function IKUDashboard() {
                 </div>
                 <div className="p-4 space-y-3 bg-white">
                   <div className="space-y-2.5">
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Pelaporan Berkala</p>
+                        <p className="text-xs font-semibold text-slate-700">Pelaporan Berkala</p>
                         <p className="text-[11px] text-slate-600">Institusi wajib memiliki laporan implementasi SPMI tingkat perguruan tinggi secara berkala melalui PD Dikti.</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2.5 p-2.5 bg-slate-50 rounded-md border border-slate-100">
-                      <CircleCheck className="w-4 h-4 text-navy mt-0.5 shrink-0" />
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white" style={{ background: "linear-gradient(135deg, rgba(248,250,252,0.8), rgba(238,242,247,0.5))", borderLeft: `2px solid ${GOLD}` }}>
+                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
                       <div>
-                        <p className="text-xs font-semibold text-navy">Siklus PPEPP</p>
+                        <p className="text-xs font-semibold text-slate-700">Siklus PPEPP</p>
                         <p className="text-[11px] text-slate-600">Penilaian wajib menunjukkan keberfungsian siklus <strong>Penetapan, Pelaksanaan, Evaluasi, Pengendalian, dan Peningkatan</strong> standar pendidikan tinggi secara terencana dan berkelanjutan.</p>
                       </div>
                     </div>
@@ -1751,11 +1775,11 @@ export default function IKUDashboard() {
     }));
 
     const barConfig: ChartConfig = {
-      value: { label: "Capaian (%)", color: NAVY },
+      value: { label: "Capaian (%)", color: PRIMARY },
     };
 
     const radarConfig: ChartConfig = {
-      value: { label: "Capaian", color: NAVY },
+      value: { label: "Capaian", color: PRIMARY },
     };
 
     const hasAnyData = ikuValues.some((v) => v.value > 0);
@@ -1763,9 +1787,9 @@ export default function IKUDashboard() {
     return (
       <div className="space-y-6">
         {/* Header */}
-        <Card className="border-l-4 border-l-navy">
+        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl" style={{ borderLeft: `4px solid ${PRIMARY}` }}>
           <CardContent className="p-5">
-            <h2 className="text-lg font-bold text-navy">{title}</h2>
+            <h2 className="text-lg font-bold gradient-text">{title}</h2>
             <p className="text-sm text-slate-500 mt-1">{subtitle}</p>
             <p className="text-xs text-slate-400 mt-0.5">Tahun Akademik {tahun}</p>
           </CardContent>
@@ -1773,12 +1797,12 @@ export default function IKUDashboard() {
 
         {/* Tabs: Dashboard & SPMI */}
         <Tabs value={mainTab} onValueChange={setMainTab} className="space-y-4">
-          <TabsList className="iku-tabs w-full flex h-auto p-1 bg-slate-100/80 rounded-lg gap-0.5">
-            <TabsTrigger value="dashboard" className="text-sm font-semibold px-6 py-2.5 rounded-md whitespace-nowrap data-[state=active]:shadow-md transition-all flex items-center gap-2">
+          <TabsList className="iku-tabs w-full flex h-auto p-1.5 rounded-xl gap-1" style={{ background: "linear-gradient(135deg, rgba(15,23,42,0.05), rgba(30,41,59,0.08))" }}>
+            <TabsTrigger value="dashboard" className="text-sm font-semibold px-6 py-2.5 rounded-lg whitespace-nowrap data-[state=active]:shadow-lg transition-all duration-200 flex items-center gap-2">
               <BarChart3 className="w-4 h-4" />
               Dashboard IKU
             </TabsTrigger>
-            <TabsTrigger value="spmi" className="text-sm font-semibold px-6 py-2.5 rounded-md whitespace-nowrap data-[state=active]:shadow-md transition-all flex items-center gap-2">
+            <TabsTrigger value="spmi" className="text-sm font-semibold px-6 py-2.5 rounded-lg whitespace-nowrap data-[state=active]:shadow-lg transition-all duration-200 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4" />
               SPMI
             </TabsTrigger>
@@ -1786,9 +1810,9 @@ export default function IKUDashboard() {
 
           <TabsContent value="dashboard" className="mt-4 space-y-6">
             {!hasAnyData ? (
-              <Card className="border border-slate-200">
+              <Card className="glass-card overflow-hidden">
                 <CardContent className="p-12 text-center">
-                  <AlertCircle className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                  <AlertCircle className="w-12 h-12 mx-auto mb-4" style={{ color: `${PRIMARY}40` }} />
                   <h3 className="text-lg font-semibold text-slate-500 mb-2">Belum Ada Data</h3>
                   <p className="text-sm text-slate-400 max-w-md mx-auto">
                     Silakan pilih program studi di sidebar kiri dan masukkan data IKU terlebih dahulu.
@@ -1807,10 +1831,10 @@ export default function IKUDashboard() {
                   const incompleteIkus = coverageList.filter((c) => c.coverage.filled < c.coverage.total);
                   if (incompleteIkus.length > 0) {
                     return (
-                      <Card className="border-amber-200 bg-amber-50/50">
+                      <Card className="glass-card overflow-hidden" style={{ borderLeft: `3px solid ${GOLD}` }}>
                         <CardContent className="p-4">
                           <div className="flex items-start gap-3">
-                            <AlertTriangle className="w-5 h-5 text-amber-600 mt-0.5 shrink-0" />
+                            <AlertTriangle className="w-5 h-5 mt-0.5 shrink-0" style={{ color: GOLD }} />
                             <div>
                               <h4 className="text-sm font-semibold text-amber-800">Data Belum Lengkap</h4>
                               <p className="text-xs text-amber-700 mt-1">
@@ -1838,34 +1862,35 @@ export default function IKUDashboard() {
                   {ikuValues.map((iku, idx) => {
                     const coverage = getIkuCoverage(iku.id, prodiIds);
                     const isComplete = coverage.filled === coverage.total;
+                    const ikuColor = IKU_COLORS[iku.id] || PRIMARY;
                     return (
-                      <Card key={iku.id} className={`border animate-fade-in ${isComplete ? "border-slate-200" : "border-amber-200 bg-amber-50/30"}`} style={{ animationDelay: `${idx * 80}ms` }}>
+                      <Card key={iku.id} className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 cursor-default" style={{ borderTop: `3px solid ${ikuColor}`, animationDelay: `${idx * 80}ms` }}>
                         <CardContent className="p-4">
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="p-1.5 rounded-md bg-navy/10">
-                              {iku.id === "iku1" && <GraduationCap className="w-3.5 h-3.5 text-navy" />}
-                              {iku.id === "iku2" && <Briefcase className="w-3.5 h-3.5 text-navy" />}
-                              {iku.id === "iku3" && <Trophy className="w-3.5 h-3.5 text-navy" />}
-                              {iku.id === "iku5" && <Handshake className="w-3.5 h-3.5 text-navy" />}
-                              {iku.id === "iku7" && <Globe className="w-3.5 h-3.5 text-navy" />}
-                              {iku.id === "iku9" && <Wallet className="w-3.5 h-3.5 text-navy" />}
-                              {iku.id === "iku12" && <Users className="w-3.5 h-3.5 text-navy" />}
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="p-2 rounded-xl" style={{ backgroundColor: `${ikuColor}15` }}>
+                              {iku.id === "iku1" && <GraduationCap className="w-4 h-4" style={{ color: ikuColor }} />}
+                              {iku.id === "iku2" && <Briefcase className="w-4 h-4" style={{ color: ikuColor }} />}
+                              {iku.id === "iku3" && <Trophy className="w-4 h-4" style={{ color: ikuColor }} />}
+                              {iku.id === "iku5" && <Handshake className="w-4 h-4" style={{ color: ikuColor }} />}
+                              {iku.id === "iku7" && <Globe className="w-4 h-4" style={{ color: ikuColor }} />}
+                              {iku.id === "iku9" && <Wallet className="w-4 h-4" style={{ color: ikuColor }} />}
+                              {iku.id === "iku12" && <Users className="w-4 h-4" style={{ color: ikuColor }} />}
                             </div>
-                            <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">{iku.shortTitle}</span>
+                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">{iku.shortTitle}</span>
                           </div>
-                          <p className={`text-3xl font-bold ${iku.value > 0 ? "text-navy" : "text-slate-300"}`}>
+                          <p className="text-3xl font-bold" style={iku.value > 0 ? { background: `linear-gradient(135deg, ${ikuColor}, ${SECONDARY})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" } : { color: "#CBD5E1" }}>
                             {iku.value.toFixed(1)}%
                           </p>
-                          <div className="mt-2 w-full bg-slate-100 rounded-full h-1.5">
-                            <div className="bg-navy h-1.5 rounded-full transition-all" style={{ width: `${Math.min(iku.value, 100)}%` }} />
+                          <div className="mt-3 w-full rounded-full h-2" style={{ backgroundColor: `${ikuColor}15` }}>
+                            <div className="h-2 rounded-full transition-all duration-500" style={{ width: `${Math.min(iku.value, 100)}%`, background: `linear-gradient(90deg, ${ikuColor}, ${ikuColor}aa)` }} />
                           </div>
-                          <div className="mt-2 flex items-center gap-1.5">
+                          <div className="mt-2.5 flex items-center gap-1.5">
                             {isComplete ? (
-                              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                              <CheckCircle2 className="w-3.5 h-3.5" style={{ color: TEAL }} />
                             ) : (
-                              <AlertCircle className="w-3 h-3 text-amber-500" />
+                              <AlertCircle className="w-3.5 h-3.5" style={{ color: GOLD }} />
                             )}
-                            <span className={`text-[10px] ${isComplete ? "text-emerald-600" : "text-amber-600"}`}>
+                            <span className={`text-[10px] font-semibold ${isComplete ? "text-emerald-600" : "text-amber-600"}`}>
                               {coverage.filled}/{coverage.total} prodi terisi
                             </span>
                           </div>
@@ -1877,9 +1902,9 @@ export default function IKUDashboard() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {/* Radar Chart */}
-                  <Card className="border border-slate-200">
+                  <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
                     <CardHeader className="pb-2">
-                      <CardTitle className="text-base font-semibold text-navy">Radar Pencapaian IKU</CardTitle>
+                      <CardTitle className="text-base font-semibold gradient-text">Radar Pencapaian IKU</CardTitle>
                       <CardDescription>Gabungan dari {prodiIds.length} program studi</CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -1888,7 +1913,7 @@ export default function IKUDashboard() {
                           <PolarGrid stroke="#e2e8f0" />
                           <PolarAngleAxis dataKey="iku" tick={{ fontSize: 10, fill: "#475569" }} />
                           <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 10, fill: "#94a3b8" }} />
-                          <Radar name="Capaian" dataKey="value" stroke={NAVY} fill={NAVY} fillOpacity={0.2} strokeWidth={2} />
+                          <Radar name="Capaian" dataKey="value" stroke={PRIMARY} fill={SECONDARY} fillOpacity={0.15} strokeWidth={2} />
                           <ChartTooltip content={<ChartTooltipContent />} />
                         </RadarChart>
                       </ChartContainer>
@@ -1896,9 +1921,9 @@ export default function IKUDashboard() {
                   </Card>
 
                   {/* Bar Chart */}
-                  <Card className="border border-slate-200">
+                  <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
                     <CardHeader className="pb-2">
-                      <CardTitle className="text-base font-semibold text-navy">Capaian per IKU</CardTitle>
+                      <CardTitle className="text-base font-semibold gradient-text">Capaian per IKU</CardTitle>
                       <CardDescription>Persentase capaian setiap indikator</CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -1908,7 +1933,7 @@ export default function IKUDashboard() {
                           <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#475569" }} />
                           <YAxis domain={[0, 100]} tick={{ fontSize: 11, fill: "#64748b" }} />
                           <ChartTooltip content={<ChartTooltipContent />} />
-                          <Bar dataKey="value" fill={NAVY} radius={[4, 4, 0, 0]} barSize={35} />
+                          <Bar dataKey="value" fill={PRIMARY} radius={[6, 6, 0, 0]} barSize={35} />
                         </BarChart>
                       </ChartContainer>
                     </CardContent>
@@ -1917,28 +1942,28 @@ export default function IKUDashboard() {
 
                 {/* Per-Prodi Comparison */}
                 {prodiComparison.length > 1 && (
-                  <Card className="border border-slate-200">
+                  <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
                     <CardHeader className="pb-2">
-                      <CardTitle className="text-base font-semibold text-navy">Perbandingan per Program Studi</CardTitle>
+                      <CardTitle className="text-base font-semibold gradient-text">Perbandingan per Program Studi</CardTitle>
                       <CardDescription>Capaian IKU setiap program studi dalam {isGlobal ? "universitas" : fakultas?.nama}</CardDescription>
                     </CardHeader>
                     <CardContent className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="border-b border-slate-200 bg-slate-50">
-                            <th className="text-left py-2.5 px-3 font-semibold text-navy text-xs">Program Studi</th>
+                          <tr className="border-b-2" style={{ borderColor: `${PRIMARY}30`, background: "linear-gradient(135deg, #F8FAFC, #EEF2F7)" }}>
+                            <th className="text-left py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Program Studi</th>
                             {IKU_LIST.map((iku) => (
-                              <th key={iku.id} className="text-center py-2.5 px-2 font-semibold text-navy text-xs">{iku.label}</th>
+                              <th key={iku.id} className="text-center py-2.5 px-2 font-semibold text-xs" style={{ color: IKU_COLORS[iku.id] }}>{iku.label}</th>
                             ))}
                           </tr>
                         </thead>
                         <tbody>
                           {prodiComparison.map((prodi) => (
-                            <tr key={prodi.id} className="border-b border-slate-100 hover:bg-slate-50">
+                            <tr key={prodi.id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
                               <td className="py-2 px-3 font-medium text-slate-700 text-xs">{prodi.nama}</td>
                               {prodi.values.map((v) => (
                                 <td key={v.ikuId} className="py-2 px-2 text-center">
-                                  <span className={`text-xs font-semibold ${v.value > 0 ? "text-navy" : "text-slate-300"}`}>
+                                  <span className="text-xs font-semibold" style={{ color: v.value > 0 ? IKU_COLORS[v.ikuId] : "#CBD5E1" }}>
                                     {v.value > 0 ? `${v.value.toFixed(1)}%` : "-"}
                                   </span>
                                 </td>
@@ -1961,9 +1986,9 @@ export default function IKUDashboard() {
                     const prodiConfig: ChartConfig = { value: { label: iku.shortTitle, color: CHART_COLORS[IKU_LIST.indexOf(iku) % CHART_COLORS.length] } };
 
                     return (
-                      <Card key={iku.id} className="border border-slate-200">
+                      <Card key={iku.id} className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
                         <CardHeader className="pb-2">
-                          <CardTitle className="text-sm font-semibold text-navy">{iku.label} - {iku.shortTitle}</CardTitle>
+                          <CardTitle className="text-sm font-semibold" style={{ color: IKU_COLORS[iku.id] }}>{iku.label} - {iku.shortTitle}</CardTitle>
                           <CardDescription className="text-xs">Perbandingan antar program studi</CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -1999,9 +2024,9 @@ export default function IKUDashboard() {
                   const pieConfig: ChartConfig = { value: { label: "Jumlah Prodi" } };
 
                   return (
-                    <Card className="border border-slate-200">
+                    <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-base font-semibold text-navy">IKU 12 - Ketersediaan Dokumen Perencanaan</CardTitle>
+                        <CardTitle className="text-base font-semibold gradient-text">IKU 12 - Ketersediaan Dokumen Perencanaan</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="max-w-sm mx-auto">
@@ -2036,80 +2061,86 @@ export default function IKUDashboard() {
   // ============ RENDER: MAIN ============
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: "linear-gradient(135deg, #F8FAFC, #EEF2F7)" }}>
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-navy border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-slate-500 font-medium">Memuat Dashboard IKU...</p>
+          <div className="w-14 h-14 border-4 rounded-full animate-spin mx-auto mb-4" style={{ borderColor: "rgba(185,28,28,0.2)", borderTopColor: PRIMARY }} />
+          <p className="font-semibold gradient-text text-lg">Memuat Dashboard IKU...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      {/* Header */}
-      <header className="bg-navy text-white shadow-lg sticky top-0 z-50">
-        <div className="flex items-center justify-between h-14 px-4">
+    <div className="min-h-screen flex flex-col" style={{ background: "linear-gradient(180deg, #F8FAFC 0%, #EEF2F7 100%)" }}>
+      {/* Header Banner with Wave */}
+      <header className="relative text-white overflow-hidden" style={{ background: "linear-gradient(135deg, #8B1A1A 0%, #B91C1C 30%, #1E3A5F 70%, #1E40AF 100%)" }}>
+        {/* Decorative geometric shapes */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-10" style={{ background: "radial-gradient(circle, rgba(212,168,67,0.3), transparent)" }} />
+          <div className="absolute top-2 right-20 w-20 h-20 rounded-full opacity-10" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.2), transparent)" }} />
+          <div className="absolute -bottom-5 left-20 w-32 h-32 rounded-full opacity-5" style={{ background: "radial-gradient(circle, rgba(212,168,67,0.3), transparent)" }} />
+          <div className="absolute top-0 left-0 w-full h-full" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0)", backgroundSize: "24px 24px" }} />
+        </div>
+        <div className="relative flex items-center justify-between h-16 px-4 sm:px-6">
           <div className="flex items-center gap-3">
-            <div className="p-1.5 bg-white/10 rounded-lg">
-              <Building2 className="w-5 h-5 text-gold" />
+            {/* Mobile menu button */}
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+            <div className="hidden sm:flex items-center gap-2.5">
+              <img src="/logo-unita.png" alt="UNITA" className="w-9 h-9 object-contain rounded-lg bg-white/10 p-1" />
             </div>
             <div>
-              <h1 className="text-base font-bold tracking-tight">Universitas Tulungagung</h1>
-              <p className="text-[10px] text-white/60">Dashboard Indikator Kinerja Utama</p>
+              <h1 className="text-base sm:text-lg font-bold tracking-tight">Universitas Tulungagung</h1>
+              <p className="text-[10px] sm:text-xs text-white/70 font-medium">Dashboard Indikator Kinerja Utama</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Badge className="bg-gold text-navy font-semibold text-xs px-2.5 py-0.5">IKU WAJIB</Badge>
+            <Badge className="font-bold text-xs px-3 py-1 border-0" style={{ background: "linear-gradient(135deg, #D4A843, #C9952E)", color: "#1a1a1a" }}>IKU WAJIB</Badge>
           </div>
+        </div>
+        {/* Wave bottom edge */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+            <path d="M0 32L48 26.7C96 21.3 192 10.7 288 8C384 5.3 480 10.7 576 14.7C672 18.7 768 21.3 864 20C960 18.7 1056 13.3 1152 10.7C1248 8 1344 8 1392 8L1440 8V32H1392C1344 32 1248 32 1152 32C1056 32 960 32 864 32C768 32 672 32 576 32C480 32 384 32 288 32C192 32 96 32 48 32H0Z" fill="#EEF2F7"/>
+          </svg>
         </div>
       </header>
 
       {/* Content */}
-      <div className="flex-1 flex">
-        {/* Sidebar */}
-        <div className="hidden md:block">{renderSidebar()}</div>
-
-        {/* Mobile nav */}
-        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 p-2">
-          <div className="flex items-center gap-2 overflow-x-auto">
-            <button
-              onClick={() => setNavSelection({ mode: "global", id: "global" })}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${navSelection.mode === "global" ? "bg-navy text-white" : "bg-slate-100 text-slate-600"}`}
-            >
-              Global
-            </button>
-            {FAKULTAS_LIST.map((f) => (
-              <button
-                key={f.id}
-                onClick={() => setNavSelection({ mode: "fakultas", id: f.id })}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${navSelection.mode === "fakultas" && navSelection.id === f.id ? "bg-navy text-white" : "bg-slate-100 text-slate-600"}`}
-              >
-                {f.nama.replace("Fakultas ", "F. ")}
-              </button>
-            ))}
+      <div className="flex-1 flex relative">
+        {/* Mobile sidebar overlay */}
+        {mobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 z-40 flex">
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+            <div className="relative z-50 h-full">
+              {renderSidebar()}
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Desktop Sidebar */}
+        <div className="hidden md:block">{renderSidebar()}</div>
 
         {/* Main Content */}
         <main className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 pb-20 md:pb-6">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-4">
-            <button onClick={() => setNavSelection({ mode: "global", id: "global" })} className="hover:text-navy transition-colors">Global</button>
+          <div className="flex items-center gap-1.5 text-xs mb-5">
+            <button onClick={() => setNavSelection({ mode: "global", id: "global" })} className="transition-colors hover:underline" style={{ color: SECONDARY }}>Global</button>
             {navSelection.mode === "fakultas" && (
               <>
-                <ChevronRight className="w-3 h-3" />
-                <span className="text-navy font-medium">{getFakultasById(navSelection.id)?.nama}</span>
+                <ChevronRight className="w-3 h-3 text-slate-400" />
+                <span className="font-semibold" style={{ color: PRIMARY }}>{getFakultasById(navSelection.id)?.nama}</span>
               </>
             )}
             {navSelection.mode === "prodi" && (
               <>
-                <ChevronRight className="w-3 h-3" />
-                <button onClick={() => setNavSelection({ mode: "fakultas", id: getProdiById(navSelection.id)?.fakultasId || "" })} className="hover:text-navy transition-colors">
+                <ChevronRight className="w-3 h-3 text-slate-400" />
+                <button onClick={() => setNavSelection({ mode: "fakultas", id: getProdiById(navSelection.id)?.fakultasId || "" })} className="transition-colors hover:underline" style={{ color: SECONDARY }}>
                   {getFakultasById(getProdiById(navSelection.id)?.fakultasId || "")?.nama}
                 </button>
-                <ChevronRight className="w-3 h-3" />
-                <span className="text-navy font-medium">{getProdiById(navSelection.id)?.nama}</span>
+                <ChevronRight className="w-3 h-3 text-slate-400" />
+                <span className="font-semibold" style={{ color: PRIMARY }}>{getProdiById(navSelection.id)?.nama}</span>
               </>
             )}
           </div>
@@ -2119,10 +2150,11 @@ export default function IKUDashboard() {
       </div>
 
       {/* Footer */}
-      <footer className="mt-auto bg-navy text-white/70 py-3">
-        <div className="flex items-center justify-between px-4">
+      <footer className="relative text-white/70 py-3 overflow-hidden" style={{ background: "linear-gradient(135deg, #0F172A, #1E293B)" }}>
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0)", backgroundSize: "20px 20px" }} />
+        <div className="relative flex items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-2">
-            <BookOpen className="w-3.5 h-3.5 text-gold" />
+            <BookOpen className="w-3.5 h-3.5" style={{ color: GOLD }} />
             <span className="text-xs">Dashboard IKU - Universitas Tulungagung</span>
           </div>
           <p className="text-[10px] text-white/40">Kepmendiktisaintek No. 358/M/KEP/2026</p>
