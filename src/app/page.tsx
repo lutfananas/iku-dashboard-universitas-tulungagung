@@ -196,36 +196,19 @@ export default function IKUDashboard() {
   };
 
   const calcAggregatedValue = (ikuId: string, prodiIds: string[]): number => {
-    const dataList: Record<string, unknown>[] = [];
-    const prodiJenjangs: string[] = [];
+    if (prodiIds.length === 0) return 0;
 
-    prodiIds.forEach((pid) => {
-      const prodiData = getProdiData(pid);
-      if (prodiData) {
-        const data = prodiData[ikuId as keyof IkuRecord];
-        if (data && hasData(data as Record<string, unknown>)) {
-          dataList.push(data as Record<string, unknown>);
-          const prodi = getProdiById(pid);
-          if (prodi) prodiJenjangs.push(prodi.jenjang);
-        }
-      }
-    });
+    // Hitung skor individu setiap prodi (yang belum isi = 0)
+    const scores = prodiIds.map((pid) => calcProdiValue(ikuId, pid));
 
-    if (dataList.length === 0) return 0;
+    // Rata-rata dari SEMUA prodi (prodi tanpa data otomatis 0)
+    return scores.reduce((a, b) => a + b, 0) / prodiIds.length;
+  };
 
-    switch (ikuId) {
-      case "iku1": {
-        const validData = dataList.map((d, i) => ({ data: d as Iku1Data, jenjang: prodiJenjangs[i] || "S1" }));
-        return calcAEE_PT(validData);
-      }
-      case "iku2": return calcIKU2_Aggregate(dataList as Iku2Data[]);
-      case "iku3": return calcIKU3_Aggregate(dataList as Iku3Data[]);
-      case "iku5": return calcIKU5_Aggregate(dataList as Iku5Data[]);
-      case "iku7": return calcIKU7_Aggregate(dataList as Iku7Data[]);
-      case "iku9": return calcIKU9_Aggregate(dataList as Iku9Data[]);
-      case "iku12": return calcIKU12_Aggregate(dataList as Iku12Data[]);
-      default: return 0;
-    }
+  // Hitung berapa prodi yang sudah mengisi data untuk IKU tertentu
+  const getIkuCoverage = (ikuId: string, prodiIds: string[]): { filled: number; total: number } => {
+    const filled = prodiIds.filter((pid) => calcProdiValue(ikuId, pid) > 0).length;
+    return { filled, total: prodiIds.length };
   };
 
   const getProdiHasData = (prodiId: string): boolean => {
@@ -1751,32 +1734,81 @@ export default function IKUDashboard() {
               </Card>
             ) : (
               <>
+                {/* Data Completeness Warning */}
+                {(() => {
+                  const coverageList = IKU_LIST.map((iku) => ({
+                    ...iku,
+                    coverage: getIkuCoverage(iku.id, prodiIds),
+                  }));
+                  const incompleteIkus = coverageList.filter((c) => c.coverage.filled < c.coverage.total);
+                  if (incompleteIkus.length > 0) {
+                    return (
+                      <Card className="border-amber-200 bg-amber-50/50">
+                        <CardContent className="p-4">
+                          <div className="flex items-start gap-3">
+                            <AlertTriangle className="w-5 h-5 text-amber-600 mt-0.5 shrink-0" />
+                            <div>
+                              <h4 className="text-sm font-semibold text-amber-800">Data Belum Lengkap</h4>
+                              <p className="text-xs text-amber-700 mt-1">
+                                Prodi yang belum mengisi data otomatis dihitung <strong>0%</strong>, sehingga mempengaruhi rata-rata universitas. 
+                                Lengkapi data semua prodi untuk mendapatkan angka akumulasi yang akurat.
+                              </p>
+                              <div className="flex flex-wrap gap-2 mt-2">
+                                {coverageList.map((c) => (
+                                  <Badge key={c.id} variant="outline" className={`text-[10px] ${c.coverage.filled < c.coverage.total ? "border-amber-300 text-amber-700 bg-amber-100/50" : "border-emerald-300 text-emerald-700 bg-emerald-100/50"}`}>
+                                    {c.label}: {c.coverage.filled}/{c.coverage.total} prodi
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  }
+                  return null;
+                })()}
+
                 {/* KPI Summary Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                  {ikuValues.map((iku, idx) => (
-                    <Card key={iku.id} className="border border-slate-200 animate-fade-in" style={{ animationDelay: `${idx * 80}ms` }}>
-                      <CardContent className="p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="p-1.5 rounded-md bg-navy/10">
-                            {iku.id === "iku1" && <GraduationCap className="w-3.5 h-3.5 text-navy" />}
-                            {iku.id === "iku2" && <Briefcase className="w-3.5 h-3.5 text-navy" />}
-                            {iku.id === "iku3" && <Trophy className="w-3.5 h-3.5 text-navy" />}
-                            {iku.id === "iku5" && <Handshake className="w-3.5 h-3.5 text-navy" />}
-                            {iku.id === "iku7" && <Globe className="w-3.5 h-3.5 text-navy" />}
-                            {iku.id === "iku9" && <Wallet className="w-3.5 h-3.5 text-navy" />}
-                            {iku.id === "iku12" && <Users className="w-3.5 h-3.5 text-navy" />}
+                  {ikuValues.map((iku, idx) => {
+                    const coverage = getIkuCoverage(iku.id, prodiIds);
+                    const isComplete = coverage.filled === coverage.total;
+                    return (
+                      <Card key={iku.id} className={`border animate-fade-in ${isComplete ? "border-slate-200" : "border-amber-200 bg-amber-50/30"}`} style={{ animationDelay: `${idx * 80}ms` }}>
+                        <CardContent className="p-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="p-1.5 rounded-md bg-navy/10">
+                              {iku.id === "iku1" && <GraduationCap className="w-3.5 h-3.5 text-navy" />}
+                              {iku.id === "iku2" && <Briefcase className="w-3.5 h-3.5 text-navy" />}
+                              {iku.id === "iku3" && <Trophy className="w-3.5 h-3.5 text-navy" />}
+                              {iku.id === "iku5" && <Handshake className="w-3.5 h-3.5 text-navy" />}
+                              {iku.id === "iku7" && <Globe className="w-3.5 h-3.5 text-navy" />}
+                              {iku.id === "iku9" && <Wallet className="w-3.5 h-3.5 text-navy" />}
+                              {iku.id === "iku12" && <Users className="w-3.5 h-3.5 text-navy" />}
+                            </div>
+                            <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">{iku.shortTitle}</span>
                           </div>
-                          <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">{iku.shortTitle}</span>
-                        </div>
-                        <p className={`text-3xl font-bold ${iku.value > 0 ? "text-navy" : "text-slate-300"}`}>
-                          {iku.value.toFixed(1)}%
-                        </p>
-                        <div className="mt-2 w-full bg-slate-100 rounded-full h-1.5">
-                          <div className="bg-navy h-1.5 rounded-full transition-all" style={{ width: `${Math.min(iku.value, 100)}%` }} />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                          <p className={`text-3xl font-bold ${iku.value > 0 ? "text-navy" : "text-slate-300"}`}>
+                            {iku.value.toFixed(1)}%
+                          </p>
+                          <div className="mt-2 w-full bg-slate-100 rounded-full h-1.5">
+                            <div className="bg-navy h-1.5 rounded-full transition-all" style={{ width: `${Math.min(iku.value, 100)}%` }} />
+                          </div>
+                          <div className="mt-2 flex items-center gap-1.5">
+                            {isComplete ? (
+                              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                            ) : (
+                              <AlertCircle className="w-3 h-3 text-amber-500" />
+                            )}
+                            <span className={`text-[10px] ${isComplete ? "text-emerald-600" : "text-amber-600"}`}>
+                              {coverage.filled}/{coverage.total} prodi terisi
+                            </span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
