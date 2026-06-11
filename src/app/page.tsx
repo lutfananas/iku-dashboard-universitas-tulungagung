@@ -465,9 +465,10 @@ export default function IKUDashboard() {
                               <p className="font-semibold text-navy mb-1">Rumus IKU 3:</p>
                               <p>Persentase = Σ(nᵢ × kᵢ) / t × 100%</p>
                               <p>n₁: ≥10 SKS di luar prodi, k₁ = 1.0</p>
-                              <p>n₂: Juara 1 Nasional, k₂ = 0.6</p>
-                              <p>n₃: Juara Provinsi, k₃ = 0.3</p>
-                              <p className="mt-1 text-slate-500">Isi jumlah mahasiswa per kategori kegiatan, bobot sudah otomatis</p>
+                              <p>n₂: HANYA Juara 1 Nasional (tanpa SKS luar prodi), k₂ = 0.6</p>
+                              <p>n₃: HANYA Juara Provinsi (tanpa SKS luar prodi & bukan Juara Nasional), k₃ = 0.3</p>
+                              <p className="mt-1.5 font-medium text-amber-700">⚠️ Anti-Overlap: Setiap mahasiswa hanya dihitung SEKALI di kategori bobot tertinggi.</p>
+                              <p className="text-amber-700">Jika mahasiswa ambil SKS luar prodi + berprestasi → masukkan ke n₁ (bobot tertinggi).</p>
                             </div>
                           </div>
                         </div>
@@ -635,14 +636,23 @@ export default function IKUDashboard() {
                         {iku.id === "iku3" && (() => {
                           const d = currentData as unknown as Iku3Data;
                           const ws = calcIKU3_WeightedSum(d);
+                          const totalMhsKegiatan = (d.mhsLuarProdi || 0) + (d.mhsJuaraNasional || 0) + (d.mhsJuaraProvinsi || 0);
+                          const isOverlap = d.totalMahasiswa > 0 && totalMhsKegiatan > (d.totalMahasiswa || 0);
                           return (
                             <>
                               <div className="flex justify-between"><span className="text-slate-500">Σ(n₁ × k₁) Luar Prodi:</span><span className="font-medium">{((d.mhsLuarProdi || 0) * 1.0).toFixed(1)}</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Σ(n₂ × k₂) Juara Nasional:</span><span className="font-medium">{((d.mhsJuaraNasional || 0) * 0.6).toFixed(1)}</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Σ(n₃ × k₃) Juara Provinsi:</span><span className="font-medium">{((d.mhsJuaraProvinsi || 0) * 0.3).toFixed(1)}</span></div>
                               <Separator className="my-1" />
+                              <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa Kegiatan (n₁+n₂+n₃):</span><span className="font-medium">{totalMhsKegiatan}</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Total Σ(n × k):</span><span className="font-medium">{ws.toFixed(1)}</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa (t):</span><span className="font-medium">{d.totalMahasiswa || 0}</span></div>
+                              {isOverlap && (
+                                <div className="mt-2 p-2 bg-amber-50 border border-amber-200 rounded-md flex items-start gap-1.5">
+                                  <AlertTriangle className="w-3.5 h-3.5 text-amber-600 mt-0.5 shrink-0" />
+                                  <p className="text-xs text-amber-700">Kemungkinan overlap! Jumlah mahasiswa kegiatan ({totalMhsKegiatan}) melebihi total mahasiswa ({d.totalMahasiswa}). Pastikan setiap mahasiswa hanya dihitung di 1 kategori (bobot tertinggi).</p>
+                                </div>
+                              )}
                             </>
                           );
                         })()}
