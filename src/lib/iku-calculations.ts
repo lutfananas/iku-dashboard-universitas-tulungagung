@@ -65,16 +65,16 @@ export function calcIKU2_Aggregate(dataList: Iku2Data[]): number {
 }
 
 // ============ IKU 3: Kegiatan Mahasiswa di Luar Program Studi ============
-// Rumus: Persentase = Σ(nᵢ × kᵢ) / t × 100%
-// Kategori dan bobot tetap:
-//   n₁: Mahasiswa ≥10 SKS di luar prodi, k₁ = 1.0
-//   n₂: Mahasiswa Juara 1 Nasional, k₂ = 0.6
-//   n₃: Mahasiswa Juara Provinsi, k₃ = 0.3
-//   t: Total Mahasiswa Terdaftar
+// 2 Komponen terpisah yang diakumulasi (boleh overlap antar komponen):
+//   Komponen A (Mobilitas): n₁ / t × 100%, k₁ = 1.0
+//   Komponen B (Prestasi): Σ(nᵢ × kᵢ) / t × 100%
+//     n₂: Juara Nasional, k₂ = 0.6
+//     n₃: Juara Provinsi, k₃ = 0.3
+//   Total IKU 3 = Komponen A + Komponen B
 
 export interface Iku3Data {
   mhsLuarProdi: number;      // n₁: jumlah mahasiswa ≥10 SKS di luar prodi (bobot 1.0)
-  mhsJuaraNasional: number;  // n₂: jumlah mahasiswa juara 1 nasional (bobot 0.6)
+  mhsJuaraNasional: number;  // n₂: jumlah mahasiswa juara nasional (bobot 0.6)
   mhsJuaraProvinsi: number;  // n₃: jumlah mahasiswa juara provinsi (bobot 0.3)
   totalMahasiswa: number;    // t: total mahasiswa terdaftar
 }
@@ -84,24 +84,39 @@ const IKU3_BOBOT_LUAR_PRODI = 1.0;
 const IKU3_BOBOT_JUARA_NASIONAL = 0.6;
 const IKU3_BOBOT_JUARA_PROVINSI = 0.3;
 
-export function calcIKU3_WeightedSum(data: Iku3Data): number {
-  return (data.mhsLuarProdi || 0) * IKU3_BOBOT_LUAR_PRODI
-       + (data.mhsJuaraNasional || 0) * IKU3_BOBOT_JUARA_NASIONAL
-       + (data.mhsJuaraProvinsi || 0) * IKU3_BOBOT_JUARA_PROVINSI;
-}
-
-export function calcIKU3(data: Iku3Data): number {
+// Komponen A: Mobilitas akademik (SKS luar prodi)
+export function calcIKU3_KomponenA(data: Iku3Data): number {
   if (!data.totalMahasiswa || data.totalMahasiswa === 0) return 0;
-  const weightedSum = calcIKU3_WeightedSum(data);
-  return (weightedSum / data.totalMahasiswa) * 100;
+  return ((data.mhsLuarProdi || 0) * IKU3_BOBOT_LUAR_PRODI / data.totalMahasiswa) * 100;
 }
 
+// Komponen B: Prestasi (juara nasional & provinsi)
+export function calcIKU3_KomponenB(data: Iku3Data): number {
+  if (!data.totalMahasiswa || data.totalMahasiswa === 0) return 0;
+  const prestasiWeighted = (data.mhsJuaraNasional || 0) * IKU3_BOBOT_JUARA_NASIONAL
+                         + (data.mhsJuaraProvinsi || 0) * IKU3_BOBOT_JUARA_PROVINSI;
+  return (prestasiWeighted / data.totalMahasiswa) * 100;
+}
+
+// Total IKU 3 = Komponen A + Komponen B
+export function calcIKU3(data: Iku3Data): number {
+  return calcIKU3_KomponenA(data) + calcIKU3_KomponenB(data);
+}
+
+// Agregat: jumlahkan numerator & denominator terpisah per komponen
 export function calcIKU3_Aggregate(dataList: Iku3Data[]): number {
   if (dataList.length === 0) return 0;
-  const totalWeighted = dataList.reduce((acc, d) => acc + calcIKU3_WeightedSum(d), 0);
   const totalMahasiswa = dataList.reduce((acc, d) => acc + (d.totalMahasiswa || 0), 0);
   if (totalMahasiswa === 0) return 0;
-  return (totalWeighted / totalMahasiswa) * 100;
+
+  const totalLuarProdi = dataList.reduce((acc, d) => acc + (d.mhsLuarProdi || 0), 0);
+  const totalPrestasiWeighted = dataList.reduce((acc, d) =>
+    acc + (d.mhsJuaraNasional || 0) * IKU3_BOBOT_JUARA_NASIONAL
+       + (d.mhsJuaraProvinsi || 0) * IKU3_BOBOT_JUARA_PROVINSI, 0);
+
+  const komponenA = (totalLuarProdi * IKU3_BOBOT_LUAR_PRODI / totalMahasiswa) * 100;
+  const komponenB = (totalPrestasiWeighted / totalMahasiswa) * 100;
+  return komponenA + komponenB;
 }
 
 // ============ IKU 5: Hilirisasi dan Kerja Sama ============

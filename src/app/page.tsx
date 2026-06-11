@@ -35,7 +35,7 @@ import {
 } from "@/lib/iku-config";
 import {
   calcAEE_Realisation, calcAEE_AchievementRate, calcAEE_PT,
-  calcIKU2, calcIKU2_Aggregate, calcIKU3, calcIKU3_Aggregate, calcIKU3_WeightedSum,
+  calcIKU2, calcIKU2_Aggregate, calcIKU3, calcIKU3_Aggregate, calcIKU3_KomponenA, calcIKU3_KomponenB,
   calcIKU5, calcIKU5_Aggregate, calcIKU7, calcIKU7_Aggregate,
   calcIKU9, calcIKU9_Aggregate, calcIKU12_Skor, calcIKU12_Aggregate,
   calcIKU12_DokumenSummary, hasData,
@@ -462,13 +462,15 @@ export default function IKUDashboard() {
                           <div className="flex items-start gap-2">
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 3:</p>
-                              <p>Persentase = Σ(nᵢ × kᵢ) / t × 100%</p>
-                              <p>n₁: ≥10 SKS di luar prodi, k₁ = 1.0</p>
-                              <p>n₂: HANYA Juara 1 Nasional (tanpa SKS luar prodi), k₂ = 0.6</p>
-                              <p>n₃: HANYA Juara Provinsi (tanpa SKS luar prodi & bukan Juara Nasional), k₃ = 0.3</p>
-                              <p className="mt-1.5 font-medium text-amber-700">⚠️ Anti-Overlap: Setiap mahasiswa hanya dihitung SEKALI di kategori bobot tertinggi.</p>
-                              <p className="text-amber-700">Jika mahasiswa ambil SKS luar prodi + berprestasi → masukkan ke n₁ (bobot tertinggi).</p>
+                              <p className="font-semibold text-navy mb-1">Rumus IKU 3 (2 Komponen Terakumulasi):</p>
+                              <p className="font-medium text-navy">Komponen A — Mobilitas Akademik:</p>
+                              <p>A = (n₁ × k₁) / t × 100% &nbsp;|&nbsp; n₁: ≥10 SKS di luar prodi, k₁ = 1.0</p>
+                              <p className="font-medium text-navy mt-1">Komponen B — Prestasi:</p>
+                              <p>B = Σ(nᵢ × kᵢ) / t × 100%</p>
+                              <p>n₂: Juara Nasional, k₂ = 0.6 &nbsp;|&nbsp; n₃: Juara Provinsi, k₃ = 0.3</p>
+                              <Separator className="my-1.5" />
+                              <p className="font-semibold text-navy">Total IKU 3 = Komponen A + Komponen B</p>
+                              <p className="mt-1 text-slate-500">Komponen A &amp; B dihitung terpisah — mahasiswa yang ambil SKS luar prodi sekaligus berprestasi dihitung di kedua komponen.</p>
                             </div>
                           </div>
                         </div>
@@ -635,24 +637,23 @@ export default function IKUDashboard() {
                         })()}
                         {iku.id === "iku3" && (() => {
                           const d = currentData as unknown as Iku3Data;
-                          const ws = calcIKU3_WeightedSum(d);
-                          const totalMhsKegiatan = (d.mhsLuarProdi || 0) + (d.mhsJuaraNasional || 0) + (d.mhsJuaraProvinsi || 0);
-                          const isOverlap = d.totalMahasiswa > 0 && totalMhsKegiatan > (d.totalMahasiswa || 0);
+                          const kompA = calcIKU3_KomponenA(d);
+                          const kompB = calcIKU3_KomponenB(d);
                           return (
                             <>
-                              <div className="flex justify-between"><span className="text-slate-500">Σ(n₁ × k₁) Luar Prodi:</span><span className="font-medium">{((d.mhsLuarProdi || 0) * 1.0).toFixed(1)}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Σ(n₂ × k₂) Juara Nasional:</span><span className="font-medium">{((d.mhsJuaraNasional || 0) * 0.6).toFixed(1)}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Σ(n₃ × k₃) Juara Provinsi:</span><span className="font-medium">{((d.mhsJuaraProvinsi || 0) * 0.3).toFixed(1)}</span></div>
+                              <p className="text-xs font-semibold text-navy mt-1">Komponen A — Mobilitas:</p>
+                              <div className="flex justify-between"><span className="text-slate-500">Mhs Luar Prodi (n₁):</span><span className="font-medium">{d.mhsLuarProdi || 0}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">× Bobot k₁:</span><span className="font-medium">1.0</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">÷ Total Mahasiswa (t):</span><span className="font-medium">{d.totalMahasiswa || 0}</span></div>
+                              <div className="flex justify-between font-medium"><span className="text-navy">Komponen A:</span><span className="text-navy">{kompA.toFixed(2)}%</span></div>
                               <Separator className="my-1" />
-                              <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa Kegiatan (n₁+n₂+n₃):</span><span className="font-medium">{totalMhsKegiatan}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Total Σ(n × k):</span><span className="font-medium">{ws.toFixed(1)}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa (t):</span><span className="font-medium">{d.totalMahasiswa || 0}</span></div>
-                              {isOverlap && (
-                                <div className="mt-2 p-2 bg-amber-50 border border-amber-200 rounded-md flex items-start gap-1.5">
-                                  <AlertTriangle className="w-3.5 h-3.5 text-amber-600 mt-0.5 shrink-0" />
-                                  <p className="text-xs text-amber-700">Kemungkinan overlap! Jumlah mahasiswa kegiatan ({totalMhsKegiatan}) melebihi total mahasiswa ({d.totalMahasiswa}). Pastikan setiap mahasiswa hanya dihitung di 1 kategori (bobot tertinggi).</p>
-                                </div>
-                              )}
+                              <p className="text-xs font-semibold text-navy">Komponen B — Prestasi:</p>
+                              <div className="flex justify-between"><span className="text-slate-500">Mhs Juara Nasional (n₂):</span><span className="font-medium">{d.mhsJuaraNasional || 0} × 0.6 = {((d.mhsJuaraNasional || 0) * 0.6).toFixed(1)}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Mhs Juara Provinsi (n₃):</span><span className="font-medium">{d.mhsJuaraProvinsi || 0} × 0.3 = {((d.mhsJuaraProvinsi || 0) * 0.3).toFixed(1)}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">÷ Total Mahasiswa (t):</span><span className="font-medium">{d.totalMahasiswa || 0}</span></div>
+                              <div className="flex justify-between font-medium"><span className="text-navy">Komponen B:</span><span className="text-navy">{kompB.toFixed(2)}%</span></div>
+                              <Separator className="my-1" />
+                              <div className="flex justify-between font-bold"><span className="text-navy">Total IKU 3 (A + B):</span><span className="text-navy">{(kompA + kompB).toFixed(2)}%</span></div>
                             </>
                           );
                         })()}
