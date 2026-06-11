@@ -35,7 +35,7 @@ import {
 } from "@/lib/iku-config";
 import {
   calcAEE_Realisation, calcAEE_AchievementRate, calcAEE_PT,
-  calcIKU2, calcIKU2_Aggregate, calcIKU3, calcIKU3_Aggregate,
+  calcIKU2, calcIKU2_Aggregate, calcIKU3, calcIKU3_Aggregate, calcIKU3_WeightedSum,
   calcIKU5, calcIKU5_Aggregate, calcIKU7, calcIKU7_Aggregate,
   calcIKU9, calcIKU9_Aggregate, calcIKU12_Skor, calcIKU12_Aggregate,
   calcIKU12_DokumenSummary, hasData,
@@ -463,8 +463,11 @@ export default function IKUDashboard() {
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
                               <p className="font-semibold text-navy mb-1">Rumus IKU 3:</p>
-                              <p>Persentase = Σ(n × k) / t × 100%</p>
-                              <p>n: Jumlah mahasiswa berkegiatan; k: Bobot kegiatan; t: Total mahasiswa</p>
+                              <p>Persentase = Σ(nᵢ × kᵢ) / t × 100%</p>
+                              <p>n₁: ≥10 SKS di luar prodi, k₁ = 1.0</p>
+                              <p>n₂: Juara 1 Nasional, k₂ = 0.6</p>
+                              <p>n₃: Juara Provinsi, k₃ = 0.3</p>
+                              <p className="mt-1 text-slate-500">Isi jumlah mahasiswa per kategori kegiatan, bobot sudah otomatis</p>
                             </div>
                           </div>
                         </div>
@@ -628,11 +631,15 @@ export default function IKUDashboard() {
                         })()}
                         {iku.id === "iku3" && (() => {
                           const d = currentData as unknown as Iku3Data;
+                          const ws = calcIKU3_WeightedSum(d);
                           return (
                             <>
-                              <div className="flex justify-between"><span className="text-slate-500">Mhs Kegiatan (tertimbang):</span><span className="font-medium">{d.mahasiswaKegiatan || 0}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Bobot Rata-rata:</span><span className="font-medium">{d.bobotKegiatan || 0}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa:</span><span className="font-medium">{d.totalMahasiswa || 0}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Σ(n₁ × k₁) Luar Prodi:</span><span className="font-medium">{((d.mhsLuarProdi || 0) * 1.0).toFixed(1)}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Σ(n₂ × k₂) Juara Nasional:</span><span className="font-medium">{((d.mhsJuaraNasional || 0) * 0.6).toFixed(1)}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Σ(n₃ × k₃) Juara Provinsi:</span><span className="font-medium">{((d.mhsJuaraProvinsi || 0) * 0.3).toFixed(1)}</span></div>
+                              <Separator className="my-1" />
+                              <div className="flex justify-between"><span className="text-slate-500">Total Σ(n × k):</span><span className="font-medium">{ws.toFixed(1)}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa (t):</span><span className="font-medium">{d.totalMahasiswa || 0}</span></div>
                             </>
                           );
                         })()}

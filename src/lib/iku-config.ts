@@ -127,8 +127,9 @@ export const IKU_FIELDS: Record<string, IkuFieldDef[]> = {
     { key: "totalResponden", label: "Total Responden Tracer Study (t)", type: "number", placeholder: "0", helperText: "Total responden yang berhasil dikumpulkan (minimal sesuai rumus Slovin, galat 2,3%)", min: 0 },
   ],
   iku3: [
-    { key: "mahasiswaKegiatan", label: "Jumlah Mahasiswa Berkegiatan di Luar Prodi (n)", type: "number", placeholder: "0", helperText: "Jumlah mahasiswa yang berkegiatan di luar prodi (MBKM, magang, pertukaran, prestasi)", min: 0 },
-    { key: "bobotKegiatan", label: "Bobot Rata-rata Kegiatan (k)", type: "number", placeholder: "0.5", helperText: "Bobot: ≥10 SKS di luar prodi = 1.0; Juara 1 Nasional = 0.6; Provinsi = 0.3", defaultValue: 0.5, min: 0, max: 1.0, step: 0.05 },
+    { key: "mhsLuarProdi", label: "Jumlah Mahasiswa ≥10 SKS di Luar Prodi (n₁)", type: "number", placeholder: "0", helperText: "Mahasiswa yang mengambil ≥10 SKS di luar program studi (MBKM, magang, pertukaran). Bobot k₁ = 1.0", min: 0 },
+    { key: "mhsJuaraNasional", label: "Jumlah Mahasiswa Juara 1 Nasional (n₂)", type: "number", placeholder: "0", helperText: "Mahasiswa peraih Juara 1 tingkat Nasional. Bobot k₂ = 0.6", min: 0 },
+    { key: "mhsJuaraProvinsi", label: "Jumlah Mahasiswa Juara Provinsi (n₃)", type: "number", placeholder: "0", helperText: "Mahasiswa peraih Juara tingkat Provinsi. Bobot k₃ = 0.3", min: 0 },
     { key: "totalMahasiswa", label: "Total Mahasiswa Terdaftar (t)", type: "number", placeholder: "0", helperText: "Total seluruh mahasiswa program studi yang terdaftar", min: 0 },
   ],
   iku5: [
