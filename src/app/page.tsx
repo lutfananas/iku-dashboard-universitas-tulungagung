@@ -184,7 +184,7 @@ export default function IKUDashboard() {
 
     const prodi = getProdiById(prodiId);
     switch (ikuId) {
-      case "iku1": return calcAEE_AchievementRate(data as Iku1Data, prodi?.jenjang || "S1");
+      case "iku1": return calcAEE_Realisation(data as Iku1Data);
       case "iku2": return calcIKU2(data as Iku2Data);
       case "iku3": return calcIKU3(data as Iku3Data);
       case "iku5": return calcIKU5(data as Iku5Data);
@@ -386,7 +386,6 @@ export default function IKUDashboard() {
                   const d = currentData as unknown as Iku1Data;
                   previewValue = calcAEE_Realisation(d);
                   previewLabel = `AEE Realisasi: ${previewValue.toFixed(2)}% | Tingkat Pencapaian: ${calcAEE_AchievementRate(d, prodi.jenjang).toFixed(2)}%`;
-                  previewValue = calcAEE_AchievementRate(d, prodi.jenjang);
                   break;
                 }
                 case "iku2": {
@@ -438,7 +437,7 @@ export default function IKUDashboard() {
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
                               <p className="font-semibold text-navy mb-1">Rumus IKU 1 (AEE PT):</p>
-                              <p>AEE = (Lulus Tepat Waktu / Total Masuk) × 100%</p>
+                              <p>AEE Realisasi = (Lulusan Tepat Waktu / Total Mahasiswa) × 100%</p>
                               <p>Tingkat Pencapaian = (AEE Realisasi / AEE Ideal) × 100%</p>
                               <p>AEE Ideal {prodi.jenjang} = {(() => { const v = { D3: 33, D4: 25, S1: 25, S2: 50, S3: 33 } as Record<string, number>; return v[prodi.jenjang] || 25; })()}%</p>
                             </div>
@@ -452,7 +451,8 @@ export default function IKUDashboard() {
                             <div className="text-xs text-slate-600">
                               <p className="font-semibold text-navy mb-1">Rumus IKU 2:</p>
                               <p>Persentase = Σ(n × k) / t × 100%</p>
-                              <p>n: Jumlah responden per kategori; k: Konstanta bobot; t: Total responden</p>
+                              <p>n: Jumlah lulusan per kategori; k: Konstanta bobot; t: Total responden</p>
+                              <p className="mt-1 text-slate-500">Pastikan setiap lulusan hanya tercatat di 1 kategori (tidak tumpang tindih)</p>
                             </div>
                           </div>
                         </div>
@@ -463,7 +463,8 @@ export default function IKUDashboard() {
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
                               <p className="font-semibold text-navy mb-1">Rumus IKU 3:</p>
-                              <p>Persentase = (Jumlah Mhs Kegiatan × Bobot) / Total Mahasiswa × 100%</p>
+                              <p>Persentase = Σ(n × k) / t × 100%</p>
+                              <p>n: Jumlah mahasiswa berkegiatan; k: Bobot kegiatan; t: Total mahasiswa</p>
                             </div>
                           </div>
                         </div>
@@ -474,7 +475,7 @@ export default function IKUDashboard() {
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
                               <p className="font-semibold text-navy mb-1">Rumus IKU 5:</p>
-                              <p>Persentase = Jumlah Luaran / Total Kerja Sama × 100%</p>
+                              <p>Persentase = Jumlah Luaran Hasil Kerjasama / Total Kerjasama PT × 100%</p>
                             </div>
                           </div>
                         </div>
@@ -485,7 +486,7 @@ export default function IKUDashboard() {
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
                               <p className="font-semibold text-navy mb-1">Rumus IKU 7:</p>
-                              <p>Persentase = Jumlah Program SDG / Total Program × 100%</p>
+                              <p>Persentase = Program SDGs (1, 4, 17 + 2 Pilihan) / Total Program SDGs PT × 100%</p>
                             </div>
                           </div>
                         </div>
@@ -496,7 +497,7 @@ export default function IKUDashboard() {
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
                               <p className="font-semibold text-navy mb-1">Rumus IKU 9:</p>
-                              <p>Persentase = Pendapatan Non-Akademik / Total Pendapatan × 100%</p>
+                              <p>Persentase = Pendapatan Non-Akademik / Total Pendapatan PT × 100%</p>
                             </div>
                           </div>
                         </div>
@@ -507,7 +508,8 @@ export default function IKUDashboard() {
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
                               <p className="font-semibold text-navy mb-1">Rumus IKU 12:</p>
-                              <p>Ketersediaan Dokumen Perencanaan Strategis resmi peningkatan kesejahteraan dosen</p>
+                              <p>Capaian = Ketersediaan Dokumen Perencanaan Strategis Kesejahteraan Dosen</p>
+                              <p className="mt-1 text-slate-500">Syarat validasi: AA ≥1,5× UMP; Lektor ≥3× UMP; Lektor Kepala ≥4× UMP; Profesor ≥6× UMP</p>
                             </div>
                           </div>
                         </div>
@@ -588,9 +590,9 @@ export default function IKUDashboard() {
                     <CardContent>
                       <div className="text-center py-4">
                         <p className="text-4xl font-bold text-navy">{previewValue.toFixed(1)}%</p>
-                        <p className="text-xs text-slate-500 mt-2">{iku.shortTitle}</p>
+                        <p className="text-xs text-slate-500 mt-2">{iku.id === "iku1" ? "AEE Realisasi" : iku.shortTitle}</p>
                         {iku.id === "iku1" && (
-                          <p className="text-xs text-slate-400 mt-1">Tingkat Pencapaian AEE</p>
+                          <p className="text-xs text-slate-400 mt-1">TP: {calcAEE_AchievementRate(currentData as unknown as Iku1Data, prodi.jenjang).toFixed(1)}%</p>
                         )}
                       </div>
                       <Separator className="my-3" />
@@ -602,9 +604,9 @@ export default function IKUDashboard() {
                           const ideal = aeeIdeal[prodi.jenjang] || 25;
                           return (
                             <>
-                              <div className="flex justify-between"><span className="text-slate-500">AEE Realisasi:</span><span className="font-medium">{aeeReal.toFixed(2)}%</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">AEE Realisasi:</span><span className="font-bold text-navy">{aeeReal.toFixed(2)}%</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">AEE Ideal ({prodi.jenjang}):</span><span className="font-medium">{ideal}%</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Tingkat Pencapaian:</span><span className="font-bold text-navy">{previewValue.toFixed(2)}%</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Tingkat Pencapaian:</span><span className="font-medium">{calcAEE_AchievementRate(d, prodi.jenjang).toFixed(2)}%</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Total Mahasiswa Terdaftar:</span><span className="font-medium">{d.jumlahMasuk || 0}</span></div>
                               <div className="flex justify-between"><span className="text-slate-500">Lulus Tepat Waktu:</span><span className="font-medium">{d.lulusTepatWaktu || 0}</span></div>
                             </>
@@ -612,16 +614,15 @@ export default function IKUDashboard() {
                         })()}
                         {iku.id === "iku2" && (() => {
                           const d = currentData as unknown as Iku2Data;
-                          const weighted = d.bekerjaJumlah * d.bekerjaBobot + d.wirausahaJumlah * d.wirausahaBobot + d.studiJumlah * 0.6 + d.sudahBekerjaJumlah * d.sudahBekerjaBobot;
+                          const weighted = d.bekerjaJumlah * d.bekerjaBobot + d.wirausahaJumlah * d.wirausahaBobot + d.studiJumlah * (d.studiBobot || 0.6);
                           return (
                             <>
-                              <div className="flex justify-between"><span className="text-slate-500">Σ(n × k) Bekerja:</span><span className="font-medium">{(d.bekerjaJumlah * d.bekerjaBobot).toFixed(1)}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Σ(n × k) Wirausaha:</span><span className="font-medium">{(d.wirausahaJumlah * d.wirausahaBobot).toFixed(1)}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Σ(n × k) Studi:</span><span className="font-medium">{(d.studiJumlah * 0.6).toFixed(1)}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Σ(n × k) Sudah Bekerja:</span><span className="font-medium">{(d.sudahBekerjaJumlah * d.sudahBekerjaBobot).toFixed(1)}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Σ(n₁ × k₁) Bekerja:</span><span className="font-medium">{(d.bekerjaJumlah * d.bekerjaBobot).toFixed(1)}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Σ(n₂ × k₂) Wirausaha:</span><span className="font-medium">{(d.wirausahaJumlah * d.wirausahaBobot).toFixed(1)}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Σ(n₃ × k₃) Studi:</span><span className="font-medium">{(d.studiJumlah * (d.studiBobot || 0.6)).toFixed(1)}</span></div>
                               <Separator className="my-1" />
                               <div className="flex justify-between"><span className="text-slate-500">Total Σ(n × k):</span><span className="font-medium">{weighted.toFixed(1)}</span></div>
-                              <div className="flex justify-between"><span className="text-slate-500">Total Responden:</span><span className="font-medium">{d.totalResponden || 0}</span></div>
+                              <div className="flex justify-between"><span className="text-slate-500">Total Responden (t):</span><span className="font-medium">{d.totalResponden || 0}</span></div>
                             </>
                           );
                         })()}

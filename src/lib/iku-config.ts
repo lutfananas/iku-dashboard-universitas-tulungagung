@@ -115,30 +115,29 @@ export interface IkuFieldDef {
 export const IKU_FIELDS: Record<string, IkuFieldDef[]> = {
   iku1: [
     { key: "jumlahMasuk", label: "Total Mahasiswa Terdaftar Tahun Akademik", type: "number", placeholder: "0", helperText: "Total mahasiswa yang terdaftar pada tahun akademik tersebut", min: 0 },
-    { key: "lulusTepatWaktu", label: "Jumlah Mahasiswa Lulus Tepat Waktu", type: "number", placeholder: "0", helperText: "Mahasiswa lulus sesuai masa tempuh kurikulum standar", min: 0 },
+    { key: "lulusTepatWaktu", label: "Jumlah Lulusan Tepat Waktu (8 Semester untuk S1)", type: "number", placeholder: "0", helperText: "Mahasiswa lulus sesuai masa tempuh kurikulum standar", min: 0 },
   ],
   iku2: [
-    { key: "bekerjaJumlah", label: "Jumlah Lulusan Bekerja", type: "number", placeholder: "0", helperText: "Lulusan yang bekerja setelah lulus (semua kategori)", min: 0 },
-    { key: "bekerjaBobot", label: "Bobot Rata-rata Bekerja", type: "number", placeholder: "0.8", helperText: "Bobot sesuai kriteria masa tunggu & gaji (0.6 - 1.0)", defaultValue: 0.8, min: 0, max: 1.2, step: 0.1 },
-    { key: "wirausahaJumlah", label: "Jumlah Lulusan Berwirausaha", type: "number", placeholder: "0", helperText: "Lulusan yang berwirausaha (founder/co-founder/freelancer)", min: 0 },
-    { key: "wirausahaBobot", label: "Bobot Rata-rata Wirausaha", type: "number", placeholder: "0.7", helperText: "Bobot sesuai kriteria (0.2 - 1.2)", defaultValue: 0.7, min: 0, max: 1.2, step: 0.1 },
-    { key: "studiJumlah", label: "Jumlah Lulusan Melanjutkan Studi", type: "number", placeholder: "0", helperText: "Lulusan yang melanjutkan studi dalam 1 tahun", min: 0 },
-    { key: "sudahBekerjaJumlah", label: "Jumlah Sudah Bekerja/Wirausaha Sebelum Lulus", type: "number", placeholder: "0", helperText: "Mahasiswa yang sudah bekerja/berwirausaha sebelum lulus", min: 0 },
-    { key: "sudahBekerjaBobot", label: "Bobot Sudah Bekerja Sebelum Lulus", type: "number", placeholder: "1.0", helperText: "Bobot rata-rata (0.6 - 1.0)", defaultValue: 1.0, min: 0, max: 1.2, step: 0.1 },
-    { key: "totalResponden", label: "Total Responden Tracer Study", type: "number", placeholder: "0", helperText: "Total responden yang berhasil dikumpulkan", min: 0 },
+    { key: "bekerjaJumlah", label: "Jumlah Lulusan Bekerja (n₁)", type: "number", placeholder: "0", helperText: "Jumlah lulusan yang bekerja dalam 1 tahun setelah lulus", min: 0 },
+    { key: "bekerjaBobot", label: "Bobot Kategori Bekerja (k₁)", type: "number", placeholder: "1.0", helperText: "Konstanta bobot: gaji >1,2×UMP & tunggu <6 bulan = 1.0; gaji ≥UMP = 0.8", defaultValue: 1.0, min: 0, max: 1.0, step: 0.1 },
+    { key: "wirausahaJumlah", label: "Jumlah Lulusan Berwirausaha (n₂)", type: "number", placeholder: "0", helperText: "Jumlah lulusan yang berwirausaha (founder/co-founder/freelancer)", min: 0 },
+    { key: "wirausahaBobot", label: "Bobot Kategori Wirausaha (k₂)", type: "number", placeholder: "0.7", helperText: "Konstanta bobot: omzet ≥UMP = 1.0; omzet <UMP = 0.7", defaultValue: 0.7, min: 0, max: 1.0, step: 0.1 },
+    { key: "studiJumlah", label: "Jumlah Lulusan Melanjutkan Studi (n₃)", type: "number", placeholder: "0", helperText: "Jumlah lulusan yang melanjutkan studi dalam 1 tahun", min: 0 },
+    { key: "studiBobot", label: "Bobot Kategori Studi (k₃)", type: "number", placeholder: "0.6", helperText: "Konstanta bobot: studi lanjut = 0.6", defaultValue: 0.6, min: 0, max: 1.0, step: 0.1 },
+    { key: "totalResponden", label: "Total Responden Tracer Study (t)", type: "number", placeholder: "0", helperText: "Total responden yang berhasil dikumpulkan (minimal sesuai rumus Slovin, galat 2,3%)", min: 0 },
   ],
   iku3: [
-    { key: "mahasiswaKegiatan", label: "Jumlah Mahasiswa Kegiatan Luar Prodi (Tertimbang)", type: "number", placeholder: "0", helperText: "Jumlah mahasiswa yang berkegiatan di luar prodi dikali bobot masing-masing", min: 0 },
-    { key: "bobotKegiatan", label: "Bobot Rata-rata Kegiatan", type: "number", placeholder: "0.5", helperText: "Bobot rata-rata kegiatan (0.05 - 1.0)", defaultValue: 0.5, min: 0, max: 1, step: 0.05 },
-    { key: "totalMahasiswa", label: "Total Mahasiswa Terdaftar", type: "number", placeholder: "0", helperText: "Total mahasiswa program studi yang terdaftar", min: 0 },
+    { key: "mahasiswaKegiatan", label: "Jumlah Mahasiswa Berkegiatan di Luar Prodi (n)", type: "number", placeholder: "0", helperText: "Jumlah mahasiswa yang berkegiatan di luar prodi (MBKM, magang, pertukaran, prestasi)", min: 0 },
+    { key: "bobotKegiatan", label: "Bobot Rata-rata Kegiatan (k)", type: "number", placeholder: "0.5", helperText: "Bobot: ≥10 SKS di luar prodi = 1.0; Juara 1 Nasional = 0.6; Provinsi = 0.3", defaultValue: 0.5, min: 0, max: 1.0, step: 0.05 },
+    { key: "totalMahasiswa", label: "Total Mahasiswa Terdaftar (t)", type: "number", placeholder: "0", helperText: "Total seluruh mahasiswa program studi yang terdaftar", min: 0 },
   ],
   iku5: [
     { key: "jumlahLuaran", label: "Jumlah Luaran Hasil Kerja Sama", type: "number", placeholder: "0", helperText: "Jumlah luaran nyata dari kerja sama dengan industri/lembaga", min: 0 },
     { key: "totalKerjasama", label: "Total Kerja Sama Perguruan Tinggi", type: "number", placeholder: "0", helperText: "Total kerja sama yang dilakukan perguruan tinggi", min: 0 },
   ],
   iku7: [
-    { key: "jumlahProgramSDG", label: "Jumlah Program/Kegiatan SDG", type: "number", placeholder: "0", helperText: "Jumlah program/kegiatan PT yang berkontribusi pada SDGs (khususnya SDG 1, 4, 17)", min: 0 },
-    { key: "totalProgram", label: "Total Program Perguruan Tinggi", type: "number", placeholder: "0", helperText: "Total program/kegiatan perguruan tinggi", min: 0 },
+    { key: "jumlahProgramSDG", label: "Jumlah Program SDGs (1, 4, 17 + 2 Pilihan)", type: "number", placeholder: "0", helperText: "Jumlah program/kegiatan yang berkontribusi pada SDG 1, 4, 17 dan 2 SDG pilihan institusi", min: 0 },
+    { key: "totalProgram", label: "Total Program SDGs Perguruan Tinggi", type: "number", placeholder: "0", helperText: "Total seluruh program/kegiatan SDGs perguruan tinggi", min: 0 },
   ],
   iku9: [
     { key: "pendapatanNonAkademik", label: "Pendapatan Non-Akademik (Rp)", type: "number", placeholder: "0", helperText: "Pendapatan/penghasilan dari bidang non-akademik", min: 0 },

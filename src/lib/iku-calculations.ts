@@ -30,17 +30,19 @@ export function calcAEE_PT(prodiDataList: { data: Iku1Data; jenjang: string }[])
   return sum / validData.length;
 }
 
-// ============ IKU 2: Lulusan Bekerja/Berwirausaha/Lanjut Studi ============
+// ============ IKU 2: Kualitas Lulusan ============
+// Rumus: Persentase = Σ(n × k) / t × 100%
+// n = jumlah lulusan per kategori, k = bobot konstanta, t = total responden
+// Kategori TIDAK saling tumpang tindih (setiap lulusan hanya di 1 kategori)
 
 export interface Iku2Data {
-  bekerjaJumlah: number;
-  bekerjaBobot: number;
-  wirausahaJumlah: number;
-  wirausahaBobot: number;
-  studiJumlah: number;
-  sudahBekerjaJumlah: number;
-  sudahBekerjaBobot: number;
-  totalResponden: number;
+  bekerjaJumlah: number;  // n₁: jumlah lulusan bekerja
+  bekerjaBobot: number;   // k₁: bobot bekerja (default 1.0, gaji >1.2×UMP & tunggu <6bln)
+  wirausahaJumlah: number; // n₂: jumlah lulusan berwirausaha
+  wirausahaBobot: number;  // k₂: bobot wirausaha (default 0.7)
+  studiJumlah: number;    // n₃: jumlah lulusan melanjutkan studi
+  studiBobot: number;     // k₃: bobot studi (default 0.6)
+  totalResponden: number; // t: total responden tracer study
 }
 
 export function calcIKU2(data: Iku2Data): number {
@@ -48,27 +50,28 @@ export function calcIKU2(data: Iku2Data): number {
   const weightedSum =
     data.bekerjaJumlah * data.bekerjaBobot +
     data.wirausahaJumlah * data.wirausahaBobot +
-    data.studiJumlah * 0.6 +
-    data.sudahBekerjaJumlah * data.sudahBekerjaBobot;
+    data.studiJumlah * data.studiBobot;
   return (weightedSum / data.totalResponden) * 100;
 }
 
 export function calcIKU2_Aggregate(dataList: Iku2Data[]): number {
   if (dataList.length === 0) return 0;
   const totalWeightedSum = dataList.reduce((acc, d) => {
-    return acc + d.bekerjaJumlah * d.bekerjaBobot + d.wirausahaJumlah * d.wirausahaBobot + d.studiJumlah * 0.6 + d.sudahBekerjaJumlah * d.sudahBekerjaBobot;
+    return acc + d.bekerjaJumlah * d.bekerjaBobot + d.wirausahaJumlah * d.wirausahaBobot + d.studiJumlah * d.studiBobot;
   }, 0);
   const totalResponden = dataList.reduce((acc, d) => acc + d.totalResponden, 0);
   if (totalResponden === 0) return 0;
   return (totalWeightedSum / totalResponden) * 100;
 }
 
-// ============ IKU 3: Mahasiswa Berprestasi di Luar Prodi ============
+// ============ IKU 3: Kegiatan Mahasiswa di Luar Program Studi ============
+// Rumus: Persentase = Σ(n × k) / t × 100%
+// n = jumlah mahasiswa berkegiatan, k = bobot kegiatan, t = total mahasiswa
 
 export interface Iku3Data {
-  mahasiswaKegiatan: number;
-  bobotKegiatan: number;
-  totalMahasiswa: number;
+  mahasiswaKegiatan: number; // n: jumlah mahasiswa berkegiatan di luar prodi
+  bobotKegiatan: number;     // k: bobot rata-rata kegiatan (default 0.5)
+  totalMahasiswa: number;    // t: total mahasiswa terdaftar
 }
 
 export function calcIKU3(data: Iku3Data): number {
@@ -84,7 +87,8 @@ export function calcIKU3_Aggregate(dataList: Iku3Data[]): number {
   return (totalWeighted / totalMahasiswa) * 100;
 }
 
-// ============ IKU 5: Kerja Sama & Hilirisasi Industri ============
+// ============ IKU 5: Hilirisasi dan Kerja Sama ============
+// Rumus: Persentase = Jumlah luaran hasil kerjasama / Total Kerjasama PT × 100%
 
 export interface Iku5Data {
   jumlahLuaran: number;
@@ -104,7 +108,8 @@ export function calcIKU5_Aggregate(dataList: Iku5Data[]): number {
   return (totalLuaran / totalKerjasama) * 100;
 }
 
-// ============ IKU 7: Keterlibatan SDGs ============
+// ============ IKU 7: Kontribusi SDGs ============
+// Rumus: Persentase = Program SDGs / Total program SDG's PT × 100%
 
 export interface Iku7Data {
   jumlahProgramSDG: number;
@@ -125,6 +130,7 @@ export function calcIKU7_Aggregate(dataList: Iku7Data[]): number {
 }
 
 // ============ IKU 9: Pendapatan Non-Akademik ============
+// Rumus: Persentase = Pendapatan non-mahasiswa / Total pendapatan PT × 100%
 
 export interface Iku9Data {
   pendapatanNonAkademik: number;
@@ -144,7 +150,9 @@ export function calcIKU9_Aggregate(dataList: Iku9Data[]): number {
   return (totalNonAkademik / totalPendapatan) * 100;
 }
 
-// ============ IKU 12: Kesejahteraan Dosen ============
+// ============ IKU 12: Ketersediaan Perencanaan Strategis Kesejahteraan Dosen ============
+// Indikator berbasis ketersediaan dokumen resmi
+// Syarat validasi: Dokumen wajib memuat target kesejahteraan berbasis jabatan akademik
 
 export interface Iku12Data {
   dokumenTersedia: "ya" | "sebagian" | "tidak";
