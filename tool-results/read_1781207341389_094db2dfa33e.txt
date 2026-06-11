@@ -1,0 +1,998 @@
+     1→▲ Next.js 16.1.3 (Turbopack)
+     2→- Local:         http://localhost:3000
+     3→- Network:       http://21.0.17.89:3000
+     4→- Environments: .env
+     5→
+     6→✓ Starting...
+     7→Attention: Next.js now collects completely anonymous telemetry regarding usage.
+     8→This information is used to shape Next.js' roadmap and prioritize features.
+     9→You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+    10→https://nextjs.org/telemetry
+    11→
+    12→
+    13→  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+    14→  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+    15→
+    16→        - include was updated to add '.next/dev/types/**/*.ts'
+    17→
+    18→  The following mandatory changes were made to your tsconfig.json:
+    19→
+    20→        - jsx was set to react-jsx (next.js uses the React automatic runtime)
+    21→
+    22→✓ Ready in 565ms
+    23→ GET / 200 in 1988ms (compile: 1825ms, render: 163ms)
+    24→ GET / 200 in 2.1s (compile: 2.0s, render: 118ms)
+    25→ GET / 200 in 26ms (compile: 1909µs, render: 24ms)
+    26→ GET / 200 in 31ms (compile: 3ms, render: 27ms)
+    27→ GET / 200 in 29ms (compile: 3ms, render: 26ms)
+    28→ GET / 200 in 28ms (compile: 2ms, render: 26ms)
+    29→ GET / 200 in 26ms (compile: 2ms, render: 23ms)
+    30→ GET / 200 in 27ms (compile: 2ms, render: 25ms)
+    31→ GET / 200 in 30ms (compile: 3ms, render: 27ms)
+    32→ GET / 200 in 29ms (compile: 3ms, render: 26ms)
+    33→ GET / 200 in 27ms (compile: 3ms, render: 23ms)
+    34→ GET / 200 in 28ms (compile: 4ms, render: 25ms)
+    35→ GET / 200 in 63ms (compile: 33ms, render: 30ms)
+    36→ GET / 200 in 71ms (compile: 3ms, render: 69ms)
+    37→ GET / 200 in 71ms (compile: 13ms, render: 58ms)
+    38→ GET / 200 in 48ms (compile: 3ms, render: 45ms)
+    39→ GET / 200 in 47ms (compile: 13ms, render: 34ms)
+    40→ GET / 200 in 36ms (compile: 14ms, render: 22ms)
+    41→ GET / 200 in 24ms (compile: 11ms, render: 13ms)
+    42→ GET / 200 in 14ms (compile: 2ms, render: 11ms)
+    43→✓ Compiled in 121ms
+    44→ GET / 200 in 63ms (compile: 36ms, render: 27ms)
+    45→ GET / 200 in 51ms (compile: 1707µs, render: 49ms)
+    46→ GET / 200 in 30ms (compile: 3ms, render: 27ms)
+    47→✓ Compiled in 190ms
+    48→ GET / 200 in 27ms (compile: 3ms, render: 24ms)
+    49→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+    50→ GET / 200 in 25ms (compile: 2ms, render: 23ms)
+    51→ GET / 200 in 26ms (compile: 3ms, render: 23ms)
+    52→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+    53→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+    54→ GET / 200 in 25ms (compile: 3ms, render: 22ms)
+    55→ GET / 200 in 26ms (compile: 2ms, render: 23ms)
+    56→ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+    57→ GET / 200 in 23ms (compile: 2ms, render: 20ms)
+    58→ GET / 200 in 24ms (compile: 3ms, render: 21ms)
+    59→ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+    60→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+    61→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+    62→ GET / 200 in 27ms (compile: 4ms, render: 23ms)
+    63→ GET / 200 in 183ms (compile: 95ms, render: 89ms)
+    64→⚠ Fast Refresh had to perform a full reload when ./src/app/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+    65→⚠ Cross origin request detected from preview-chat-8b508087-c193-41c2-83a5-8a20dc3a0b03.space-z.ai to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+    66→Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+    67→✓ Compiled in 16ms
+    68→ GET / 200 in 120ms (compile: 2ms, render: 117ms)
+    69→ GET /api/iku 200 in 258ms (compile: 245ms, render: 13ms)
+    70→ GET / 200 in 36ms (compile: 4ms, render: 32ms)
+    71→ GET /api/iku 200 in 9ms (compile: 1904µs, render: 7ms)
+    72→ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+    73→ GET /api/iku 200 in 6ms (compile: 1627µs, render: 4ms)
+    74→ GET / 200 in 27ms (compile: 2ms, render: 24ms)
+    75→ GET /api/iku 200 in 6ms (compile: 2ms, render: 4ms)
+    76→ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+    77→ GET /api/iku 200 in 5ms (compile: 1845µs, render: 3ms)
+    78→ GET / 200 in 25ms (compile: 3ms, render: 21ms)
+    79→ GET / 200 in 23ms (compile: 1901µs, render: 21ms)
+    80→ GET / 200 in 29ms (compile: 2ms, render: 27ms)
+    81→ GET /api/iku 200 in 6ms (compile: 2ms, render: 4ms)
+    82→✓ Compiled in 555ms
+    83→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+    84→ GET /api/iku?tahun=2025 200 in 101ms (compile: 84ms, render: 17ms)
+    85→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+    86→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1960µs, render: 5ms)
+    87→✓ Compiled in 114ms
+    88→ GET / 200 in 75ms (compile: 39ms, render: 36ms)
+    89→ GET / 200 in 16ms (compile: 3ms, render: 13ms)
+    90→ GET / 200 in 136ms (compile: 3ms, render: 133ms)
+    91→prisma:query SELECT 1
+    92→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+    93→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 6ms)
+    94→prisma:query SELECT 1
+    95→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+    96→prisma:query INSERT INTO `main`.`IkuData` (`id`, `prodi`, `fakultas`, `tahun`, `iku1`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+    97→ POST /api/iku 200 in 13ms (compile: 3ms, render: 10ms)
+    98→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+    99→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1769µs, render: 6ms)
+   100→ GET / 200 in 31ms (compile: 2ms, render: 29ms)
+   101→prisma:query SELECT 1
+   102→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1471µs, render: 4ms)
+   103→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   104→✓ Compiled in 115ms
+   105→prisma:query SELECT 1
+   106→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 6ms)
+   107→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   108→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   109→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1764µs, render: 5ms)
+   110→✓ Compiled in 163ms
+   111→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   112→ GET /api/iku?tahun=2025 200 in 8ms (compile: 3ms, render: 6ms)
+   113→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   114→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   115→ GET / 200 in 83ms (compile: 48ms, render: 35ms)
+   116→ GET / 200 in 104ms (compile: 88ms, render: 17ms)
+   117→✓ Compiled in 0ms
+   118→ GET / 200 in 108ms (compile: 2ms, render: 105ms)
+   119→ GET / 200 in 21ms (compile: 1945µs, render: 19ms)
+   120→prisma:query SELECT 1
+   121→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   122→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   123→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   124→ GET /api/iku?tahun=2025 200 in 8ms (compile: 3ms, render: 4ms)
+   125→✓ Compiled in 98ms
+   126→ GET / 200 in 145ms (compile: 36ms, render: 109ms)
+   127→ GET / 200 in 30ms (compile: 4ms, render: 26ms)
+   128→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   129→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   130→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   131→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 4ms)
+   132→ GET / 200 in 30ms (compile: 3ms, render: 27ms)
+   133→ GET / 200 in 24ms (compile: 1988µs, render: 22ms)
+   134→ GET / 200 in 25ms (compile: 2ms, render: 23ms)
+   135→prisma:query SELECT 1
+   136→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   137→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 5ms)
+   138→✓ Compiled in 152ms
+   139→prisma:query SELECT 1
+   140→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   141→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   142→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   143→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1543µs, render: 4ms)
+   144→✓ Compiled in 122ms
+   145→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   146→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   147→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   148→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1553µs, render: 4ms)
+   149→✓ Compiled in 123ms
+   150→prisma:query SELECT 1
+   151→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   152→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1877µs, render: 4ms)
+   153→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   154→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1961µs, render: 4ms)
+   155→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1655µs, render: 4ms)
+   156→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   157→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   158→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1922µs, render: 5ms)
+   159→✓ Compiled in 271ms
+   160→prisma:query SELECT 1
+   161→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   162→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 5ms)
+   163→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   164→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1901µs, render: 4ms)
+   165→ GET / 200 in 170ms (compile: 43ms, render: 127ms)
+   166→prisma:query SELECT 1
+   167→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   168→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1979µs, render: 5ms)
+   169→prisma:query SELECT 1
+   170→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   171→prisma:query INSERT INTO `main`.`IkuData` (`id`, `prodi`, `fakultas`, `tahun`, `iku1`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   172→ POST /api/iku 200 in 13ms (compile: 3ms, render: 10ms)
+   173→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 5ms)
+   174→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   175→prisma:query SELECT 1
+   176→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   177→prisma:query UPDATE `main`.`IkuData` SET `iku1` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   178→ POST /api/iku 200 in 9ms (compile: 2ms, render: 7ms)
+   179→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1741µs, render: 4ms)
+   180→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   181→ GET / 200 in 28ms (compile: 2ms, render: 26ms)
+   182→ GET / 200 in 25ms (compile: 2ms, render: 23ms)
+   183→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+   184→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 5ms)
+   185→prisma:query SELECT 1
+   186→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   187→ GET / 200 in 26ms (compile: 3ms, render: 22ms)
+   188→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1922µs, render: 5ms)
+   189→prisma:query SELECT 1
+   190→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   191→prisma:query SELECT 1
+   192→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   193→prisma:query UPDATE `main`.`IkuData` SET `iku1` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   194→ POST /api/iku 200 in 8ms (compile: 1930µs, render: 6ms)
+   195→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   196→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1828µs, render: 4ms)
+   197→✓ Compiled in 131ms
+   198→prisma:query SELECT 1
+   199→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   200→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 6ms)
+   201→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   202→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1684µs, render: 4ms)
+   203→✓ Compiled in 150ms
+   204→prisma:query SELECT 1
+   205→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   206→ GET /api/iku?tahun=2025 200 in 8ms (compile: 3ms, render: 5ms)
+   207→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   208→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1608µs, render: 4ms)
+   209→ GET / 200 in 161ms (compile: 39ms, render: 122ms)
+   210→ GET / 200 in 28ms (compile: 2ms, render: 26ms)
+   211→ GET / 200 in 24ms (compile: 2ms, render: 21ms)
+   212→prisma:query SELECT 1
+   213→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   214→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   215→prisma:query SELECT 1
+   216→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   217→prisma:query UPDATE `main`.`IkuData` SET `iku2` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   218→ POST /api/iku 200 in 11ms (compile: 3ms, render: 9ms)
+   219→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   220→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   221→ GET / 200 in 27ms (compile: 3ms, render: 23ms)
+   222→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1961µs, render: 5ms)
+   223→prisma:query SELECT 1
+   224→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   225→✓ Compiled in 200ms
+   226→prisma:query SELECT 1
+   227→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   228→ GET /api/iku?tahun=2025 200 in 10ms (compile: 3ms, render: 7ms)
+   229→✓ Compiled in 0ms
+   230→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   231→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1745µs, render: 4ms)
+   232→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   233→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   234→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   235→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1378µs, render: 4ms)
+   236→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   237→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1645µs, render: 4ms)
+   238→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   239→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1568µs, render: 4ms)
+   240→ GET / 200 in 151ms (compile: 44ms, render: 107ms)
+   241→prisma:query SELECT 1
+   242→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   243→ GET /api/iku?tahun=2025 200 in 8ms (compile: 3ms, render: 6ms)
+   244→ GET / 200 in 23ms (compile: 2ms, render: 21ms)
+   245→ GET / 200 in 23ms (compile: 1872µs, render: 21ms)
+   246→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+   247→prisma:query SELECT 1
+   248→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   249→ GET /api/iku?tahun=2025 200 in 6ms (compile: 2ms, render: 4ms)
+   250→ GET / 200 in 27ms (compile: 2ms, render: 25ms)
+   251→prisma:query SELECT 1
+   252→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   253→ POST /api/iku 200 in 12ms (compile: 2ms, render: 10ms)
+   254→prisma:query UPDATE `main`.`IkuData` SET `iku5` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   255→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   256→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1682µs, render: 4ms)
+   257→✓ Compiled in 129ms
+   258→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   259→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1957µs, render: 5ms)
+   260→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   261→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1992µs, render: 5ms)
+   262→prisma:query SELECT 1
+   263→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   264→prisma:query UPDATE `main`.`IkuData` SET `iku5` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   265→ POST /api/iku 200 in 8ms (compile: 2ms, render: 6ms)
+   266→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   267→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   268→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   269→prisma:query INSERT INTO `main`.`IkuData` (`id`, `prodi`, `fakultas`, `tahun`, `iku5`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   270→ POST /api/iku 200 in 12ms (compile: 3ms, render: 9ms)
+   271→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   272→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1810µs, render: 4ms)
+   273→✓ Compiled in 130ms
+   274→ GET /api/iku?tahun=2025 200 in 8ms (compile: 1929µs, render: 6ms)
+   275→prisma:query SELECT 1
+   276→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   277→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   278→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1992µs, render: 4ms)
+   279→✓ Compiled in 133ms
+   280→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   281→ GET /api/iku?tahun=2025 200 in 8ms (compile: 4ms, render: 4ms)
+   282→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   283→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1571µs, render: 4ms)
+   284→prisma:query SELECT 1
+   285→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   286→prisma:query INSERT INTO `main`.`IkuData` (`id`, `prodi`, `fakultas`, `tahun`, `iku5`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   287→ POST /api/iku 200 in 9ms (compile: 2ms, render: 6ms)
+   288→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   289→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1776µs, render: 4ms)
+   290→✓ Compiled in 121ms
+   291→prisma:query SELECT 1
+   292→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   293→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   294→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   295→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1860µs, render: 4ms)
+   296→prisma:query SELECT 1
+   297→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   298→prisma:query INSERT INTO `main`.`IkuData` (`id`, `prodi`, `fakultas`, `tahun`, `iku5`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   299→ POST /api/iku 200 in 13ms (compile: 3ms, render: 10ms)
+   300→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   301→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   302→✓ Compiled in 120ms
+   303→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   304→ GET /api/iku?tahun=2025 200 in 9ms (compile: 3ms, render: 6ms)
+   305→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   306→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   307→✓ Compiled in 125ms
+   308→prisma:query SELECT 1
+   309→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   310→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   311→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   312→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1592µs, render: 4ms)
+   313→✓ Compiled in 132ms
+   314→prisma:query SELECT 1
+   315→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   316→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 6ms)
+   317→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   318→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1679µs, render: 4ms)
+   319→✓ Compiled in 122ms
+   320→prisma:query SELECT 1
+   321→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   322→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   323→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   324→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   325→✓ Compiled in 126ms
+   326→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   327→ GET /api/iku?tahun=2025 200 in 8ms (compile: 3ms, render: 6ms)
+   328→prisma:query SELECT 1
+   329→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   330→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 4ms)
+   331→ GET / 200 in 184ms (compile: 42ms, render: 142ms)
+   332→prisma:query SELECT 1
+   333→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   334→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 6ms)
+   335→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+   336→ GET / 200 in 23ms (compile: 3ms, render: 20ms)
+   337→ GET / 200 in 27ms (compile: 2ms, render: 25ms)
+   338→prisma:query SELECT 1
+   339→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   340→ GET /api/iku?tahun=2025 200 in 7ms (compile: 3ms, render: 4ms)
+   341→ GET / 200 in 34ms (compile: 2ms, render: 32ms)
+   342→prisma:query SELECT 1
+   343→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   344→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1842µs, render: 5ms)
+   345→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   346→prisma:query UPDATE `main`.`IkuData` SET `iku2` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   347→ POST /api/iku 200 in 9ms (compile: 1975µs, render: 7ms)
+   348→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   349→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1756µs, render: 5ms)
+   350→prisma:query SELECT 1
+   351→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   352→prisma:query UPDATE `main`.`IkuData` SET `iku7` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   353→ POST /api/iku 200 in 8ms (compile: 1906µs, render: 6ms)
+   354→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   355→ GET /api/iku?tahun=2025 200 in 7ms (compile: 3ms, render: 4ms)
+   356→prisma:query SELECT 1
+   357→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   358→prisma:query UPDATE `main`.`IkuData` SET `iku9` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   359→ POST /api/iku 200 in 9ms (compile: 2ms, render: 6ms)
+   360→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   361→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1765µs, render: 4ms)
+   362→prisma:query SELECT 1
+   363→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   364→ POST /api/iku 200 in 8ms (compile: 1885µs, render: 6ms)
+   365→prisma:query UPDATE `main`.`IkuData` SET `iku9` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   366→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1664µs, render: 4ms)
+   367→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   368→✓ Compiled in 142ms
+   369→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   370→ GET /api/iku?tahun=2025 200 in 7ms (compile: 3ms, render: 5ms)
+   371→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   372→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1822µs, render: 4ms)
+   373→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   374→ GET /api/iku?tahun=2025 200 in 6ms (compile: 2ms, render: 4ms)
+   375→✓ Compiled in 131ms
+   376→prisma:query SELECT 1
+   377→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   378→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1873µs, render: 5ms)
+   379→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1456µs, render: 4ms)
+   380→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   381→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1411µs, render: 4ms)
+   382→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   383→✓ Compiled in 174ms
+   384→✓ Compiled in 209ms
+   385→ GET / 200 in 62ms (compile: 40ms, render: 22ms)
+   386→ GET / 200 in 11ms (compile: 1941µs, render: 9ms)
+   387→ GET / 200 in 12ms (compile: 1656µs, render: 10ms)
+   388→prisma:query SELECT 1
+   389→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   390→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   391→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   392→ GET /api/iku?tahun=2025 200 in 7ms (compile: 3ms, render: 4ms)
+   393→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   394→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   395→ GET / 200 in 140ms (compile: 4ms, render: 136ms)
+   396→prisma:query SELECT 1
+   397→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   398→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   399→prisma:query SELECT 1
+   400→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   401→prisma:query UPDATE `main`.`IkuData` SET `iku9` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   402→ POST /api/iku 200 in 8ms (compile: 2ms, render: 6ms)
+   403→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   404→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1763µs, render: 4ms)
+   405→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   406→prisma:query UPDATE `main`.`IkuData` SET `iku9` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   407→ POST /api/iku 200 in 8ms (compile: 1978µs, render: 6ms)
+   408→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   409→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1861µs, render: 4ms)
+   410→prisma:query SELECT 1
+   411→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   412→prisma:query UPDATE `main`.`IkuData` SET `iku9` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   413→ POST /api/iku 200 in 8ms (compile: 2ms, render: 6ms)
+   414→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   415→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1718µs, render: 4ms)
+   416→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   417→prisma:query UPDATE `main`.`IkuData` SET `iku9` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   418→ POST /api/iku 200 in 8ms (compile: 1994µs, render: 6ms)
+   419→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   420→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1623µs, render: 4ms)
+   421→prisma:query SELECT 1
+   422→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   423→prisma:query INSERT INTO `main`.`IkuData` (`id`, `prodi`, `fakultas`, `tahun`, `iku9`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   424→ POST /api/iku 200 in 9ms (compile: 2ms, render: 7ms)
+   425→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   426→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1786µs, render: 4ms)
+   427→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   428→prisma:query INSERT INTO `main`.`IkuData` (`id`, `prodi`, `fakultas`, `tahun`, `iku9`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   429→ POST /api/iku 200 in 8ms (compile: 2ms, render: 6ms)
+   430→ GET /api/iku?tahun=2025 200 in 9ms (compile: 1756µs, render: 7ms)
+   431→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   432→prisma:query SELECT 1
+   433→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   434→prisma:query INSERT INTO `main`.`IkuData` (`id`, `prodi`, `fakultas`, `tahun`, `iku9`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   435→ POST /api/iku 200 in 8ms (compile: 2ms, render: 6ms)
+   436→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   437→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1719µs, render: 4ms)
+   438→ GET / 200 in 77ms (compile: 3ms, render: 74ms)
+   439→ GET / 200 in 37ms (compile: 3ms, render: 35ms)
+   440→prisma:query SELECT 1
+   441→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   442→prisma:query UPDATE `main`.`IkuData` SET `iku9` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   443→ POST /api/iku 200 in 8ms (compile: 2ms, render: 6ms)
+   444→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   445→ GET /api/iku?tahun=2025 200 in 6ms (compile: 2ms, render: 4ms)
+   446→ GET / 200 in 28ms (compile: 2ms, render: 26ms)
+   447→prisma:query SELECT 1
+   448→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   449→ GET /api/iku?tahun=2025 200 in 8ms (compile: 3ms, render: 5ms)
+   450→ GET / 200 in 26ms (compile: 2ms, render: 23ms)
+   451→prisma:query SELECT 1
+   452→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   453→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1997µs, render: 5ms)
+   454→✓ Compiled in 119ms
+   455→prisma:query SELECT 1
+   456→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   457→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   458→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   459→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1675µs, render: 4ms)
+   460→✓ Compiled in 213ms
+   461→prisma:query SELECT 1
+   462→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   463→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1843µs, render: 4ms)
+   464→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   465→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1441µs, render: 4ms)
+   466→ GET / 200 in 186ms (compile: 43ms, render: 143ms)
+   467→prisma:query SELECT 1
+   468→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   469→ GET /api/iku?tahun=2025 200 in 8ms (compile: 1903µs, render: 6ms)
+   470→ GET / 200 in 51ms (compile: 3ms, render: 48ms)
+   471→ GET / 200 in 24ms (compile: 1523µs, render: 22ms)
+   472→ GET / 200 in 24ms (compile: 1996µs, render: 22ms)
+   473→prisma:query SELECT 1
+   474→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   475→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   476→✓ Compiled in 127ms
+   477→prisma:query SELECT 1
+   478→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   479→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1993µs, render: 5ms)
+   480→ GET /api/iku?tahun=2025 200 in 8ms (compile: 1757µs, render: 6ms)
+   481→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   482→✓ Compiled in 148ms
+   483→prisma:query SELECT 1
+   484→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   485→ GET /api/iku?tahun=2025 200 in 6ms (compile: 2ms, render: 4ms)
+   486→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   487→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1943µs, render: 4ms)
+   488→✓ Compiled in 141ms
+   489→prisma:query SELECT 1
+   490→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   491→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 5ms)
+   492→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   493→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1968µs, render: 4ms)
+   494→ GET / 200 in 155ms (compile: 42ms, render: 113ms)
+   495→prisma:query SELECT 1
+   496→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   497→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 6ms)
+   498→ GET / 200 in 26ms (compile: 3ms, render: 23ms)
+   499→ GET / 200 in 22ms (compile: 2ms, render: 20ms)
+   500→ GET / 200 in 27ms (compile: 2ms, render: 25ms)
+   501→prisma:query SELECT 1
+   502→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   503→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1821µs, render: 4ms)
+   504→✓ Compiled in 123ms
+   505→prisma:query SELECT 1
+   506→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   507→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1984µs, render: 4ms)
+   508→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   509→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1692µs, render: 4ms)
+   510→✓ Compiled in 153ms
+   511→✓ Compiled in 129ms
+   512→ GET / 200 in 73ms (compile: 40ms, render: 34ms)
+   513→ GET / 200 in 14ms (compile: 1678µs, render: 12ms)
+   514→prisma:query SELECT 1
+   515→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   516→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1909µs, render: 5ms)
+   517→✓ Compiled in 169ms
+   518→⚠ Fast Refresh had to perform a full reload due to a runtime error.
+   519→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   520→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1572µs, render: 5ms)
+   521→ GET / 200 in 179ms (compile: 41ms, render: 138ms)
+   522→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   523→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1810µs, render: 5ms)
+   524→✓ Compiled in 138ms
+   525→prisma:query SELECT 1
+   526→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   527→ GET /api/iku?tahun=2025 200 in 9ms (compile: 3ms, render: 6ms)
+   528→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   529→ GET /api/iku?tahun=2025 200 in 7ms (compile: 3ms, render: 5ms)
+   530→ GET / 200 in 161ms (compile: 42ms, render: 119ms)
+   531→prisma:query SELECT 1
+   532→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   533→ GET /api/iku?tahun=2025 200 in 10ms (compile: 4ms, render: 5ms)
+   534→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+   535→ GET / 200 in 20ms (compile: 1681µs, render: 19ms)
+   536→ GET / 200 in 29ms (compile: 2ms, render: 26ms)
+   537→prisma:query SELECT 1
+   538→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   539→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1930µs, render: 5ms)
+   540→ GET / 200 in 23ms (compile: 3ms, render: 21ms)
+   541→prisma:query SELECT 1
+   542→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   543→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 4ms)
+   544→prisma:query SELECT 1
+   545→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   546→prisma:query UPDATE `main`.`IkuData` SET `iku12` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   547→ POST /api/iku 200 in 9ms (compile: 2ms, render: 7ms)
+   548→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   549→ GET /api/iku?tahun=2025 200 in 6ms (compile: 2ms, render: 4ms)
+   550→✓ Compiled in 136ms
+   551→prisma:query SELECT 1
+   552→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   553→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1984µs, render: 5ms)
+   554→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   555→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1734µs, render: 4ms)
+   556→✓ Compiled in 152ms
+   557→prisma:query SELECT 1
+   558→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   559→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   560→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1920µs, render: 4ms)
+   561→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   562→ GET / 200 in 161ms (compile: 45ms, render: 117ms)
+   563→prisma:query SELECT 1
+   564→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   565→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1729µs, render: 5ms)
+   566→prisma:query SELECT 1
+   567→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   568→prisma:query UPDATE `main`.`IkuData` SET `iku5` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   569→ POST /api/iku 200 in 11ms (compile: 3ms, render: 8ms)
+   570→ GET /api/iku?tahun=2025 200 in 8ms (compile: 3ms, render: 5ms)
+   571→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   572→ GET / 200 in 31ms (compile: 3ms, render: 28ms)
+   573→prisma:query SELECT 1
+   574→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   575→ GET /api/iku?tahun=2025 200 in 9ms (compile: 1791µs, render: 7ms)
+   576→ GET / 200 in 27ms (compile: 2ms, render: 25ms)
+   577→ GET / 200 in 22ms (compile: 1585µs, render: 20ms)
+   578→ GET / 200 in 27ms (compile: 2ms, render: 25ms)
+   579→prisma:query SELECT 1
+   580→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   581→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   582→ GET / 200 in 26ms (compile: 2ms, render: 23ms)
+   583→prisma:query SELECT 1
+   584→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   585→ GET /api/iku?tahun=2025 200 in 6ms (compile: 2ms, render: 4ms)
+   586→prisma:query SELECT 1
+   587→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   588→ GET /api/iku?tahun=2026 200 in 7ms (compile: 2ms, render: 4ms)
+   589→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   590→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   591→prisma:query SELECT 1
+   592→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE ((`main`.`IkuData`.`prodi` = ? AND `main`.`IkuData`.`tahun` = ?) AND 1=1) LIMIT ? OFFSET ?
+   593→prisma:query UPDATE `main`.`IkuData` SET `iku2` = ?, `updatedAt` = ? WHERE (`main`.`IkuData`.`id` = ? AND 1=1) RETURNING `id` AS `id`, `prodi` AS `prodi`, `fakultas` AS `fakultas`, `tahun` AS `tahun`, `iku1` AS `iku1`, `iku2` AS `iku2`, `iku3` AS `iku3`, `iku5` AS `iku5`, `iku7` AS `iku7`, `iku9` AS `iku9`, `iku12` AS `iku12`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+   594→ POST /api/iku 200 in 9ms (compile: 2ms, render: 7ms)
+   595→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1921µs, render: 5ms)
+   596→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   597→ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+   598→ GET / 200 in 26ms (compile: 1692µs, render: 24ms)
+   599→ GET / 200 in 27ms (compile: 2ms, render: 24ms)
+   600→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 6ms)
+   601→prisma:query SELECT 1
+   602→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   603→ GET / 200 in 29ms (compile: 3ms, render: 26ms)
+   604→ GET / 200 in 22ms (compile: 1581µs, render: 20ms)
+   605→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+   606→prisma:query SELECT 1
+   607→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   608→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1916µs, render: 4ms)
+   609→ GET / 200 in 25ms (compile: 2ms, render: 23ms)
+   610→ GET / 200 in 21ms (compile: 1572µs, render: 20ms)
+   611→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+   612→prisma:query SELECT 1
+   613→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   614→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1922µs, render: 5ms)
+   615→ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+   616→ GET / 200 in 23ms (compile: 1703µs, render: 21ms)
+   617→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+   618→prisma:query SELECT 1
+   619→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   620→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1976µs, render: 4ms)
+   621→ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+   622→ GET / 200 in 21ms (compile: 1540µs, render: 19ms)
+   623→ GET / 200 in 24ms (compile: 4ms, render: 21ms)
+   624→prisma:query SELECT 1
+   625→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   626→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1954µs, render: 4ms)
+   627→ GET / 200 in 45ms (compile: 2ms, render: 42ms)
+   628→ GET / 200 in 24ms (compile: 1594µs, render: 22ms)
+   629→ GET / 200 in 32ms (compile: 2ms, render: 30ms)
+   630→prisma:query SELECT 1
+   631→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   632→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 6ms)
+   633→ GET / 200 in 25ms (compile: 2ms, render: 23ms)
+   634→ GET / 200 in 21ms (compile: 1720µs, render: 20ms)
+   635→ GET / 200 in 23ms (compile: 2ms, render: 21ms)
+   636→prisma:query SELECT 1
+   637→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   638→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1953µs, render: 5ms)
+   639→ GET / 200 in 24ms (compile: 2ms, render: 21ms)
+   640→ GET / 200 in 22ms (compile: 1656µs, render: 20ms)
+   641→ GET / 200 in 25ms (compile: 2ms, render: 22ms)
+   642→prisma:query SELECT 1
+   643→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   644→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 5ms)
+   645→ GET / 200 in 25ms (compile: 2ms, render: 23ms)
+   646→prisma:query SELECT 1
+   647→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   648→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1840µs, render: 4ms)
+   649→ GET / 200 in 23ms (compile: 1979µs, render: 21ms)
+   650→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+   651→prisma:query SELECT 1
+   652→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   653→ GET /api/iku?tahun=2025 200 in 7ms (compile: 3ms, render: 4ms)
+   654→ GET / 200 in 25ms (compile: 1998µs, render: 23ms)
+   655→prisma:query SELECT 1
+   656→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   657→ GET /api/iku?tahun=2025 200 in 6ms (compile: 2ms, render: 4ms)
+   658→ GET / 200 in 25ms (compile: 1993µs, render: 23ms)
+   659→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1949µs, render: 5ms)
+   660→prisma:query SELECT 1
+   661→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   662→ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+   663→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   664→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   665→ GET / 200 in 27ms (compile: 2ms, render: 25ms)
+   666→prisma:query SELECT 1
+   667→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1864µs, render: 5ms)
+   668→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   669→ GET / 200 in 25ms (compile: 3ms, render: 23ms)
+   670→ GET / 200 in 21ms (compile: 1840µs, render: 19ms)
+   671→ GET / 200 in 25ms (compile: 2ms, render: 23ms)
+   672→prisma:query SELECT 1
+   673→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   674→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   675→✓ Compiled in 201ms
+   676→prisma:query SELECT 1
+   677→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   678→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 4ms)
+   679→ GET / 200 in 204ms (compile: 40ms, render: 164ms)
+   680→ GET / 200 in 22ms (compile: 1907µs, render: 20ms)
+   681→ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+   682→prisma:query SELECT 1
+   683→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE 1=1 ORDER BY `main`.`IkuData`.`id` ASC LIMIT ? OFFSET ?
+   684→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   685→ GET /api/iku?tahun=2025 200 in 77ms (compile: 68ms, render: 9ms)
+   686→✓ Compiled in 260ms
+   687→prisma:query SELECT 1
+   688→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   689→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 6ms)
+   690→✓ Compiled in 214ms
+   691→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 5ms)
+   692→prisma:query SELECT 1
+   693→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   694→✓ Compiled in 228ms
+   695→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 5ms)
+   696→prisma:query SELECT 1
+   697→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   698→✓ Compiled in 180ms
+   699→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   700→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1965µs, render: 5ms)
+   701→✓ Compiled in 163ms
+   702→prisma:query SELECT 1
+   703→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   704→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   705→✓ Compiled in 133ms
+   706→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   707→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   708→✓ Compiled in 412ms
+   709→prisma:query SELECT 1
+   710→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   711→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   712→✓ Compiled in 326ms
+   713→prisma:query SELECT 1
+   714→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   715→ GET /api/iku?tahun=2025 200 in 9ms (compile: 3ms, render: 6ms)
+   716→✓ Compiled in 126ms
+   717→prisma:query SELECT 1
+   718→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   719→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   720→✓ Compiled in 195ms
+   721→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   722→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1808µs, render: 5ms)
+   723→✓ Compiled in 125ms
+   724→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   725→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1847µs, render: 5ms)
+   726→✓ Compiled in 163ms
+   727→prisma:query SELECT 1
+   728→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   729→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1928µs, render: 4ms)
+   730→✓ Compiled in 128ms
+   731→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   732→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   733→✓ Compiled in 115ms
+   734→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   735→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1845µs, render: 5ms)
+   736→✓ Compiled in 104ms
+   737→prisma:query SELECT 1
+   738→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   739→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1872µs, render: 5ms)
+   740→✓ Compiled in 211ms
+   741→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   742→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1959µs, render: 6ms)
+   743→✓ Compiled in 139ms
+   744→prisma:query SELECT 1
+   745→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   746→ GET /api/iku?tahun=2025 200 in 9ms (compile: 3ms, render: 6ms)
+   747→✓ Compiled in 132ms
+   748→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   749→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1865µs, render: 5ms)
+   750→✓ Compiled in 160ms
+   751→prisma:query SELECT 1
+   752→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   753→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1887µs, render: 5ms)
+   754→✓ Compiled in 146ms
+   755→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   756→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1873µs, render: 4ms)
+   757→✓ Compiled in 137ms
+   758→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   759→ GET /api/iku?tahun=2025 200 in 8ms (compile: 2ms, render: 5ms)
+   760→✓ Compiled in 156ms
+   761→prisma:query SELECT 1
+   762→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   763→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 4ms)
+   764→✓ Compiled in 186ms
+   765→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   766→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1889µs, render: 5ms)
+   767→✓ Compiled in 125ms
+   768→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   769→ GET /api/iku?tahun=2025 200 in 9ms (compile: 3ms, render: 6ms)
+   770→✓ Compiled in 167ms
+   771→prisma:query SELECT 1
+   772→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   773→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1736µs, render: 4ms)
+   774→✓ Compiled in 118ms
+   775→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   776→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1972µs, render: 5ms)
+   777→✓ Compiled in 121ms
+   778→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   779→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1913µs, render: 5ms)
+   780→✓ Compiled in 129ms
+   781→prisma:query SELECT 1
+   782→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   783→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1889µs, render: 5ms)
+   784→✓ Compiled in 126ms
+   785→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   786→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1882µs, render: 4ms)
+   787→✓ Compiled in 129ms
+   788→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   789→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1909µs, render: 5ms)
+   790→✓ Compiled in 134ms
+   791→prisma:query SELECT 1
+   792→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   793→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1862µs, render: 4ms)
+   794→✓ Compiled in 125ms
+   795→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   796→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   797→✓ Compiled in 114ms
+   798→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   799→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1859µs, render: 5ms)
+   800→✓ Compiled in 106ms
+   801→prisma:query SELECT 1
+   802→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   803→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   804→✓ Compiled in 116ms
+   805→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   806→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1897µs, render: 5ms)
+   807→✓ Compiled in 106ms
+   808→prisma:query SELECT 1
+   809→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   810→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1870µs, render: 5ms)
+   811→✓ Compiled in 100ms
+   812→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   813→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1846µs, render: 4ms)
+   814→✓ Compiled in 115ms
+   815→prisma:query SELECT 1
+   816→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   817→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1844µs, render: 4ms)
+   818→✓ Compiled in 119ms
+   819→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   820→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1722µs, render: 4ms)
+   821→✓ Compiled in 154ms
+   822→prisma:query SELECT 1
+   823→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   824→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1836µs, render: 5ms)
+   825→✓ Compiled in 106ms
+   826→prisma:query SELECT 1
+   827→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   828→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   829→✓ Compiled in 98ms
+   830→prisma:query SELECT 1
+   831→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   832→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1820µs, render: 4ms)
+   833→✓ Compiled in 114ms
+   834→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   835→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1814µs, render: 5ms)
+   836→✓ Compiled in 108ms
+   837→prisma:query SELECT 1
+   838→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   839→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1928µs, render: 4ms)
+   840→✓ Compiled in 173ms
+   841→✓ Compiled in 133ms
+   842→prisma:query SELECT 1
+   843→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   844→ GET /api/iku?tahun=2025 200 in 6ms (compile: 2ms, render: 4ms)
+   845→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   846→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1553µs, render: 4ms)
+   847→✓ Compiled in 250ms
+   848→ GET / 200 in 178ms (compile: 40ms, render: 138ms)
+   849→prisma:query SELECT 1
+   850→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   851→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1927µs, render: 5ms)
+   852→✓ Compiled in 230ms
+   853→✓ Compiled in 129ms
+   854→prisma:query SELECT 1
+   855→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   856→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1995µs, render: 5ms)
+   857→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   858→ GET /api/iku?tahun=2025 200 in 6ms (compile: 2ms, render: 4ms)
+   859→✓ Compiled in 126ms
+   860→prisma:query SELECT 1
+   861→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   862→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   863→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   864→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1743µs, render: 4ms)
+   865→✓ Compiled in 134ms
+   866→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   867→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1940µs, render: 5ms)
+   868→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   869→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1845µs, render: 5ms)
+   870→✓ Compiled in 137ms
+   871→prisma:query SELECT 1
+   872→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   873→ GET /api/iku?tahun=2025 200 in 8ms (compile: 3ms, render: 6ms)
+   874→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   875→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1860µs, render: 4ms)
+   876→✓ Compiled in 108ms
+   877→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   878→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   879→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   880→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1803µs, render: 4ms)
+   881→✓ Compiled in 130ms
+   882→prisma:query SELECT 1
+   883→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   884→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1919µs, render: 4ms)
+   885→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   886→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1604µs, render: 4ms)
+   887→✓ Compiled in 115ms
+   888→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   889→ GET /api/iku?tahun=2025 200 in 9ms (compile: 2ms, render: 7ms)
+   890→prisma:query SELECT 1
+   891→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   892→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1728µs, render: 4ms)
+   893→✓ Compiled in 129ms
+   894→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   895→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1904µs, render: 5ms)
+   896→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   897→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1490µs, render: 4ms)
+   898→✓ Compiled in 125ms
+   899→prisma:query SELECT 1
+   900→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   901→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1920µs, render: 5ms)
+   902→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   903→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1403µs, render: 4ms)
+   904→✓ Compiled in 123ms
+   905→prisma:query SELECT 1
+   906→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   907→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1834µs, render: 4ms)
+   908→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   909→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1358µs, render: 4ms)
+   910→✓ Compiled in 226ms
+   911→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   912→ GET /api/iku?tahun=2025 200 in 9ms (compile: 2ms, render: 6ms)
+   913→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   914→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1864µs, render: 5ms)
+   915→✓ Compiled in 125ms
+   916→prisma:query SELECT 1
+   917→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   918→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1971µs, render: 5ms)
+   919→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   920→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1569µs, render: 4ms)
+   921→✓ Compiled in 117ms
+   922→prisma:query SELECT 1
+   923→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   924→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1844µs, render: 5ms)
+   925→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   926→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1728µs, render: 4ms)
+   927→✓ Compiled in 161ms
+   928→prisma:query SELECT 1
+   929→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   930→ GET /api/iku?tahun=2025 200 in 12ms (compile: 3ms, render: 8ms)
+   931→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   932→ GET /api/iku?tahun=2025 200 in 9ms (compile: 3ms, render: 6ms)
+   933→✓ Compiled in 125ms
+   934→prisma:query SELECT 1
+   935→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   936→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1924µs, render: 5ms)
+   937→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   938→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1583µs, render: 4ms)
+   939→✓ Compiled in 214ms
+   940→prisma:query SELECT 1
+   941→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   942→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   943→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   944→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1878µs, render: 4ms)
+   945→✓ Compiled in 150ms
+   946→prisma:query SELECT 1
+   947→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   948→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   949→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   950→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1767µs, render: 4ms)
+   951→✓ Compiled in 184ms
+   952→prisma:query SELECT 1
+   953→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   954→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1956µs, render: 5ms)
+   955→ GET /api/iku?tahun=2025 200 in 5ms (compile: 1529µs, render: 4ms)
+   956→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   957→✓ Compiled in 126ms
+   958→prisma:query SELECT 1
+   959→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   960→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 4ms)
+   961→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   962→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1470µs, render: 4ms)
+   963→ GET / 200 in 199ms (compile: 48ms, render: 151ms)
+   964→ GET /api/iku?tahun=2025 200 in 9ms (compile: 1936µs, render: 7ms)
+   965→prisma:query SELECT 1
+   966→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   967→ GET / 200 in 44ms (compile: 20ms, render: 24ms)
+   968→ GET / 200 in 46ms (compile: 3ms, render: 44ms)
+   969→ GET / 200 in 32ms (compile: 2ms, render: 29ms)
+   970→prisma:query SELECT 1
+   971→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   972→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1919µs, render: 5ms)
+   973→ GET / 200 in 22ms (compile: 2ms, render: 20ms)
+   974→prisma:query SELECT 1
+   975→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   976→ GET /api/iku?tahun=2025 200 in 7ms (compile: 2ms, render: 5ms)
+   977→✓ Compiled in 243ms
+   978→✓ Compiled in 186ms
+   979→prisma:query SELECT 1
+   980→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   981→ GET /api/iku?tahun=2025 200 in 6ms (compile: 1919µs, render: 4ms)
+   982→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   983→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1943µs, render: 5ms)
+   984→ GET / 200 in 165ms (compile: 43ms, render: 122ms)
+   985→prisma:query SELECT 1
+   986→ GET /api/iku?tahun=2025 200 in 10ms (compile: 2ms, render: 8ms)
+   987→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   988→ GET / 200 in 29ms (compile: 3ms, render: 26ms)
+   989→ GET / 200 in 24ms (compile: 1971µs, render: 22ms)
+   990→ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+   991→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1929µs, render: 5ms)
+   992→prisma:query SELECT 1
+   993→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   994→ GET / 200 in 25ms (compile: 2ms, render: 23ms)
+   995→ GET /api/iku?tahun=2025 200 in 7ms (compile: 1902µs, render: 5ms)
+   996→prisma:query SELECT 1
+   997→prisma:query SELECT `main`.`IkuData`.`id`, `main`.`IkuData`.`prodi`, `main`.`IkuData`.`fakultas`, `main`.`IkuData`.`tahun`, `main`.`IkuData`.`iku1`, `main`.`IkuData`.`iku2`, `main`.`IkuData`.`iku3`, `main`.`IkuData`.`iku5`, `main`.`IkuData`.`iku7`, `main`.`IkuData`.`iku9`, `main`.`IkuData`.`iku12`, `main`.`IkuData`.`createdAt`, `main`.`IkuData`.`updatedAt` FROM `main`.`IkuData` WHERE `main`.`IkuData`.`tahun` = ? ORDER BY `main`.`IkuData`.`tahun` DESC, `main`.`IkuData`.`prodi` ASC LIMIT ? OFFSET ?
+   998→

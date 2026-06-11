@@ -1857,108 +1857,137 @@ export default function IKUDashboard() {
                   return null;
                 })()}
 
-                {/* KPI Summary Cards — Premium Circular Gauge */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                  {ikuValues.map((iku, idx) => {
-                    const coverage = getIkuCoverage(iku.id, prodiIds);
-                    const isComplete = coverage.filled === coverage.total;
-                    const ikuColor = IKU_COLORS[iku.id] || PRIMARY;
-                    const pct = Math.min(iku.value, 100);
-                    // SVG circular gauge math
-                    const radius = 42;
-                    const circ = 2 * Math.PI * radius;
-                    const offset = circ - (pct / 100) * circ;
-                    const ikuIcon = iku.id === "iku1" ? GraduationCap : iku.id === "iku2" ? Briefcase : iku.id === "iku3" ? Trophy : iku.id === "iku5" ? Handshake : iku.id === "iku7" ? Globe : iku.id === "iku9" ? Wallet : Users;
-                    const IkuIcon = ikuIcon;
+                {/* KPI Summary — Unified Horizontal Panel */}
+                <div className="kpi-panel bg-white border border-slate-100 shadow-sm">
+                  {/* Panel Header */}
+                  <div className="px-6 pt-5 pb-3 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${PRIMARY}15, ${SECONDARY}10)` }}>
+                        <BarChart3 className="w-4 h-4" style={{ color: PRIMARY }} />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-bold text-slate-800">Capaian Indikator Kinerja Utama</h3>
+                        <p className="text-[11px] text-slate-400 font-medium">Ringkasan persentase pencapaian setiap IKU</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] font-semibold text-slate-400">TAHUN {tahun}</span>
+                    </div>
+                  </div>
 
-                    return (
-                      <div
-                        key={iku.id}
-                        className="kpi-card bg-white"
-                        style={{ "--card-accent": ikuColor } as React.CSSProperties}
-                      >
-                        <div className="kpi-glow" />
-                        <div className="kpi-inner-glow" />
-                        <div className="relative p-5 pb-4">
-                          {/* Top: IKU label + icon */}
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center gap-2.5">
-                              <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${ikuColor}18, ${ikuColor}08)` }}>
-                                <IkuIcon className="w-4.5 h-4.5" style={{ color: ikuColor }} />
-                              </div>
-                              <div>
-                                <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: ikuColor }}>{iku.label}</p>
-                                <p className="text-[10px] text-slate-400 font-medium">{iku.shortTitle}</p>
-                              </div>
-                            </div>
-                            {isComplete ? (
-                              <div className="w-6 h-6 rounded-full flex items-center justify-center bg-emerald-50">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                              </div>
-                            ) : (
-                              <div className="w-6 h-6 rounded-full flex items-center justify-center bg-amber-50">
-                                <AlertCircle className="w-3.5 h-3.5 text-amber-500" />
-                              </div>
-                            )}
-                          </div>
+                  {/* IKU Rows */}
+                  <div className="px-6 pb-5 space-y-0">
+                    {ikuValues.map((iku, idx) => {
+                      const coverage = getIkuCoverage(iku.id, prodiIds);
+                      const isComplete = coverage.filled === coverage.total;
+                      const ikuColor = IKU_COLORS[iku.id] || PRIMARY;
+                      const pct = Math.min(iku.value, 100);
+                      // Mini SVG ring math
+                      const miniR = 16;
+                      const miniCirc = 2 * Math.PI * miniR;
+                      const miniOffset = miniCirc - (pct / 100) * miniCirc;
+                      const ikuIcon = iku.id === "iku1" ? GraduationCap : iku.id === "iku2" ? Briefcase : iku.id === "iku3" ? Trophy : iku.id === "iku5" ? Handshake : iku.id === "iku7" ? Globe : iku.id === "iku9" ? Wallet : Users;
+                      const IkuIcon = ikuIcon;
 
-                          {/* Circular Gauge */}
-                          <div className="flex items-center justify-center my-2">
-                            <div className="relative" style={{ width: 110, height: 110 }}>
-                              <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
-                                {/* Decorative outer ring */}
-                                <circle cx="50" cy="50" r="48" fill="none" stroke={ikuColor} strokeWidth="0.3" opacity="0.15" />
-                                {/* Track */}
-                                <circle cx="50" cy="50" r={radius} className="kpi-ring-track" color={ikuColor} strokeWidth="7" />
-                                {/* Fill */}
+                      // Determine status
+                      const statusLabel = pct >= 75 ? "Baik" : pct >= 50 ? "Cukup" : pct >= 25 ? "Perlu Perhatian" : "Belum Tercapai";
+                      const statusColor = pct >= 75 ? "#059669" : pct >= 50 ? "#D97706" : pct >= 25 ? "#EA580C" : "#DC2626";
+
+                      return (
+                        <div
+                          key={iku.id}
+                          className="kpi-row py-4"
+                          style={{ "--bar-color": ikuColor } as React.CSSProperties}
+                        >
+                          {/* Separator line */}
+                          {idx > 0 && (
+                            <div className="absolute top-0 left-0 right-0 h-px bg-slate-100" />
+                          )}
+
+                          <div className="flex items-center gap-4">
+                            {/* Mini circular indicator */}
+                            <div className="relative shrink-0" style={{ width: 48, height: 48 }}>
+                              <svg viewBox="0 0 40 40" className="w-full h-full -rotate-90">
+                                <circle cx="20" cy="20" r={miniR} className="kpi-mini-ring-track" stroke={ikuColor} strokeWidth="3.5" />
                                 <circle
-                                  cx="50" cy="50" r={radius}
-                                  className="kpi-ring-fill"
+                                  cx="20" cy="20" r={miniR}
+                                  className="kpi-mini-ring-fill"
                                   stroke={ikuColor}
-                                  strokeWidth="7"
-                                  strokeDasharray={circ}
-                                  strokeDashoffset={iku.value > 0 ? offset : circ}
-                                  style={{ "--card-accent": ikuColor } as React.CSSProperties}
+                                  strokeWidth="3.5"
+                                  strokeDasharray={miniCirc}
+                                  strokeDashoffset={iku.value > 0 ? miniOffset : miniCirc}
+                                  style={{ filter: iku.value > 0 ? `drop-shadow(0 0 4px ${ikuColor}60)` : "none" }}
                                 />
                               </svg>
-                              {/* Center content */}
-                              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                <span
-                                  className="text-2xl font-black leading-none"
-                                  style={iku.value > 0 ? {
-                                    background: `linear-gradient(135deg, ${ikuColor}, ${ikuColor}cc)`,
-                                    WebkitBackgroundClip: "text",
-                                    WebkitTextFillColor: "transparent",
-                                  } : { color: "#E2E8F0" }}
-                                >
-                                  {iku.value.toFixed(1)}
-                                </span>
-                                <span className="text-[10px] font-bold text-slate-400 mt-0.5">PERSEN</span>
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <IkuIcon className="w-3.5 h-3.5" style={{ color: iku.value > 0 ? ikuColor : "#CBD5E1" }} />
+                              </div>
+                            </div>
+
+                            {/* Label + Bar */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1.5">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs font-bold tracking-wide" style={{ color: ikuColor }}>{iku.label}</span>
+                                  <span className="text-[10px] text-slate-400 font-medium hidden sm:inline">— {iku.shortTitle}</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  {/* Status badge */}
+                                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full hidden md:inline-block"
+                                    style={{
+                                      color: statusColor,
+                                      backgroundColor: `${statusColor}12`,
+                                    }}
+                                  >
+                                    {statusLabel}
+                                  </span>
+                                  {/* Coverage */}
+                                  <div className="flex items-center gap-1">
+                                    {isComplete ? (
+                                      <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                                    ) : (
+                                      <AlertCircle className="w-3 h-3 text-amber-400" />
+                                    )}
+                                    <span className="text-[10px] font-semibold" style={{ color: isComplete ? "#059669" : "#D97706" }}>
+                                      {coverage.filled}/{coverage.total}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Progress Bar + Percentage */}
+                              <div className="flex items-center gap-3">
+                                <div className="flex-1 kpi-bar-track" style={{ backgroundColor: `${ikuColor}10` }}>
+                                  <div
+                                    className="kpi-bar-fill"
+                                    style={{
+                                      width: `${pct}%`,
+                                      background: iku.value > 0
+                                        ? `linear-gradient(90deg, ${ikuColor}cc, ${ikuColor})`
+                                        : "transparent",
+                                    }}
+                                  />
+                                </div>
+                                <div className="shrink-0 w-16 text-right">
+                                  <span
+                                    className="text-lg font-black leading-none"
+                                    style={iku.value > 0 ? {
+                                      background: `linear-gradient(135deg, ${ikuColor}, ${ikuColor}bb)`,
+                                      WebkitBackgroundClip: "text",
+                                      WebkitTextFillColor: "transparent",
+                                    } : { color: "#E2E8F0" }}
+                                  >
+                                    {iku.value.toFixed(1)}
+                                  </span>
+                                  <span className="text-[10px] font-bold text-slate-400 ml-0.5">%</span>
+                                </div>
                               </div>
                             </div>
                           </div>
-
-                          {/* Bottom: Coverage */}
-                          <div className="flex items-center justify-center gap-1.5 mt-2">
-                            <div className="flex gap-0.5">
-                              {Array.from({ length: coverage.total }).map((_, i) => (
-                                <div
-                                  key={i}
-                                  className="w-1.5 h-1.5 rounded-full transition-all"
-                                  style={{
-                                    backgroundColor: i < coverage.filled ? ikuColor : "#E2E8F0",
-                                  }}
-                                />
-                              ))}
-                            </div>
-                            <span className="text-[10px] font-semibold" style={{ color: isComplete ? "#059669" : "#D97706" }}>
-                              {coverage.filled}/{coverage.total} prodi
-                            </span>
-                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
