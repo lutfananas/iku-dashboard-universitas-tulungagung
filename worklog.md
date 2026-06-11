@@ -49,3 +49,24 @@ Stage Summary:
 - SPMI tab successfully added to Global/Fakultas dashboard views
 - Tab contains narrative (Keterkaitan IKU dengan IAPT 4.1), SPMI assessment scoring, accordion mapping, summary table with recommendations, and detailed IAPT indicator mapping
 - All rendering verified via browser: tab clickable, accordion works, charts render, no JS errors
+
+---
+Task ID: 1
+Agent: main
+Task: Deploy IKU-UNITA Dashboard to Vercel
+
+Work Log:
+- Attempted Railway deployment - failed due to Node 18 EOL, then 502 errors (HOSTNAME binding issue)
+- Switched to Vercel deployment per user request
+- Installed Vercel CLI, deployed project
+- Renamed project from "my-project" to "iku-unita"
+- Hit SSO protection on team account (401 on all URLs)
+- Deleted old team project, recreated as personal project
+- Team-level SSO still applies but domain iku-unita.vercel.app works (200 OK)
+- Successfully deployed to https://iku-unita.vercel.app
+
+Stage Summary:
+- Live URL: https://iku-unita.vercel.app
+- Project name: iku-unita on Vercel
+- Connected to GitHub: lutfananas/iku-dashboard-universitas-tulungagung
+- Auto-deploy from main branch enabled
