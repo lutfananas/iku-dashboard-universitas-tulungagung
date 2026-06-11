@@ -1,290 +1,111 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { db } from "@/lib/db";
 
-// Mock data for Universitas Tulungagung IKU Dashboard
-const ikuData = {
-  universitas: "Universitas Tulungagung",
-  tahun: 2026,
-  ringkasan: {
-    iku1: { nilai: 78.5, target: 85, satuan: "%", label: "AEE PT", status: "warning" as const },
-    iku2: { nilai: 72.3, target: 80, satuan: "%", label: "Lulusan Bekerja/Wirausaha", status: "warning" as const },
-    iku3: { nilai: 45.8, target: 50, satuan: "%", label: "Mahasiswa Berprestasi", status: "warning" as const },
-    iku5: { nilai: 62.1, target: 70, satuan: "%", label: "Kerja Sama Industri", status: "warning" as const },
-    iku7: { nilai: 68.4, target: 75, satuan: "%", label: "Keterlibatan SDGs", status: "warning" as const },
-    iku9: { nilai: 35.2, target: 40, satuan: "%", label: "Pendapatan Non-Akademik", status: "warning" as const },
-    iku12: { nilai: 82.0, target: 85, satuan: "%", label: "Kesejahteraan Dosen", status: "success" as const },
-  },
+// GET /api/iku?tahun=2025 or GET /api/iku (all data)
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const tahun = searchParams.get("tahun");
+    const prodi = searchParams.get("prodi");
 
-  iku1: {
-    title: "Angka Efisiensi Edukasi (AEE PT)",
-    deskripsi: "Tingkat keberhasilan mahasiswa menyelesaikan studi tepat waktu sesuai masa studi standar",
-    formula: "(Jumlah mahasiswa lulus sesuai masa tempuh / Total mahasiswa terdaftar) × 100%",
-    nilai: 78.5,
-    target: 85,
-    aeeIdeal: { D3: 33, D4: 25, S1: 25, S2: 50, S3: 33 },
-    perProdi: [
-      { prodi: "Manajemen (S1)", jenjang: "S1", aeeRealisasi: 22.5, aeeIdeal: 25, pencapaian: 90.0, mahasiswa: 320, lulusTepat: 72 },
-      { prodi: "Akuntansi (S1)", jenjang: "S1", aeeRealisasi: 21.0, aeeIdeal: 25, pencapaian: 84.0, mahasiswa: 280, lulusTepat: 59 },
-      { prodi: "Hukum (S1)", jenjang: "S1", aeeRealisasi: 19.5, aeeIdeal: 25, pencapaian: 78.0, mahasiswa: 250, lulusTepat: 49 },
-      { prodi: "Teknik Informatika (S1)", jenjang: "S1", aeeRealisasi: 23.8, aeeIdeal: 25, pencapaian: 95.2, mahasiswa: 200, lulusTepat: 48 },
-      { prodi: "PGSD (S1)", jenjang: "S1", aeeRealisasi: 20.5, aeeIdeal: 25, pencapaian: 82.0, mahasiswa: 350, lulusTepat: 72 },
-      { prodi: "PBSI (S1)", jenjang: "S1", aeeRealisasi: 18.5, aeeIdeal: 25, pencapaian: 74.0, mahasiswa: 180, lulusTepat: 33 },
-      { prodi: "Administrasi Publik (S1)", jenjang: "S1", aeeRealisasi: 20.0, aeeIdeal: 25, pencapaian: 80.0, mahasiswa: 220, lulusTepat: 44 },
-      { prodi: "Magister Manajemen (S2)", jenjang: "S2", aeeRealisasi: 42.0, aeeIdeal: 50, pencapaian: 84.0, mahasiswa: 60, lulusTepat: 25 },
-      { prodi: "Magister Hukum (S2)", jenjang: "S2", aeeRealisasi: 38.5, aeeIdeal: 50, pencapaian: 77.0, mahasiswa: 45, lulusTepat: 17 },
-      { prodi: "Keperawatan (D3)", jenjang: "D3", aeeRealisasi: 28.0, aeeIdeal: 33, pencapaian: 84.8, mahasiswa: 150, lulusTepat: 42 },
-    ],
-    trendTahunan: [
-      { tahun: 2021, nilai: 68.2 },
-      { tahun: 2022, nilai: 71.5 },
-      { tahun: 2023, nilai: 74.8 },
-      { tahun: 2024, nilai: 76.3 },
-      { tahun: 2025, nilai: 78.5 },
-    ],
-  },
+    const where: Record<string, unknown> = {};
+    if (tahun) where.tahun = parseInt(tahun);
+    if (prodi) where.prodi = prodi;
 
-  iku2: {
-    title: "Lulusan Bekerja, Berwirausaha, atau Lanjut Studi",
-    deskripsi: "Persentase lulusan yang langsung bekerja, berwirausaha, atau melanjutkan studi dalam 1 tahun setelah kelulusan",
-    formula: "Σ(n × k) / t × 100%",
-    nilai: 72.3,
-    target: 80,
-    distribusi: [
-      { kategori: "Bekerja (Swasta)", jumlah: 245, persentase: 38.5 },
-      { kategori: "Bekerja (Pemerintah/BUMN)", jumlah: 85, persentase: 13.4 },
-      { kategori: "Berwirausaha (Founder)", jumlah: 68, persentase: 10.7 },
-      { kategori: "Berwirausaha (Freelancer)", jumlah: 42, persentase: 6.6 },
-      { kategori: "Melanjutkan Studi", jumlah: 55, persentase: 8.6 },
-      { kategori: "Sudah Bekerja Sebelum Lulus", jumlah: 62, persentase: 9.7 },
-      { kategori: "Belum Bekerja", jumlah: 80, persentase: 12.6 },
-    ],
-    masaTunggu: [
-      { range: "< 3 bulan", jumlah: 180, persentase: 28.3 },
-      { range: "3-6 bulan", jumlah: 145, persentase: 22.8 },
-      { range: "6-12 bulan", jumlah: 120, persentase: 18.9 },
-      { range: "> 12 bulan", jumlah: 80, persentase: 12.6 },
-      { range: "Sudah bekerja", jumlah: 112, persentase: 17.6 },
-    ],
-    perFakultas: [
-      { fakultas: "FEB", bekerja: 75, wirausaha: 15, studi: 8, belum: 2 },
-      { fakultas: "FHUKUM", bekerja: 70, wirausaha: 8, studi: 12, belum: 10 },
-      { fakultas: "FTIK", bekerja: 80, wirausaha: 12, studi: 5, belum: 3 },
-      { fakultas: "FKIP", bekerja: 65, wirausaha: 10, studi: 15, belum: 10 },
-      { fakultas: "FKES", bekerja: 82, wirausaha: 5, studi: 8, belum: 5 },
-      { fakultas: "FISIP", bekerja: 68, wirausaha: 12, studi: 10, belum: 10 },
-    ],
-    trendTahunan: [
-      { tahun: 2021, nilai: 58.5 },
-      { tahun: 2022, nilai: 63.2 },
-      { tahun: 2023, nilai: 67.8 },
-      { tahun: 2024, nilai: 70.1 },
-      { tahun: 2025, nilai: 72.3 },
-    ],
-  },
+    const data = await db.ikuData.findMany({ where, orderBy: [{ tahun: "desc" }, { prodi: "asc" }] });
 
-  iku3: {
-    title: "Mahasiswa Berkegiatan/Prestasi di Luar Program Studi",
-    deskripsi: "Persentase mahasiswa Diploma dan Sarjana yang memperoleh pengalaman pembelajaran atau prestasi di luar program studinya",
-    formula: "Σ(n × k) / t × 100%",
-    nilai: 45.8,
-    target: 50,
-    jenisKegiatan: [
-      { jenis: "Magang/Praktik Kerja", jumlah: 320, persentase: 42.1 },
-      { jenis: "Program Mahasiswa Berdampak", jumlah: 125, persentase: 16.4 },
-      { jenis: "Pertukaran Mahasiswa", jumlah: 45, persentase: 5.9 },
-      { jenis: "Penelitian/Riset", jumlah: 85, persentase: 11.2 },
-      { jenis: "Kompetisi/Prestasi", jumlah: 185, persentase: 24.3 },
-    ],
-    prestasi: [
-      { tingkat: "Internasional", juara1: 3, juara2_3: 5, harapan: 2, finalis: 8 },
-      { tingkat: "Nasional", juara1: 15, juara2_3: 22, harapan: 10, finalis: 35 },
-      { tingkat: "Provinsi", juara1: 28, juara2_3: 35, harapan: 15, finalis: 45 },
-    ],
-    sksDiluar: [
-      { kategori: "≤ 5 SKS", jumlah: 280, bobot: 0.4 },
-      { kategori: "6-10 SKS", jumlah: 150, bobot: 0.6 },
-      { kategori: "≥ 10 SKS", jumlah: 45, bobot: 1.0 },
-    ],
-    trendTahunan: [
-      { tahun: 2021, nilai: 28.5 },
-      { tahun: 2022, nilai: 33.2 },
-      { tahun: 2023, nilai: 38.8 },
-      { tahun: 2024, nilai: 42.1 },
-      { tahun: 2025, nilai: 45.8 },
-    ],
-  },
+    // Parse JSON fields
+    const parsed = data.map((d) => ({
+      ...d,
+      iku1: d.iku1 ? JSON.parse(d.iku1) : null,
+      iku2: d.iku2 ? JSON.parse(d.iku2) : null,
+      iku3: d.iku3 ? JSON.parse(d.iku3) : null,
+      iku5: d.iku5 ? JSON.parse(d.iku5) : null,
+      iku7: d.iku7 ? JSON.parse(d.iku7) : null,
+      iku9: d.iku9 ? JSON.parse(d.iku9) : null,
+      iku12: d.iku12 ? JSON.parse(d.iku12) : null,
+    }));
 
-  iku5: {
-    title: "Luaran Hasil Kerja Sama dan Hilirisasi dengan Industri/Lembaga",
-    deskripsi: "Persentase program studi yang memiliki kerja sama yang menghasilkan luaran nyata dengan industri/lembaga",
-    formula: "Jumlah Prodi dengan kerja sama aktif / Total Prodi × 100%",
-    nilai: 62.1,
-    target: 70,
-    jenisKerjasama: [
-      { jenis: "Penelitian Bersama", jumlah: 12, aktif: 10 },
-      { jenis: "Magang Industri", jumlah: 18, aktif: 15 },
-      { jenis: "Pengembangan Kurikulum", jumlah: 8, aktif: 6 },
-      { jenis: "Transfer Teknologi", jumlah: 5, aktif: 3 },
-      { jenis: "Pembiayaan Riset", jumlah: 6, aktif: 4 },
-      { jenis: "Pengabdian Masyarakat", jumlah: 10, aktif: 8 },
-    ],
-    luaran: [
-      { jenis: "Publikasi Bersama", jumlah: 28 },
-      { jenis: "Paten/CI", jumlah: 5 },
-      { jenis: "Produk/Prototipe", jumlah: 12 },
-      { jenis: "MoU Aktif", jumlah: 45 },
-      { jenis: "Mahasiswa Magang", jumlah: 320 },
-    ],
-    perProdi: [
-      { prodi: "Teknik Informatika", kerjasama: 8, luaran: 12, persentase: 85 },
-      { prodi: "Manajemen", kerjasama: 6, luaran: 8, persentase: 72 },
-      { prodi: "Akuntansi", kerjasama: 5, luaran: 6, persentase: 65 },
-      { prodi: "Hukum", kerjasama: 3, luaran: 4, persentase: 48 },
-      { prodi: "PGSD", kerjasama: 4, luaran: 5, persentase: 55 },
-      { prodi: "Keperawatan", kerjasama: 7, luaran: 9, persentase: 78 },
-      { prodi: "Administrasi Publik", kerjasama: 3, luaran: 3, persentase: 42 },
-    ],
-    trendTahunan: [
-      { tahun: 2021, nilai: 42.5 },
-      { tahun: 2022, nilai: 48.3 },
-      { tahun: 2023, nilai: 53.8 },
-      { tahun: 2024, nilai: 58.2 },
-      { tahun: 2025, nilai: 62.1 },
-    ],
-  },
+    return NextResponse.json(parsed);
+  } catch (error) {
+    console.error("GET /api/iku error:", error);
+    return NextResponse.json({ error: "Failed to fetch data" }, { status: 500 });
+  }
+}
 
-  iku7: {
-    title: "Keterlibatan dalam SDGs",
-    deskripsi: "Keterlibatan perguruan tinggi dalam mendukung pencapaian Tujuan Pembangunan Berkelanjutan (SDGs), khususnya SDG 1, 4, dan 17",
-    formula: "Skor komposit berdasarkan indikator SDG 1, 4, dan 17",
-    nilai: 68.4,
-    target: 75,
-    sdgDetail: [
-      {
-        sdg: "SDG 1: Tanpa Kemiskinan",
-        skor: 65.2,
-        kegiatan: [
-          "Program pemberdayaan masyarakat desa tertinggal",
-          "Riset pengentasan kemiskinan di Kab. Tulungagung",
-          "Beasiswa bagi mahasiswa kurang mampu",
-          "Program KKN tematik pengentasan kemiskinan",
-        ],
-        jumlahKegiatan: 15,
-        jumlahMhsTerlibat: 450,
-      },
-      {
-        sdg: "SDG 4: Pendidikan Berkualitas",
-        skor: 72.8,
-        kegiatan: [
-          "Program pembelajaran inklusif",
-          "Pelatihan guru sekolah dasar",
-          "Pengembangan e-learning untuk masyarakat",
-          "Program literasi digital",
-          "Sertifikasi kompetensi bagi mahasiswa",
-        ],
-        jumlahKegiatan: 22,
-        jumlahMhsTerlibat: 680,
-      },
-      {
-        sdg: "SDG 17: Kemitraan untuk Tujuan",
-        skor: 67.2,
-        kegiatan: [
-          "Kerja sama dengan Pemerintah Daerah",
-          "Kemitraan dengan NGO internasional",
-          "Kolaborasi riset dengan universitas luar negeri",
-          "Program volunteer bersama komunitas",
-        ],
-        jumlahKegiatan: 12,
-        jumlahMhsTerlibat: 320,
-      },
-    ],
-    indikatorSDG: [
-      { indikator: "Penelitian SDG", skor: 62.5 },
-      { indikator: "Pengabdian SDG", skor: 70.3 },
-      { indikator: "Kurikulum SDG", skor: 58.8 },
-      { indikator: "Kampus Berkelanjutan", skor: 65.4 },
-      { indikator: "Kemitraan SDG", skor: 67.2 },
-      { indikator: "Advokasi SDG", skor: 72.1 },
-    ],
-    trendTahunan: [
-      { tahun: 2021, nilai: 48.2 },
-      { tahun: 2022, nilai: 53.5 },
-      { tahun: 2023, nilai: 59.8 },
-      { tahun: 2024, nilai: 64.2 },
-      { tahun: 2025, nilai: 68.4 },
-    ],
-  },
+// POST /api/iku - Create or update IKU data for a prodi+tahun
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { prodi, fakultas, tahun, ikuId, data: ikuData } = body;
 
-  iku9: {
-    title: "Pendapatan/Penghasilan dari Bidang Non-Akademik",
-    deskripsi: "Persentase pendapatan perguruan tinggi yang berasal dari sumber non-akademik terhadap total pendapatan",
-    formula: "Pendapatan non-akademik / Total pendapatan × 100%",
-    nilai: 35.2,
-    target: 40,
-    sumberPendapatan: [
-      { sumber: "Kerja Sama Industri", nominal: 2800, persentase: 28.5 },
-      { sumber: "Jasa Konsultasi", nominal: 1500, persentase: 15.3 },
-      { sumber: "Sewa Fasilitas", nominal: 1200, persentase: 12.2 },
-      { sumber: "Pelatihan/Sertifikasi", nominal: 1800, persentase: 18.4 },
-      { sumber: "Hibah Penelitian", nominal: 1100, persentase: 11.2 },
-      { sumber: "Royalti/Paten", nominal: 350, persentase: 3.6 },
-      { sumber: "Lain-lain", nominal: 1050, persentase: 10.7 },
-    ],
-    perTahun: [
-      { tahun: 2021, akademik: 12000, nonAkademik: 3200, total: 15200, persentase: 21.1 },
-      { tahun: 2022, akademik: 13500, nonAkademik: 4100, total: 17600, persentase: 23.3 },
-      { tahun: 2023, akademik: 14000, nonAkademik: 5200, total: 19200, persentase: 27.1 },
-      { tahun: 2024, akademik: 15000, nonAkademik: 6800, total: 21800, persentase: 31.2 },
-      { tahun: 2025, akademik: 15800, nonAkademik: 8600, total: 24400, persentase: 35.2 },
-    ],
-    trendPersentase: [
-      { tahun: 2021, nilai: 21.1 },
-      { tahun: 2022, nilai: 23.3 },
-      { tahun: 2023, nilai: 27.1 },
-      { tahun: 2024, nilai: 31.2 },
-      { tahun: 2025, nilai: 35.2 },
-    ],
-  },
+    if (!prodi || !fakultas || !tahun || !ikuId) {
+      return NextResponse.json({ error: "Missing required fields: prodi, fakultas, tahun, ikuId" }, { status: 400 });
+    }
 
-  iku12: {
-    title: "Perencanaan Strategis Peningkatan Kesejahteraan Dosen",
-    deskripsi: "Ketersediaan dan implementasi perencanaan strategis untuk meningkatkan kesejahteraan dosen",
-    formula: "Skor komposit berdasarkan indikator kesejahteraan dosen",
-    nilai: 82.0,
-    target: 85,
-    indikator: [
-      { aspek: "Renstra Kesejahteraan", skor: 88, ket: "Tersedia dan terimplementasi" },
-      { aspek: "Tunjangan Kinerja", skor: 82, ket: "Diberikan secara berkala" },
-      { aspek: "Pengembangan Karir", skor: 78, ket: "Program aktif berjalan" },
-      { aspek: "Jaminan Kesehatan", skor: 90, ket: "Cakupan komprehensif" },
-      { aspek: "Beban Kerja Optimal", skor: 75, ket: "Sebagian terpenuhi" },
-      { aspek: "Kesejahteraan Non-Finansial", skor: 80, ket: "Program penghargaan aktif" },
-      { aspek: "Kompensasi Kompetitif", skor: 76, ket: "Disesuaikan berkala" },
-    ],
-    perFakultas: [
-      { fakultas: "FEB", skor: 84 },
-      { fakultas: "FHUKUM", skor: 80 },
-      { fakultas: "FTIK", skor: 85 },
-      { fakultas: "FKIP", skor: 78 },
-      { fakultas: "FKES", skor: 83 },
-      { fakultas: "FISIP", skor: 79 },
-    ],
-    realisasiAnggaran: [
-      { tahun: 2021, anggaran: 2500, realisasi: 2100, persentase: 84.0 },
-      { tahun: 2022, anggaran: 2800, realisasi: 2450, persentase: 87.5 },
-      { tahun: 2023, anggaran: 3100, realisasi: 2780, persentase: 89.7 },
-      { tahun: 2024, anggaran: 3500, realisasi: 3050, persentase: 87.1 },
-      { tahun: 2025, anggaran: 3800, realisasi: 3350, persentase: 88.2 },
-    ],
-    trendTahunan: [
-      { tahun: 2021, nilai: 68.5 },
-      { tahun: 2022, nilai: 73.2 },
-      { tahun: 2023, nilai: 77.8 },
-      { tahun: 2024, nilai: 80.1 },
-      { tahun: 2025, nilai: 82.0 },
-    ],
-  },
-};
+    const validIkuIds = ["iku1", "iku2", "iku3", "iku5", "iku7", "iku9", "iku12"];
+    if (!validIkuIds.includes(ikuId)) {
+      return NextResponse.json({ error: "Invalid ikuId" }, { status: 400 });
+    }
 
-export async function GET() {
-  return NextResponse.json(ikuData);
+    const jsonData = JSON.stringify(ikuData);
+
+    // Upsert: find existing record for this prodi+tahun, or create new
+    const existing = await db.ikuData.findUnique({
+      where: { prodi_tahun: { prodi, tahun: parseInt(tahun) } },
+    });
+
+    let result;
+    if (existing) {
+      result = await db.ikuData.update({
+        where: { id: existing.id },
+        data: { [ikuId]: jsonData },
+      });
+    } else {
+      result = await db.ikuData.create({
+        data: {
+          prodi,
+          fakultas,
+          tahun: parseInt(tahun),
+          [ikuId]: jsonData,
+        },
+      });
+    }
+
+    return NextResponse.json({
+      ...result,
+      iku1: result.iku1 ? JSON.parse(result.iku1) : null,
+      iku2: result.iku2 ? JSON.parse(result.iku2) : null,
+      iku3: result.iku3 ? JSON.parse(result.iku3) : null,
+      iku5: result.iku5 ? JSON.parse(result.iku5) : null,
+      iku7: result.iku7 ? JSON.parse(result.iku7) : null,
+      iku9: result.iku9 ? JSON.parse(result.iku9) : null,
+      iku12: result.iku12 ? JSON.parse(result.iku12) : null,
+    });
+  } catch (error) {
+    console.error("POST /api/iku error:", error);
+    return NextResponse.json({ error: "Failed to save data" }, { status: 500 });
+  }
+}
+
+// DELETE /api/iku?prodi=s1-akuntansi&tahun=2025
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const prodi = searchParams.get("prodi");
+    const tahun = searchParams.get("tahun");
+
+    if (!prodi || !tahun) {
+      return NextResponse.json({ error: "Missing required fields: prodi, tahun" }, { status: 400 });
+    }
+
+    await db.ikuData.deleteMany({
+      where: { prodi, tahun: parseInt(tahun) },
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("DELETE /api/iku error:", error);
+    return NextResponse.json({ error: "Failed to delete data" }, { status: 500 });
+  }
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,9 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Dashboard IKU - Universitas Tulungagung",
-  description: "Dashboard Interaktif Pencapaian Indikator Kinerja Utama (IKU) Universitas Tulungagung",
-  keywords: ["IKU", "Universitas Tulungagung", "Dashboard", "Pencapaian", "Kinerja Utama"],
-  authors: [{ name: "Universitas Tulungagung" }],
+  description: "Dashboard Interaktif Pencapaian Indikator Kinerja Utama (IKU) Universitas Tulungagung - Input & Monitoring",
 };
 
 export default function RootLayout({
