@@ -133,16 +133,16 @@ export const IKU_FIELDS: Record<string, IkuFieldDef[]> = {
     { key: "totalMahasiswa", label: "Total Mahasiswa Terdaftar (t)", type: "number", placeholder: "0", helperText: "Total seluruh mahasiswa program studi yang terdaftar", min: 0 },
   ],
   iku5: [
-    { key: "jumlahLuaran", label: "Jumlah Luaran Hasil Kerja Sama", type: "number", placeholder: "0", helperText: "Jumlah luaran nyata dari kerja sama dengan industri/lembaga", min: 0 },
-    { key: "totalKerjasama", label: "Total Kerja Sama Perguruan Tinggi", type: "number", placeholder: "0", helperText: "Total kerja sama yang dilakukan perguruan tinggi", min: 0 },
+    { key: "jumlahLuaran", label: "Jumlah Luaran Hasil Kerja Sama Prodi", type: "number", placeholder: "0", helperText: "Jumlah luaran nyata dari kerja sama prodi ini dengan industri/lembaga", min: 0 },
+    { key: "totalKerjasama", label: "Total Kerja Sama Program Studi", type: "number", placeholder: "0", helperText: "Total kerja sama yang dilakukan program studi ini", min: 0 },
   ],
   iku7: [
-    { key: "jumlahProgramSDG", label: "Jumlah Program SDGs (1, 4, 17 + 2 Pilihan)", type: "number", placeholder: "0", helperText: "Jumlah program/kegiatan yang berkontribusi pada SDG 1, 4, 17 dan 2 SDG pilihan institusi", min: 0 },
-    { key: "totalProgram", label: "Total Program SDGs Perguruan Tinggi", type: "number", placeholder: "0", helperText: "Total seluruh program/kegiatan SDGs perguruan tinggi", min: 0 },
+    { key: "jumlahProgramSDG", label: "Jumlah Program SDGs Prodi (1, 4, 17 + 2 Pilihan)", type: "number", placeholder: "0", helperText: "Jumlah program/kegiatan prodi ini yang berkontribusi pada SDG 1, 4, 17 dan 2 SDG pilihan", min: 0 },
+    { key: "totalProgram", label: "Total Program SDGs Program Studi", type: "number", placeholder: "0", helperText: "Total seluruh program/kegiatan SDGs program studi ini", min: 0 },
   ],
   iku9: [
-    { key: "pendapatanNonAkademik", label: "Pendapatan Non-Akademik (Rp)", type: "number", placeholder: "0", helperText: "Pendapatan/penghasilan dari bidang non-akademik", min: 0 },
-    { key: "totalPendapatan", label: "Total Pendapatan Perguruan Tinggi (Rp)", type: "number", placeholder: "0", helperText: "Total seluruh pendapatan perguruan tinggi dalam satu periode", min: 0 },
+    { key: "pendapatanNonAkademik", label: "Pendapatan Non-Akademik Prodi (Rp)", type: "number", placeholder: "0", helperText: "Pendapatan/penghasilan prodi ini dari bidang non-akademik", min: 0 },
+    { key: "totalPendapatan", label: "Total Pendapatan Program Studi (Rp)", type: "number", placeholder: "0", helperText: "Total seluruh pendapatan program studi ini dalam satu periode", min: 0 },
   ],
   iku12: [
     { key: "dokumenTersedia", label: "Ketersediaan Dokumen Perencanaan", type: "select", helperText: "Apakah dokumen perencanaan strategis kesejahteraan dosen tersedia?", options: [

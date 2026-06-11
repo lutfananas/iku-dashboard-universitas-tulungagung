@@ -477,8 +477,9 @@ export default function IKUDashboard() {
                           <div className="flex items-start gap-2">
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 5:</p>
-                              <p>Persentase = Jumlah Luaran Hasil Kerjasama / Total Kerjasama PT × 100%</p>
+                              <p className="font-semibold text-navy mb-1">Rumus IKU 5 (Level Prodi):</p>
+                              <p>Persentase = Luaran Hasil Kerjasama Prodi / Total Kerjasama Prodi × 100%</p>
+                              <p className="mt-1 text-slate-500">Isi data kerjasama prodi ini. Rasio universitas dihitung otomatis di Global Universitas.</p>
                             </div>
                           </div>
                         </div>
@@ -488,8 +489,9 @@ export default function IKUDashboard() {
                           <div className="flex items-start gap-2">
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 7:</p>
-                              <p>Persentase = Program SDGs (1, 4, 17 + 2 Pilihan) / Total Program SDGs PT × 100%</p>
+                              <p className="font-semibold text-navy mb-1">Rumus IKU 7 (Level Prodi):</p>
+                              <p>Persentase = Program SDGs Prodi / Total Program SDGs Prodi × 100%</p>
+                              <p className="mt-1 text-slate-500">Isi data SDGs prodi ini. Rasio universitas dihitung otomatis di Global Universitas.</p>
                             </div>
                           </div>
                         </div>
@@ -499,8 +501,9 @@ export default function IKUDashboard() {
                           <div className="flex items-start gap-2">
                             <Info className="w-4 h-4 text-navy mt-0.5 shrink-0" />
                             <div className="text-xs text-slate-600">
-                              <p className="font-semibold text-navy mb-1">Rumus IKU 9:</p>
-                              <p>Persentase = Pendapatan Non-Akademik / Total Pendapatan PT × 100%</p>
+                              <p className="font-semibold text-navy mb-1">Rumus IKU 9 (Level Prodi):</p>
+                              <p>Persentase = Pendapatan Non-Akademik Prodi / Total Pendapatan Prodi × 100%</p>
+                              <p className="mt-1 text-slate-500">Isi data pendapatan prodi ini. Rasio universitas dihitung otomatis di Global Universitas.</p>
                             </div>
                           </div>
                         </div>
