@@ -1,0 +1,502 @@
+  1001→                  return (
+  1002→                    <div key={iku.id} className={`p-4 rounded-lg border ${getSpmiStatusBg(status)}`}>
+  1003→                      <div className="flex items-center justify-between mb-2">
+  1004→                        <span className="text-sm font-bold text-slate-200">{iku.label}</span>
+  1005→                        {getSpmiIcon(status)}
+  1006→                      </div>
+  1007→                      <p className="text-xs text-slate-500 mb-1">{iku.shortTitle}</p>
+  1008→                      <div className="flex items-end gap-2 mb-2">
+  1009→                        <span className="text-2xl font-bold gradient-text">{value.toFixed(1)}%</span>
+  1010→                        <Badge className={`text-[10px] font-semibold border mb-1 ${getSpmiStatusBadge(status)}`}>
+  1011→                          {getSpmiStatusLabel(status)}
+  1012→                        </Badge>
+  1013→                      </div>
+  1014→                      <Progress value={value} className={`h-1.5 ${getSpmiProgressColor(status)}`} />
+  1015→                    </div>
+  1016→                  );
+  1017→                })}
+  1018→              </div>
+  1019→            )}
+  1020→          </CardContent>
+  1021→        </Card>
+  1022→
+  1023→        {/* Narrative: IKU-to-IAPT Mapping */}
+  1024→        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
+  1025→          <CardHeader className="pb-3">
+  1026→            <CardTitle className="text-base font-semibold gradient-text flex items-center gap-2">
+  1027→              <FileText className="w-4 h-4" />
+  1028→              Narasi: Keterkaitan Pencapaian IKU dengan Standar Akreditasi
+  1029→            </CardTitle>
+  1030→            <CardDescription>
+  1031→              Pemetaan indikator pada Instrumen Akreditasi Perguruan Tinggi (IAPT) Versi 4.1 yang dipengaruhi oleh pencapaian IKU sesuai Kepmendiktisaintek No. 358/M/KEP/2026
+  1032→            </CardDescription>
+  1033→          </CardHeader>
+  1034→          <CardContent>
+  1035→            <div className="rounded-lg p-4 mb-5 border-l-4" style={{ background: "rgba(22,22,42,0.5)", borderLeftColor: GOLD }}>
+  1036→              <p className="text-sm text-slate-200 leading-relaxed">
+  1037→                Berdasarkan fokus institusi pada <strong>7 IKU Wajib</strong> sesuai Keputusan Menteri Pendidikan Tinggi, Sains, dan Teknologi Nomor 358/M/KEP/2026, berikut adalah pemetaan lengkap indikator pada Instrumen Akreditasi Perguruan Tinggi (IAPT) Versi 4.1 yang secara langsung maupun tidak langsung dipengaruhi oleh pencapaian IKU tersebut. Sebagai tim Penjaminan Mutu, daftar ini dapat digunakan untuk memastikan bahwa setiap data IKU yang dikumpulkan juga memenuhi syarat bukti (eviden) untuk butir-butir indikator akreditasi.
+  1038→              </p>
+  1039→            </div>
+  1040→
+  1041→            <Accordion type="multiple" className="space-y-3">
+  1042→              {/* Kriteria 1: Budaya Mutu */}
+  1043→              <AccordionItem value="budaya-mutu" className="glass-card rounded-xl overflow-hidden border-0 transition-all duration-300">
+  1044→                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-white/[0.03] group">
+  1045→                  <div className="flex items-center gap-3 text-left">
+  1046→                    <div className={`p-1.5 rounded-md ${getSpmiStatusBg(getSpmiStatus(kriteriaScores.budayaMutu))}`}>
+  1047→                      {getSpmiIcon(getSpmiStatus(kriteriaScores.budayaMutu))}
+  1048→                    </div>
+  1049→                    <div>
+  1050→                      <span className="text-sm font-semibold gradient-text">1. Kriteria Budaya Mutu</span>
+  1051→                      <p className="text-xs text-slate-400">Fokus pada Tata Kelola Mutu</p>
+  1052→                    </div>
+  1053→                    <Badge variant="outline" className="ml-2 text-[10px]">{kriteriaScores.budayaMutu.toFixed(1)}%</Badge>
+  1054→                  </div>
+  1055→                </AccordionTrigger>
+  1056→                <AccordionContent className="px-4 pb-4">
+  1057→                  <div className="rounded-lg p-4 border-l-4 mb-3" style={{ background: "rgba(22,22,42,0.5)", borderLeftColor: GOLD }}>
+  1058→                    <p className="text-xs text-slate-500 leading-relaxed">
+  1059→                      Pemenuhan IKU ini menunjang sistem penjaminan mutu internal (SPMI) dalam mengelola data kinerja.
+  1060→                    </p>
+  1061→                  </div>
+  1062→                  <div className="space-y-3">
+  1063→                    <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku1))}`}>
+  1064→                      <div className="flex items-center gap-2 mb-1.5">
+  1065→                        <span className="text-xs font-bold text-slate-200">IKU 1 (AEE PT) → Indikator 3</span>
+  1066→                        <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku1))}`}>
+  1067→                          {ikuValues.iku1.toFixed(1)}% - {getSpmiStatusLabel(getSpmiStatus(ikuValues.iku1))}
+  1068→                        </Badge>
+  1069→                      </div>
+  1070→                      <p className="text-xs text-slate-500">
+  1071→                        <strong>Laporan Implementasi SPMI:</strong> Pencapaian 7 IKU Wajib harus dilaporkan secara berkala (setiap 3 bulan) melalui PD Dikti. Laporan kinerja yang terus membaik dari data IKU ini menjadi bukti utama keberfungsian sistem pengelolaan data dan informasi.
+  1072→                      </p>
+  1073→                    </div>
+  1074→                  </div>
+  1075→                </AccordionContent>
+  1076→              </AccordionItem>
+  1077→
+  1078→              {/* Kriteria 2: Relevansi */}
+  1079→              <AccordionItem value="relevansi" className="glass-card rounded-xl overflow-hidden border-0 transition-all duration-300">
+  1080→                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-white/[0.03] group">
+  1081→                  <div className="flex items-center gap-3 text-left">
+  1082→                    <div className={`p-1.5 rounded-md ${getSpmiStatusBg(getSpmiStatus(kriteriaScores.relevansi))}`}>
+  1083→                      {getSpmiIcon(getSpmiStatus(kriteriaScores.relevansi))}
+  1084→                    </div>
+  1085→                    <div>
+  1086→                      <span className="text-sm font-semibold gradient-text">2. Kriteria Relevansi</span>
+  1087→                      <p className="text-xs text-slate-400">Fokus pada Luaran Tridharma</p>
+  1088→                    </div>
+  1089→                    <Badge variant="outline" className="ml-2 text-[10px]">{kriteriaScores.relevansi.toFixed(1)}%</Badge>
+  1090→                  </div>
+  1091→                </AccordionTrigger>
+  1092→                <AccordionContent className="px-4 pb-4">
+  1093→                  <div className="rounded-lg p-4 border-l-4 mb-3" style={{ background: "rgba(22,22,42,0.5)", borderLeftColor: GOLD }}>
+  1094→                    <p className="text-xs text-slate-500 leading-relaxed">
+  1095→                      Kriteria ini memiliki kaitan paling banyak dengan 7 IKU Wajib, terutama terkait dampak dan luaran pendidikan serta penelitian.
+  1096→                    </p>
+  1097→                  </div>
+  1098→                  <div className="space-y-3">
+  1099→                    {/* IKU 1 */}
+  1100→                    <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku1))}`}>
+  1101→                      <div className="flex items-center gap-2 mb-1.5">
+  1102→                        <span className="text-xs font-bold text-slate-200">IKU 1 (AEE PT)</span>
+  1103→                        <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku1))}`}>
+  1104→                          {ikuValues.iku1.toFixed(1)}%
+  1105→                        </Badge>
+  1106→                      </div>
+  1107→                      <div className="space-y-1.5 ml-2">
+  1108→                        <p className="text-xs text-slate-500">
+  1109→                          <strong className="text-slate-200">→ Indikator 10 (Perbaikan Proses Pembelajaran):</strong> Data efisiensi edukasi menunjukkan apakah proses pembelajaran diperbaiki secara berkelanjutan berdasarkan evaluasi masa studi mahasiswa.
+  1110→                        </p>
+  1111→                        <p className="text-xs text-slate-500">
+  1112→                          <strong className="text-slate-200">→ Indikator 15 (Analisis Prestasi & Kelulusan):</strong> Mengukur keberhasilan lulus tepat waktu sesuai masa tempuh kurikulum yang ditetapkan institusi.
+  1113→                        </p>
+  1114→                      </div>
+  1115→                    </div>
+  1116→
+  1117→                    {/* IKU 2 */}
+  1118→                    <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku2))}`}>
+  1119→                      <div className="flex items-center gap-2 mb-1.5">
+  1120→                        <span className="text-xs font-bold text-slate-200">IKU 2 (Kualitas Lulusan)</span>
+  1121→                        <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku2))}`}>
+  1122→                          {ikuValues.iku2.toFixed(1)}%
+  1123→                        </Badge>
+  1124→                      </div>
+  1125→                      <div className="space-y-1.5 ml-2">
+  1126→                        <p className="text-xs text-slate-500">
+  1127→                          <strong className="text-slate-200">→ Indikator 14 (Kompetensi Lulusan):</strong> Pengakuan dan apresiasi kompetensi lulusan oleh dunia kerja (DUDIK) yang dibuktikan dengan tingkat upah &gt; 1,2x UMP.
+  1128→                        </p>
+  1129→                        <p className="text-xs text-slate-500">
+  1130→                          <strong className="text-slate-200">→ Indikator 15 (Keterserapan Lapangan Kerja):</strong> Analisis terhadap lulusan yang langsung bekerja atau berwirausaha dalam jangka waktu 1 tahun.
+  1131→                        </p>
+  1132→                      </div>
+  1133→                    </div>
+  1134→
+  1135→                    {/* IKU 3 */}
+  1136→                    <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku3))}`}>
+  1137→                      <div className="flex items-center gap-2 mb-1.5">
+  1138→                        <span className="text-xs font-bold text-slate-200">IKU 3 (Kegiatan Mahasiswa)</span>
+  1139→                        <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku3))}`}>
+  1140→                          {ikuValues.iku3.toFixed(1)}%
+  1141→                        </Badge>
+  1142→                      </div>
+  1143→                      <div className="space-y-1.5 ml-2">
+  1144→                        <p className="text-xs text-slate-500">
+  1145→                          <strong className="text-slate-200">→ Indikator 15 (Analisis Prestasi Mahasiswa):</strong> Mencakup prestasi di luar program studi baik tingkat provinsi, nasional, maupun internasional.
+  1146→                        </p>
+  1147→                        <p className="text-xs text-slate-500">
+  1148→                          <strong className="text-slate-200">→ Indikator 32 (Layanan Mahasiswa):</strong> Bukti adanya layanan dan pengakuan resmi bagi mahasiswa untuk belajar di luar program studi.
+  1149→                        </p>
+  1150→                      </div>
+  1151→                    </div>
+  1152→
+  1153→                    {/* IKU 5 */}
+  1154→                    <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku5))}`}>
+  1155→                      <div className="flex items-center gap-2 mb-1.5">
+  1156→                        <span className="text-xs font-bold text-slate-200">IKU 5 (Hilirisasi & Kerja Sama)</span>
+  1157→                        <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku5))}`}>
+  1158→                          {ikuValues.iku5.toFixed(1)}%
+  1159→                        </Badge>
+  1160→                      </div>
+  1161→                      <div className="space-y-1.5 ml-2">
+  1162→                        <p className="text-xs text-slate-500">
+  1163→                          <strong className="text-slate-200">→ Indikator 18 (Mutu & Relevansi Penelitian):</strong> Menunjukkan hasil penelitian yang memenuhi kriteria kemanfaatan bagi mitra industri atau masyarakat.
+  1164→                        </p>
+  1165→                        <p className="text-xs text-slate-500">
+  1166→                          <strong className="text-slate-200">→ Indikator 22 (Mutu & Relevansi PkM):</strong> Bukti bahwa pengabdian kepada masyarakat memiliki dampak nyata dan mendukung misi institusi.
+  1167→                        </p>
+  1168→                        <p className="text-xs text-slate-500">
+  1169→                          <strong className="text-slate-200">→ Indikator 34 (Kepuasan Pemangku Kepentingan):</strong> Tingkat kepuasan mitra kerja terhadap kolaborasi tridharma yang dilakukan.
+  1170→                        </p>
+  1171→                      </div>
+  1172→                    </div>
+  1173→                  </div>
+  1174→                </AccordionContent>
+  1175→              </AccordionItem>
+  1176→
+  1177→              {/* Kriteria 3: Akuntabilitas */}
+  1178→              <AccordionItem value="akuntabilitas" className="glass-card rounded-xl overflow-hidden border-0 transition-all duration-300">
+  1179→                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-white/[0.03] group">
+  1180→                  <div className="flex items-center gap-3 text-left">
+  1181→                    <div className={`p-1.5 rounded-md ${getSpmiStatusBg(getSpmiStatus(kriteriaScores.akuntabilitas))}`}>
+  1182→                      {getSpmiIcon(getSpmiStatus(kriteriaScores.akuntabilitas))}
+  1183→                    </div>
+  1184→                    <div>
+  1185→                      <span className="text-sm font-semibold gradient-text">3. Kriteria Akuntabilitas</span>
+  1186→                      <p className="text-xs text-slate-400">Fokus pada Manajemen Sumber Daya</p>
+  1187→                    </div>
+  1188→                    <Badge variant="outline" className="ml-2 text-[10px]">{kriteriaScores.akuntabilitas.toFixed(1)}%</Badge>
+  1189→                  </div>
+  1190→                </AccordionTrigger>
+  1191→                <AccordionContent className="px-4 pb-4">
+  1192→                  <div className="rounded-lg p-4 border-l-4 mb-3" style={{ background: "rgba(22,22,42,0.5)", borderLeftColor: GOLD }}>
+  1193→                    <p className="text-xs text-slate-500 leading-relaxed">
+  1194→                      Fokus pada IKU 9 dan 12 secara langsung memperkuat aspek pengelolaan keuangan dan SDM yang transparan.
+  1195→                    </p>
+  1196→                  </div>
+  1197→                  <div className="space-y-3">
+  1198→                    {/* IKU 9 */}
+  1199→                    <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku9))}`}>
+  1200→                      <div className="flex items-center gap-2 mb-1.5">
+  1201→                        <span className="text-xs font-bold text-slate-200">IKU 9 (Pendapatan Non-Akademik)</span>
+  1202→                        <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku9))}`}>
+  1203→                          {ikuValues.iku9.toFixed(1)}%
+  1204→                        </Badge>
+  1205→                      </div>
+  1206→                      <div className="space-y-1.5 ml-2">
+  1207→                        <p className="text-xs text-slate-500">
+  1208→                          <strong className="text-slate-200">→ Indikator 27 (Renstra Keuangan):</strong> Adanya rencana strategis keuangan 5 tahunan yang mencakup diversifikasi pendanaan dari riset dan unit bisnis.
+  1209→                        </p>
+  1210→                        <p className="text-xs text-slate-500">
+  1211→                          <strong className="text-slate-200">→ Indikator 33 (Pola Pengelolaan Keuangan):</strong> Menjalankan pola pengelolaan keuangan yang sehat sesuai status penyelenggaraan institusi.
+  1212→                        </p>
+  1213→                        <p className="text-xs text-slate-500">
+  1214→                          <strong className="text-slate-200">→ Indikator 35 (Audit Keuangan Eksternal):</strong> Terkait kewajiban audit oleh auditor independen untuk memastikan kewajaran laporan keuangan.
+  1215→                        </p>
+  1216→                      </div>
+  1217→                    </div>
+  1218→
+  1219→                    {/* IKU 12 */}
+  1220→                    <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku12))}`}>
+  1221→                      <div className="flex items-center gap-2 mb-1.5">
+  1222→                        <span className="text-xs font-bold text-slate-200">IKU 12 (Kesejahteraan Dosen)</span>
+  1223→                        <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku12))}`}>
+  1224→                          {ikuValues.iku12.toFixed(1)}%
+  1225→                        </Badge>
+  1226→                      </div>
+  1227→                      <div className="space-y-1.5 ml-2">
+  1228→                        <p className="text-xs text-slate-500">
+  1229→                          <strong className="text-slate-200">→ Indikator 6 (Renstra Pengelolaan SDM):</strong> Bukti adanya perencanaan strategis yang menunjukkan analisis kebutuhan dan pengembangan kesejahteraan dosen.
+  1230→                        </p>
+  1231→                        <p className="text-xs text-slate-500">
+  1232→                          <strong className="text-slate-200">→ Indikator 11 (Dosen Tetap Jabatan Akademik):</strong> Perencanaan kesejahteraan yang dikaitkan dengan jenjang jabatan akademik mendorong dosen untuk terus meningkatkan kualifikasi fungsionalnya.
+  1233→                        </p>
+  1234→                        <p className="text-xs text-slate-500">
+  1235→                          <strong className="text-slate-200">→ Indikator 29 (Pengelolaan Fungsional):</strong> Khususnya pada aspek penempatan personil (staffing) dan pengarahan (leading) dalam tata kelola SDM.
+  1236→                        </p>
+  1237→                      </div>
+  1238→                    </div>
+  1239→                  </div>
+  1240→                </AccordionContent>
+  1241→              </AccordionItem>
+  1242→
+  1243→              {/* Kriteria 4: Diferensiasi Misi */}
+  1244→              <AccordionItem value="diferensiasi" className="glass-card rounded-xl overflow-hidden border-0 transition-all duration-300">
+  1245→                <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-white/[0.03] group">
+  1246→                  <div className="flex items-center gap-3 text-left">
+  1247→                    <div className={`p-1.5 rounded-md ${getSpmiStatusBg(getSpmiStatus(kriteriaScores.diferensiasi))}`}>
+  1248→                      {getSpmiIcon(getSpmiStatus(kriteriaScores.diferensiasi))}
+  1249→                    </div>
+  1250→                    <div>
+  1251→                      <span className="text-sm font-semibold gradient-text">4. Kriteria Diferensiasi Misi</span>
+  1252→                      <p className="text-xs text-slate-400">Fokus pada Keunikan Institusi</p>
+  1253→                    </div>
+  1254→                    <Badge variant="outline" className="ml-2 text-[10px]">{kriteriaScores.diferensiasi.toFixed(1)}%</Badge>
+  1255→                  </div>
+  1256→                </AccordionTrigger>
+  1257→                <AccordionContent className="px-4 pb-4">
+  1258→                  <div className="rounded-lg p-4 border-l-4 mb-3" style={{ background: "rgba(22,22,42,0.5)", borderLeftColor: GOLD }}>
+  1259→                    <p className="text-xs text-slate-500 leading-relaxed">
+  1260→                      Pengambilan IKU 7 merupakan instrumen utama untuk menunjukkan identitas khas perguruan tinggi.
+  1261→                    </p>
+  1262→                  </div>
+  1263→                  <div className="space-y-3">
+  1264→                    <div className={`p-3 rounded-lg border ${getSpmiStatusBg(getSpmiStatus(ikuValues.iku7))}`}>
+  1265→                      <div className="flex items-center gap-2 mb-1.5">
+  1266→                        <span className="text-xs font-bold text-slate-200">IKU 7 (SDGs)</span>
+  1267→                        <Badge className={`text-[10px] border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku7))}`}>
+  1268→                          {ikuValues.iku7.toFixed(1)}%
+  1269→                        </Badge>
+  1270→                      </div>
+  1271→                      <div className="space-y-1.5 ml-2">
+  1272→                        <p className="text-xs text-slate-500">
+  1273→                          <strong className="text-slate-200">→ Indikator 36 (Penetapan Diferensiasi Misi):</strong> Pemilihan 2 SDGs tambahan di luar tema wajib menjadi bagian dari peta jalan pengembangan institusi yang unik.
+  1274→                        </p>
+  1275→                        <p className="text-xs text-slate-500">
+  1276→                          <strong className="text-slate-200">→ Indikator 38 (Penilaian Kesesuaian Capaian):</strong> Evaluasi tahunan untuk melihat sejauh mana kegiatan tridharma (SDGs 1, 4, 17, dan pilihan) selaras dengan misi yang dijanjikan.
+  1277→                        </p>
+  1278→                        <p className="text-xs text-slate-500">
+  1279→                          <strong className="text-slate-200">→ Indikator 39 (Pengakuan Keunggulan Eksternal):</strong> Apresiasi dari masyarakat atau lembaga internasional atas kontribusi nyata perguruan tinggi dalam isu-isu pembangunan berkelanjutan.
+  1280→                        </p>
+  1281→                      </div>
+  1282→                    </div>
+  1283→                  </div>
+  1284→                </AccordionContent>
+  1285→              </AccordionItem>
+  1286→            </Accordion>
+  1287→          </CardContent>
+  1288→        </Card>
+  1289→
+  1290→        {/* SPMI Summary Table */}
+  1291→        {hasAnyData && (
+  1292→          <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
+  1293→            <CardHeader className="pb-3">
+  1294→              <CardTitle className="text-base font-semibold gradient-text flex items-center gap-2">
+  1295→                <Award className="w-4 h-4" />
+  1296→                Ringkasan Penilaian SPMI dari Sisi IKU
+  1297→              </CardTitle>
+  1298→              <CardDescription>Rekomendasi tindak lanjut berdasarkan status ketercapaian</CardDescription>
+  1299→            </CardHeader>
+  1300→            <CardContent>
+  1301→              <div className="overflow-x-auto">
+  1302→                <table className="w-full text-sm">
+  1303→                  <thead>
+  1304→                    <tr className="border-b-2" style={{ borderColor: `${PRIMARY}30`, background: "rgba(22,22,42,0.5)" }}>
+  1305→                      <th className="text-left py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Kriteria</th>
+  1306→                      <th className="text-left py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>IKU Terkait</th>
+  1307→                      <th className="text-center py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Nilai</th>
+  1308→                      <th className="text-center py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Status</th>
+  1309→                      <th className="text-left py-3 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Rekomendasi</th>
+  1310→                    </tr>
+  1311→                  </thead>
+  1312→                  <tbody>
+  1313→                    {[
+  1314→                      {
+  1315→                        kriteria: "Budaya Mutu",
+  1316→                        iku: "Semua IKU (Pelaporan)",
+  1317→                        value: kriteriaScores.budayaMutu,
+  1318→                        rekomendasi: kriteriaScores.budayaMutu >= 75
+  1319→                          ? "Pertahankan pelaporan berkala dan tingkatkan kualitas data."
+  1320→                          : kriteriaScores.budayaMutu >= 50
+  1321→                          ? "Lengkapi pelaporan IKU yang belum terisi dan perbaiki mekanisme pengumpulan data."
+  1322→                          : "Perlu perhatian serius pada kelengkapan pelaporan IKU sebagai bukti implementasi SPMI.",
+  1323→                      },
+  1324→                      {
+  1325→                        kriteria: "Relevansi",
+  1326→                        iku: "IKU 1, 2, 3, 5",
+  1327→                        value: kriteriaScores.relevansi,
+  1328→                        rekomendasi: kriteriaScores.relevansi >= 75
+  1329→                          ? "Luaran tridharma sudah relevan. Fokus pada peningkatan mutu dan dampak luaran."
+  1330→                          : kriteriaScores.relevansi >= 50
+  1331→                          ? "Tingkatkan kualitas lulusan dan hilirisasi penelitian. Perbaiki proses pembelajaran berdasarkan evaluasi AEE."
+  1332→                          : "Perlu perbaikan signifikan pada efisiensi edukasi, keterserapan lulusan, dan kerja sama industri.",
+  1333→                      },
+  1334→                      {
+  1335→                        kriteria: "Akuntabilitas",
+  1336→                        iku: "IKU 9, 12",
+  1337→                        value: kriteriaScores.akuntabilitas,
+  1338→                        rekomendasi: kriteriaScores.akuntabilitas >= 75
+  1339→                          ? "Pengelolaan keuangan dan SDM sudah transparan. Pertahankan audit dan diversifikasi pendanaan."
+  1340→                          : kriteriaScores.akuntabilitas >= 50
+  1341→                          ? "Perlu diversifikasi pendapatan non-akademik dan peningkatan kesejahteraan dosen."
+  1342→                          : "Urgen: perbaiki pola pengelolaan keuangan dan susun dokumen perencanaan kesejahteraan dosen.",
+  1343→                      },
+  1344→                      {
+  1345→                        kriteria: "Diferensiasi Misi",
+  1346→                        iku: "IKU 7",
+  1347→                        value: kriteriaScores.diferensiasi,
+  1348→                        rekomendasi: kriteriaScores.diferensiasi >= 75
+  1349→                          ? "Identitas khas institusi melalui SDGs sudah kuat. Perkuat pengakuan eksternal."
+  1350→                          : kriteriaScores.diferensiasi >= 50
+  1351→                          ? "Tingkatkan program SDG dan perkuat keterkaitan dengan misi diferensiasi institusi."
+  1352→                          : "Kritikal: perlu penetapan dan implementasi program SDGs sebagai pembeda institusi.",
+  1353→                      },
+  1354→                    ].map((row) => {
+  1355→                      const status = getSpmiStatus(row.value);
+  1356→                      return (
+  1357→                        <tr key={row.kriteria} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+  1358→                          <td className="py-3 px-3 font-medium text-xs" style={{ color: PRIMARY }}>{row.kriteria}</td>
+  1359→                          <td className="py-3 px-3 text-xs text-slate-500">{row.iku}</td>
+  1360→                          <td className="py-3 px-3 text-center">
+  1361→                            <span className="text-xs font-bold" style={{ color: row.value > 0 ? PRIMARY : "rgba(255,255,255,0.15)" }}>
+  1362→                              {row.value.toFixed(1)}%
+  1363→                            </span>
+  1364→                          </td>
+  1365→                          <td className="py-3 px-3 text-center">
+  1366→                            <Badge className={`text-[10px] font-semibold border ${getSpmiStatusBadge(status)}`}>
+  1367→                              <span className="flex items-center gap-1">
+  1368→                                {getSpmiIcon(status)}
+  1369→                                {getSpmiStatusLabel(status)}
+  1370→                              </span>
+  1371→                            </Badge>
+  1372→                          </td>
+  1373→                          <td className="py-3 px-3 text-xs text-slate-500 max-w-xs">{row.rekomendasi}</td>
+  1374→                        </tr>
+  1375→                      );
+  1376→                    })}
+  1377→                  </tbody>
+  1378→                </table>
+  1379→              </div>
+  1380→
+  1381→              <Separator className="my-4" />
+  1382→
+  1383→              {/* Legend */}
+  1384→              <div className="flex flex-wrap gap-4 text-xs">
+  1385→                <div className="flex items-center gap-1.5">
+  1386→                  <CircleCheck className="w-3.5 h-3.5 text-emerald-400" />
+  1387→                  <span className="text-slate-500"><strong>Baik</strong> (≥75%)</span>
+  1388→                </div>
+  1389→                <div className="flex items-center gap-1.5">
+  1390→                  <CircleDot className="w-3.5 h-3.5 text-amber-400" />
+  1391→                  <span className="text-slate-500"><strong>Cukup</strong> (50-74%)</span>
+  1392→                </div>
+  1393→                <div className="flex items-center gap-1.5">
+  1394→                  <AlertTriangle className="w-3.5 h-3.5 text-orange-400" />
+  1395→                  <span className="text-slate-500"><strong>Perlu Perhatian</strong> (25-49%)</span>
+  1396→                </div>
+  1397→                <div className="flex items-center gap-1.5">
+  1398→                  <CircleX className="w-3.5 h-3.5 text-red-400" />
+  1399→                  <span className="text-slate-500"><strong>Belum Tercapai</strong> (&lt;25%)</span>
+  1400→                </div>
+  1401→              </div>
+  1402→            </CardContent>
+  1403→          </Card>
+  1404→        )}
+  1405→
+  1406→        {/* IAPT Indicator Mapping Detail */}
+  1407→        {hasAnyData && (
+  1408→          <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
+  1409→            <CardHeader className="pb-3">
+  1410→              <CardTitle className="text-base font-semibold gradient-text flex items-center gap-2">
+  1411→                <TrendingUp className="w-4 h-4" />
+  1412→                Detail Pemetaan Indikator IAPT 4.1
+  1413→              </CardTitle>
+  1414→              <CardDescription>Setiap IKU dan indikator IAPT yang dipengaruhinya beserta status pencapaian</CardDescription>
+  1415→            </CardHeader>
+  1416→            <CardContent>
+  1417→              <div className="overflow-x-auto custom-scrollbar max-h-96 overflow-y-auto">
+  1418→                <table className="w-full text-sm">
+  1419→                  <thead className="sticky top-0 z-10" style={{ background: "rgba(22,22,42,0.5)" }}>
+  1420→                    <tr className="border-b-2" style={{ borderColor: `${PRIMARY}30` }}>
+  1421→                      <th className="text-left py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>IKU</th>
+  1422→                      <th className="text-left py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Indikator IAPT</th>
+  1423→                      <th className="text-left py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Deskripsi</th>
+  1424→                      <th className="text-center py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Capaian IKU</th>
+  1425→                      <th className="text-center py-2.5 px-3 font-semibold text-xs" style={{ color: PRIMARY }}>Status</th>
+  1426→                    </tr>
+  1427→                  </thead>
+  1428→                  <tbody>
+  1429→                    {[
+  1430→                      { iku: "IKU 1", indikator: "Ind. 3", deskripsi: "Laporan Implementasi SPMI", ikuId: "iku1" },
+  1431→                      { iku: "IKU 1", indikator: "Ind. 10", deskripsi: "Perbaikan Proses Pembelajaran", ikuId: "iku1" },
+  1432→                      { iku: "IKU 1", indikator: "Ind. 15", deskripsi: "Analisis Prestasi & Kelulusan", ikuId: "iku1" },
+  1433→                      { iku: "IKU 2", indikator: "Ind. 14", deskripsi: "Kompetensi Lulusan", ikuId: "iku2" },
+  1434→                      { iku: "IKU 2", indikator: "Ind. 15", deskripsi: "Keterserapan Lapangan Kerja", ikuId: "iku2" },
+  1435→                      { iku: "IKU 3", indikator: "Ind. 15", deskripsi: "Analisis Prestasi Mahasiswa", ikuId: "iku3" },
+  1436→                      { iku: "IKU 3", indikator: "Ind. 32", deskripsi: "Layanan Mahasiswa", ikuId: "iku3" },
+  1437→                      { iku: "IKU 5", indikator: "Ind. 18", deskripsi: "Mutu & Relevansi Penelitian", ikuId: "iku5" },
+  1438→                      { iku: "IKU 5", indikator: "Ind. 22", deskripsi: "Mutu & Relevansi PkM", ikuId: "iku5" },
+  1439→                      { iku: "IKU 5", indikator: "Ind. 34", deskripsi: "Kepuasan Pemangku Kepentingan", ikuId: "iku5" },
+  1440→                      { iku: "IKU 7", indikator: "Ind. 36", deskripsi: "Penetapan Diferensiasi Misi", ikuId: "iku7" },
+  1441→                      { iku: "IKU 7", indikator: "Ind. 38", deskripsi: "Penilaian Kesesuaian Capaian", ikuId: "iku7" },
+  1442→                      { iku: "IKU 7", indikator: "Ind. 39", deskripsi: "Pengakuan Keunggulan Eksternal", ikuId: "iku7" },
+  1443→                      { iku: "IKU 9", indikator: "Ind. 27", deskripsi: "Renstra Keuangan", ikuId: "iku9" },
+  1444→                      { iku: "IKU 9", indikator: "Ind. 33", deskripsi: "Pola Pengelolaan Keuangan", ikuId: "iku9" },
+  1445→                      { iku: "IKU 9", indikator: "Ind. 35", deskripsi: "Audit Keuangan Eksternal", ikuId: "iku9" },
+  1446→                      { iku: "IKU 12", indikator: "Ind. 6", deskripsi: "Renstra Pengelolaan SDM", ikuId: "iku12" },
+  1447→                      { iku: "IKU 12", indikator: "Ind. 11", deskripsi: "Dosen Tetap Jabatan Akademik", ikuId: "iku12" },
+  1448→                      { iku: "IKU 12", indikator: "Ind. 29", deskripsi: "Pengelolaan Fungsional", ikuId: "iku12" },
+  1449→                    ].map((row, idx) => {
+  1450→                      const value = ikuValues[row.ikuId];
+  1451→                      const status = getSpmiStatus(value);
+  1452→                      return (
+  1453→                        <tr key={idx} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+  1454→                          <td className="py-2 px-3 font-semibold text-xs" style={{ color: IKU_COLORS[row.ikuId] || PRIMARY }}>{row.iku}</td>
+  1455→                          <td className="py-2 px-3 text-xs text-slate-300 font-medium">{row.indikator}</td>
+  1456→                          <td className="py-2 px-3 text-xs text-slate-400">{row.deskripsi}</td>
+  1457→                          <td className="py-2 px-3 text-center">
+  1458→                            <span className="text-xs font-bold" style={{ color: value > 0 ? IKU_COLORS[row.ikuId] || PRIMARY : "rgba(255,255,255,0.15)" }}>
+  1459→                              {value.toFixed(1)}%
+  1460→                            </span>
+  1461→                          </td>
+  1462→                          <td className="py-2 px-3 text-center">
+  1463→                            <div className="flex items-center justify-center gap-1">
+  1464→                              {getSpmiIcon(status)}
+  1465→                              <span className={`text-[10px] font-semibold ${getSpmiStatusColor(status)}`}>
+  1466→                                {getSpmiStatusLabel(status)}
+  1467→                              </span>
+  1468→                            </div>
+  1469→                          </td>
+  1470→                        </tr>
+  1471→                      );
+  1472→                    })}
+  1473→                  </tbody>
+  1474→                </table>
+  1475→              </div>
+  1476→            </CardContent>
+  1477→          </Card>
+  1478→        )}
+  1479→
+  1480→        {/* Penilaian Wajib SPMI */}
+  1481→        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl" style={{ borderTop: `3px solid ${GOLD}` }}>
+  1482→          <CardHeader className="pb-3">
+  1483→            <CardTitle className="text-base font-bold gradient-text flex items-center gap-2">
+  1484→              <ShieldCheck className="w-5 h-5" style={{ color: GOLD }} />
+  1485→              Penilaian Wajib (Syarat Perlu) Indikator Akreditasi
+  1486→            </CardTitle>
+  1487→            <CardDescription className="text-xs">
+  1488→              Ketentuan mutlak yang harus dipenuhi agar institusi dapat meraih status &quot;Terakreditasi&quot; atau &quot;Terakreditasi Unggul&quot; berdasarkan 7 IKU Wajib sesuai Kepmendiktisaintek No. 358/M/KEP/2026
+  1489→            </CardDescription>
+  1490→          </CardHeader>
+  1491→          <CardContent>
+  1492→            <div className="rounded-lg p-3.5 mb-5 border-l-4" style={{ background: `linear-gradient(135deg, ${GOLD}08, ${GOLD}03)`, borderLeftColor: GOLD }}>
+  1493→              <p className="text-xs text-amber-900 leading-relaxed">
+  1494→                Berdasarkan pilihan institusi Anda untuk berfokus pada <strong>7 IKU Wajib</strong>, terdapat beberapa <strong>penilaian wajib (Syarat Perlu)</strong> dalam indikator akreditasi yang harus dipenuhi agar institusi Anda dapat meraih status <strong>&quot;Terakreditasi&quot;</strong> atau <strong>&quot;Terakreditasi Unggul&quot;</strong>. Berikut adalah daftar penilaian wajib dan ketentuan mutlak yang harus dipenuhi pada indikator-indikator tersebut.
+  1495→              </p>
+  1496→            </div>
+  1497→
+  1498→            <div className="space-y-4">
+  1499→              {/* 1. Aspek SDM */}
+  1500→              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+
+[showing lines 1001-1500 of 2274; use offset=1501 with limit to continue reading]

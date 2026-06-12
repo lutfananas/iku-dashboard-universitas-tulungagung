@@ -1,0 +1,502 @@
+  1501→                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "rgba(139,92,246,0.06)" }}>
+  1502→                  <Users className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
+  1503→                  <div>
+  1504→                    <h4 className="text-sm font-bold">Penilaian Wajib pada Aspek SDM</h4>
+  1505→                    <p className="text-[10px] text-white/70">IKU 12 &amp; Indikator 6, 11</p>
+  1506→                  </div>
+  1507→                  {hasAnyData && (
+  1508→                    <Badge className={`ml-auto text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku12))}`}>
+  1509→                      IKU 12: {ikuValues.iku12.toFixed(1)}%
+  1510→                    </Badge>
+  1511→                  )}
+  1512→                </div>
+  1513→                <div className="p-4 space-y-3 bg-[#16162A]">
+  1514→                  <p className="text-xs text-slate-500 italic">Untuk mendukung kriteria ini, institusi Anda memiliki kewajiban penilaian sebagai berikut:</p>
+  1515→                  <div className="space-y-2.5">
+  1516→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1517→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1518→                      <div>
+  1519→                        <p className="text-xs font-semibold text-slate-200">Dokumen Perencanaan Strategis</p>
+  1520→                        <p className="text-[11px] text-slate-500">Wajib memiliki Renstra atau Rencana Induk SDM yang telah ditetapkan secara resmi oleh pimpinan dan dapat diverifikasi.</p>
+  1521→                      </div>
+  1522→                    </div>
+  1523→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1524→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1525→                      <div>
+  1526→                        <p className="text-xs font-semibold text-slate-200">Standar Penghasilan Minimum</p>
+  1527→                        <p className="text-[11px] text-slate-500">Dokumen tersebut secara eksplisit wajib memuat target peningkatan kesejahteraan dosen dengan standar berbasis jenjang jabatan akademik, contohnya: <strong>Asisten Ahli ≥ 1,5× UMP</strong> dan <strong>Lektor ≥ 3× UMP</strong>.</p>
+  1528→                      </div>
+  1529→                    </div>
+  1530→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1531→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1532→                      <div>
+  1533→                        <p className="text-xs font-semibold text-slate-200">Kecukupan Dosen Tetap</p>
+  1534→                        <p className="text-[11px] text-slate-500">Perguruan tinggi wajib membuktikan kecukupan jumlah dosen tetap yang memiliki jabatan akademik di setiap program studi.</p>
+  1535→                      </div>
+  1536→                    </div>
+  1537→                  </div>
+  1538→                </div>
+  1539→              </div>
+  1540→
+  1541→              {/* 2. Luaran Pendidikan */}
+  1542→              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+  1543→                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "rgba(139,92,246,0.06)" }}>
+  1544→                  <GraduationCap className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
+  1545→                  <div>
+  1546→                    <h4 className="text-sm font-bold">Penilaian Wajib pada Luaran Pendidikan</h4>
+  1547→                    <p className="text-[10px] text-white/70">IKU 1, 2 &amp; Indikator 14, 15</p>
+  1548→                  </div>
+  1549→                  {hasAnyData && (
+  1550→                    <div className="ml-auto flex gap-1.5">
+  1551→                      <Badge className={`text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku1))}`}>
+  1552→                        IKU 1: {ikuValues.iku1.toFixed(1)}%
+  1553→                      </Badge>
+  1554→                      <Badge className={`text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku2))}`}>
+  1555→                        IKU 2: {ikuValues.iku2.toFixed(1)}%
+  1556→                      </Badge>
+  1557→                    </div>
+  1558→                  )}
+  1559→                </div>
+  1560→                <div className="p-4 space-y-3 bg-[#16162A]">
+  1561→                  <p className="text-xs text-slate-500 italic">Aspek ini merupakan inti dari kriteria Relevansi yang menilai dampak nyata institusi:</p>
+  1562→                  <div className="space-y-2.5">
+  1563→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1564→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1565→                      <div>
+  1566→                        <p className="text-xs font-semibold text-slate-200">Validitas Tracer Study (IKU 2)</p>
+  1567→                        <p className="text-[11px] text-slate-500">Penilaian wajib dilakukan melalui penelusuran lulusan (D1-S1) dalam jangka waktu maksimal 1 tahun setelah lulus.</p>
+  1568→                      </div>
+  1569→                    </div>
+  1570→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1571→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1572→                      <div>
+  1573→                        <p className="text-xs font-semibold text-slate-200">Responden Minimum</p>
+  1574→                        <p className="text-[11px] text-slate-500">Wajib mengumpulkan jumlah responden minimum sesuai formula <code className="px-1 py-0.5 rounded text-[10px] font-mono" style={{ backgroundColor: `${PRIMARY}15`, color: PRIMARY }}>n = N / (N×d² + 1)</code> dengan tingkat galat (error) sebesar <strong>2,3%</strong> agar data dianggap sah.</p>
+  1575→                      </div>
+  1576→                    </div>
+  1577→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1578→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1579→                      <div>
+  1580→                        <p className="text-xs font-semibold text-slate-200">Efisiensi Masa Studi (IKU 1)</p>
+  1581→                        <p className="text-[11px] text-slate-500">Wajib menghitung Angka Efisiensi Edukasi (AEE) berdasarkan jumlah mahasiswa yang lulus tepat waktu (misalnya 8 semester untuk Sarjana) dibandingkan total mahasiswa masuk.</p>
+  1582→                      </div>
+  1583→                    </div>
+  1584→                  </div>
+  1585→                </div>
+  1586→              </div>
+  1587→
+  1588→              {/* 3. Hilirisasi & Kerja Sama */}
+  1589→              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+  1590→                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "rgba(139,92,246,0.06)" }}>
+  1591→                  <Handshake className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
+  1592→                  <div>
+  1593→                    <h4 className="text-sm font-bold">Penilaian Wajib pada Hilirisasi &amp; Kerja Sama</h4>
+  1594→                    <p className="text-[10px] text-white/70">IKU 5 &amp; Indikator 18, 22, 34</p>
+  1595→                  </div>
+  1596→                  {hasAnyData && (
+  1597→                    <Badge className={`ml-auto text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku5))}`}>
+  1598→                      IKU 5: {ikuValues.iku5.toFixed(1)}%
+  1599→                    </Badge>
+  1600→                  )}
+  1601→                </div>
+  1602→                <div className="p-4 space-y-3 bg-[#16162A]">
+  1603→                  <p className="text-xs text-slate-500 italic">Penjaminan mutu harus memastikan setiap kerja sama memiliki bukti legalitas dan dampak:</p>
+  1604→                  <div className="space-y-2.5">
+  1605→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1606→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1607→                      <div>
+  1608→                        <p className="text-xs font-semibold text-slate-200">Legalitas Kerja Sama</p>
+  1609→                        <p className="text-[11px] text-slate-500">Setiap luaran wajib didukung oleh dokumen resmi seperti MoU atau MoA yang masih aktif dengan mitra industri atau lembaga.</p>
+  1610→                      </div>
+  1611→                    </div>
+  1612→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1613→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1614→                      <div>
+  1615→                        <p className="text-xs font-semibold text-slate-200">Bukti Pemanfaatan (Hilirisasi)</p>
+  1616→                        <p className="text-[11px] text-slate-500">Luaran (jurnal, produk terapan, atau seni) wajib dibuktikan telah dimanfaatkan melalui surat penerapan, laporan implementasi, atau bukti komersialisasi/lisensi dari mitra.</p>
+  1617→                      </div>
+  1618→                    </div>
+  1619→                  </div>
+  1620→                </div>
+  1621→              </div>
+  1622→
+  1623→              {/* 4. Tata Kelola & Keuangan */}
+  1624→              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+  1625→                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "rgba(139,92,246,0.06)" }}>
+  1626→                  <Wallet className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
+  1627→                  <div>
+  1628→                    <h4 className="text-sm font-bold">Penilaian Wajib pada Tata Kelola &amp; Keuangan</h4>
+  1629→                    <p className="text-[10px] text-white/70">IKU 9 &amp; Indikator 33, 35</p>
+  1630→                  </div>
+  1631→                  {hasAnyData && (
+  1632→                    <Badge className={`ml-auto text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku9))}`}>
+  1633→                      IKU 9: {ikuValues.iku9.toFixed(1)}%
+  1634→                    </Badge>
+  1635→                  )}
+  1636→                </div>
+  1637→                <div className="p-4 space-y-3 bg-[#16162A]">
+  1638→                  <p className="text-xs text-slate-500 italic">Untuk PTS, akuntabilitas keuangan memiliki standar penilaian yang spesifik:</p>
+  1639→                  <div className="space-y-2.5">
+  1640→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1641→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1642→                      <div>
+  1643→                        <p className="text-xs font-semibold text-slate-200">Audit Eksternal Independen</p>
+  1644→                        <p className="text-[11px] text-slate-500">Laporan keuangan institusi wajib diaudit oleh auditor independen terdaftar untuk memastikan kewajaran penyajian data.</p>
+  1645→                      </div>
+  1646→                    </div>
+  1647→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1648→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1649→                      <div>
+  1650→                        <p className="text-xs font-semibold text-slate-200">Opini Audit</p>
+  1651→                        <p className="text-[11px] text-slate-500">Hasil audit yang diakui minimal berstatus <strong>Wajar Tanpa Pengecualian (WTP)</strong> atau <strong>Wajar Dengan Pengecualian (WDP)</strong>.</p>
+  1652→                      </div>
+  1653→                    </div>
+  1654→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1655→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1656→                      <div>
+  1657→                        <p className="text-xs font-semibold text-slate-200">Diversifikasi Pendapatan</p>
+  1658→                        <p className="text-[11px] text-slate-500">Wajib mencatatkan pendapatan dari sumber non-akademik (hibah riset, unit bisnis, jasa layanan) di dalam laporan keuangan resmi.</p>
+  1659→                      </div>
+  1660→                    </div>
+  1661→                  </div>
+  1662→                </div>
+  1663→              </div>
+  1664→
+  1665→              {/* 5. Diferensiasi Misi */}
+  1666→              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+  1667→                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "rgba(139,92,246,0.06)" }}>
+  1668→                  <Globe className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
+  1669→                  <div>
+  1670→                    <h4 className="text-sm font-bold">Penilaian Wajib pada Diferensiasi Misi</h4>
+  1671→                    <p className="text-[10px] text-white/70">IKU 7 &amp; Indikator 36, 38</p>
+  1672→                  </div>
+  1673→                  {hasAnyData && (
+  1674→                    <Badge className={`ml-auto text-[10px] font-semibold border ${getSpmiStatusBadge(getSpmiStatus(ikuValues.iku7))}`}>
+  1675→                      IKU 7: {ikuValues.iku7.toFixed(1)}%
+  1676→                    </Badge>
+  1677→                  )}
+  1678→                </div>
+  1679→                <div className="p-4 space-y-3 bg-[#16162A]">
+  1680→                  <p className="text-xs text-slate-500 italic">Kewajiban dalam pemilihan tema strategis untuk keunikan institusi:</p>
+  1681→                  <div className="space-y-2.5">
+  1682→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1683→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1684→                      <div>
+  1685→                        <p className="text-xs font-semibold text-slate-200">Pemilihan 2 SDGs Tambahan</p>
+  1686→                        <p className="text-[11px] text-slate-500">Selain wajib berkontribusi pada <strong>SDG 1, 4, dan 17</strong>, institusi wajib memilih <strong>2 tujuan SDGs lain</strong> yang sesuai dengan keunggulan kampus.</p>
+  1687→                      </div>
+  1688→                    </div>
+  1689→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1690→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1691→                      <div>
+  1692→                        <p className="text-xs font-semibold text-slate-200">Formalitas dalam Renstra</p>
+  1693→                        <p className="text-[11px] text-slate-500">Penetapan 2 SDGs pilihan tersebut wajib dituangkan secara formal dalam dokumen Renstra atau laporan kinerja tahunan untuk dapat dinilai oleh asesor.</p>
+  1694→                      </div>
+  1695→                    </div>
+  1696→                  </div>
+  1697→                </div>
+  1698→              </div>
+  1699→
+  1700→              {/* 6. Budaya Mutu */}
+  1701→              <div className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg">
+  1702→                <div className="text-white px-4 py-3 flex items-center gap-2.5" style={{ background: "rgba(139,92,246,0.06)" }}>
+  1703→                  <ShieldCheck className="w-4 h-4 shrink-0" style={{ color: GOLD }} />
+  1704→                  <div>
+  1705→                    <h4 className="text-sm font-bold">Penilaian Wajib Budaya Mutu</h4>
+  1706→                    <p className="text-[10px] text-white/70">Indikator 3</p>
+  1707→                  </div>
+  1708→                </div>
+  1709→                <div className="p-4 space-y-3 bg-[#16162A]">
+  1710→                  <div className="space-y-2.5">
+  1711→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1712→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1713→                      <div>
+  1714→                        <p className="text-xs font-semibold text-slate-200">Pelaporan Berkala</p>
+  1715→                        <p className="text-[11px] text-slate-500">Institusi wajib memiliki laporan implementasi SPMI tingkat perguruan tinggi secara berkala melalui PD Dikti.</p>
+  1716→                      </div>
+  1717→                    </div>
+  1718→                    <div className="flex items-start gap-2.5 p-2.5 rounded-lg transition-colors hover:bg-white/[0.02]" style={{ background: "rgba(22,22,42,0.4)", borderLeft: `2px solid ${GOLD}` }}>
+  1719→                      <CircleCheck className="w-4 h-4 mt-0.5 shrink-0" style={{ color: TEAL }} />
+  1720→                      <div>
+  1721→                        <p className="text-xs font-semibold text-slate-200">Siklus PPEPP</p>
+  1722→                        <p className="text-[11px] text-slate-500">Penilaian wajib menunjukkan keberfungsian siklus <strong>Penetapan, Pelaksanaan, Evaluasi, Pengendalian, dan Peningkatan</strong> standar pendidikan tinggi secara terencana dan berkelanjutan.</p>
+  1723→                      </div>
+  1724→                    </div>
+  1725→                  </div>
+  1726→                </div>
+  1727→              </div>
+  1728→            </div>
+  1729→          </CardContent>
+  1730→        </Card>
+  1731→      </div>
+  1732→    );
+  1733→  };
+  1734→
+  1735→  // ============ RENDER: GLOBAL/FAKULTAS DASHBOARD ============
+  1736→  const renderAggregatedDashboard = () => {
+  1737→    const isGlobal = navSelection.mode === "global";
+  1738→    const fakultas = !isGlobal ? getFakultasById(navSelection.id) : null;
+  1739→    const prodiIds = isGlobal
+  1740→      ? ALL_PRODI.map((p) => p.id)
+  1741→      : getProdiByFakultas(navSelection.id).map((p) => p.id);
+  1742→
+  1743→    const title = isGlobal ? "Global Universitas" : fakultas?.nama || "";
+  1744→    const subtitle = isGlobal
+  1745→      ? "Akumulasi pencapaian IKU dari seluruh program studi"
+  1746→      : `Akumulasi pencapaian IKU dari ${getProdiByFakultas(navSelection.id).map((p) => p.nama).join(", ")}`;
+  1747→
+  1748→    // Calculate values per IKU
+  1749→    const ikuValues = IKU_LIST.map((iku) => ({
+  1750→      ...iku,
+  1751→      value: calcAggregatedValue(iku.id, prodiIds),
+  1752→    }));
+  1753→
+  1754→    // Per-prodi comparison data
+  1755→    const prodiComparison = prodiIds.map((pid) => {
+  1756→      const prodi = getProdiById(pid);
+  1757→      return {
+  1758→        id: pid,
+  1759→        nama: prodi?.nama || pid,
+  1760→        shortName: prodi?.nama.replace("S1 ", "").replace("D3 ", "") || pid,
+  1761→        values: IKU_LIST.map((iku) => ({
+  1762→          ikuId: iku.id,
+  1763→          label: iku.label,
+  1764→          value: calcProdiValue(iku.id, pid),
+  1765→        })),
+  1766→      };
+  1767→    });
+  1768→
+  1769→    // Bar chart data for each IKU
+  1770→    const ikuBarData = IKU_LIST.map((iku) => ({
+  1771→      name: iku.label,
+  1772→      shortTitle: iku.shortTitle,
+  1773→      value: calcAggregatedValue(iku.id, prodiIds),
+  1774→      prodiCount: prodiIds.filter((pid) => {
+  1775→        const d = getProdiData(pid);
+  1776→        return d && d[iku.id as keyof IkuRecord] !== null && hasData(d[iku.id as keyof IkuRecord] as Record<string, unknown>);
+  1777→      }).length,
+  1778→    }));
+  1779→
+  1780→    const barConfig: ChartConfig = {
+  1781→      value: { label: "Capaian (%)", color: PRIMARY },
+  1782→    };
+  1783→
+  1784→    const radarConfig: ChartConfig = {
+  1785→      value: { label: "Capaian", color: PRIMARY },
+  1786→    };
+  1787→
+  1788→    const hasAnyData = ikuValues.some((v) => v.value > 0);
+  1789→
+  1790→    return (
+  1791→      <div className="space-y-6">
+  1792→        {/* Header */}
+  1793→        <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl" style={{ borderLeft: `4px solid ${PRIMARY}`, boxShadow: `0 0 20px ${PRIMARY}10` }}>
+  1794→          <CardContent className="p-5">
+  1795→            <h2 className="text-lg font-bold gradient-text">{title}</h2>
+  1796→            <p className="text-sm text-slate-400 mt-1">{subtitle}</p>
+  1797→            <p className="text-xs text-slate-500 mt-0.5">Tahun Akademik {tahun}</p>
+  1798→          </CardContent>
+  1799→        </Card>
+  1800→
+  1801→        {/* Tabs: Dashboard & SPMI */}
+  1802→        <Tabs value={mainTab} onValueChange={setMainTab} className="space-y-4">
+  1803→          <TabsList className="iku-tabs w-full flex h-auto p-1.5 rounded-xl gap-1" style={{ background: "rgba(26, 26, 46, 0.6)", border: "1px solid rgba(255,255,255,0.04)" }}>
+  1804→            <TabsTrigger value="dashboard" className="text-sm font-semibold px-6 py-2.5 rounded-lg whitespace-nowrap data-[state=active]:shadow-lg transition-all duration-200 flex items-center gap-2">
+  1805→              <BarChart3 className="w-4 h-4" />
+  1806→              Dashboard IKU
+  1807→            </TabsTrigger>
+  1808→            <TabsTrigger value="spmi" className="text-sm font-semibold px-6 py-2.5 rounded-lg whitespace-nowrap data-[state=active]:shadow-lg transition-all duration-200 flex items-center gap-2">
+  1809→              <ShieldCheck className="w-4 h-4" />
+  1810→              SPMI
+  1811→            </TabsTrigger>
+  1812→          </TabsList>
+  1813→
+  1814→          <TabsContent value="dashboard" className="mt-4 space-y-6">
+  1815→            {!hasAnyData ? (
+  1816→              <Card className="glass-card overflow-hidden">
+  1817→                <CardContent className="p-12 text-center">
+  1818→                  <AlertCircle className="w-12 h-12 mx-auto mb-4" style={{ color: `${PRIMARY}60` }} />
+  1819→                  <h3 className="text-lg font-semibold text-slate-400 mb-2">Belum Ada Data</h3>
+  1820→                  <p className="text-sm text-slate-500 max-w-md mx-auto">
+  1821→                    Silakan pilih program studi di sidebar kiri dan masukkan data IKU terlebih dahulu.
+  1822→                    Data yang diinput akan otomatis diagregasi di halaman ini.
+  1823→                  </p>
+  1824→                </CardContent>
+  1825→              </Card>
+  1826→            ) : (
+  1827→              <>
+  1828→                {/* Data Completeness Warning */}
+  1829→                {(() => {
+  1830→                  const coverageList = IKU_LIST.map((iku) => ({
+  1831→                    ...iku,
+  1832→                    coverage: getIkuCoverage(iku.id, prodiIds),
+  1833→                  }));
+  1834→                  const incompleteIkus = coverageList.filter((c) => c.coverage.filled < c.coverage.total);
+  1835→                  if (incompleteIkus.length > 0) {
+  1836→                    return (
+  1837→                      <Card className="glass-card overflow-hidden" style={{ borderLeft: `3px solid ${GOLD}` }}>
+  1838→                        <CardContent className="p-4">
+  1839→                          <div className="flex items-start gap-3">
+  1840→                            <AlertTriangle className="w-5 h-5 mt-0.5 shrink-0" style={{ color: GOLD }} />
+  1841→                            <div>
+  1842→                              <h4 className="text-sm font-semibold text-amber-400">Data Belum Lengkap</h4>
+  1843→                              <p className="text-xs text-amber-500 mt-1">
+  1844→                                Prodi yang belum mengisi data otomatis dihitung <strong>0%</strong>, sehingga mempengaruhi rata-rata universitas. 
+  1845→                                Lengkapi data semua prodi untuk mendapatkan angka akumulasi yang akurat.
+  1846→                              </p>
+  1847→                              <div className="flex flex-wrap gap-2 mt-2">
+  1848→                                {coverageList.map((c) => (
+  1849→                                  <Badge key={c.id} variant="outline" className={`text-[10px] ${c.coverage.filled < c.coverage.total ? "border-amber-700/30 text-amber-400 bg-amber-900/20" : "border-emerald-700/30 text-emerald-400 bg-emerald-900/20"}`}>
+  1850→                                    {c.label}: {c.coverage.filled}/{c.coverage.total} prodi
+  1851→                                  </Badge>
+  1852→                                ))}
+  1853→                              </div>
+  1854→                            </div>
+  1855→                          </div>
+  1856→                        </CardContent>
+  1857→                      </Card>
+  1858→                    );
+  1859→                  }
+  1860→                  return null;
+  1861→                })()}
+  1862→
+  1863→                {/* KPI Summary Cards — Dark Bento with Neon Ring */}
+  1864→                <div className="relative rounded-2xl p-5 overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.04), rgba(6,182,212,0.03), rgba(244,63,94,0.02))" }}>
+  1865→                  {/* Decorative blurred circles for mesh effect */}
+  1866→                  <div className="absolute top-0 left-0 w-40 h-40 rounded-full opacity-20" style={{ background: PRIMARY, filter: "blur(80px)" }} />
+  1867→                  <div className="absolute bottom-0 right-0 w-48 h-48 rounded-full opacity-15" style={{ background: SECONDARY, filter: "blur(80px)" }} />
+  1868→                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full opacity-10" style={{ background: ACCENT, filter: "blur(60px)" }} />
+  1869→                <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+  1870→                  {ikuValues.map((iku) => {
+  1871→                    const coverage = getIkuCoverage(iku.id, prodiIds);
+  1872→                    const isComplete = coverage.filled === coverage.total;
+  1873→                    const ikuColor = IKU_COLORS[iku.id] || PRIMARY;
+  1874→                    const pct = Math.min(iku.value, 100);
+  1875→                    // SVG circular gauge math
+  1876→                    const radius = 42;
+  1877→                    const circ = 2 * Math.PI * radius;
+  1878→                    const offset = circ - (pct / 100) * circ;
+  1879→                    const ikuIcon = iku.id === "iku1" ? GraduationCap : iku.id === "iku2" ? Briefcase : iku.id === "iku3" ? Trophy : iku.id === "iku5" ? Handshake : iku.id === "iku7" ? Globe : iku.id === "iku9" ? Wallet : Users;
+  1880→                    const IkuIcon = ikuIcon;
+  1881→
+  1882→                    return (
+  1883→                      <div
+  1884→                        key={iku.id}
+  1885→                        className="kpi-glass-card"
+  1886→                        style={{ "--card-accent": ikuColor } as React.CSSProperties}
+  1887→                      >
+  1888→                        <div className="relative p-5 pb-4">
+  1889→                          {/* Top: IKU label + icon */}
+  1890→                          <div className="flex items-center justify-between mb-4">
+  1891→                            <div className="flex items-center gap-2.5">
+  1892→                              <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${ikuColor}20, ${ikuColor}08)` }}>
+  1893→                                <IkuIcon className="w-4.5 h-4.5" style={{ color: ikuColor }} />
+  1894→                              </div>
+  1895→                              <div>
+  1896→                                <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: ikuColor }}>{iku.label}</p>
+  1897→                                <p className="text-[10px] text-slate-500 font-medium">{iku.shortTitle}</p>
+  1898→                              </div>
+  1899→                            </div>
+  1900→                            {isComplete ? (
+  1901→                              <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: `${ikuColor}10` }}>
+  1902→                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+  1903→                              </div>
+  1904→                            ) : (
+  1905→                              <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: `${ikuColor}08` }}>
+  1906→                                <AlertCircle className="w-3.5 h-3.5 text-amber-500" />
+  1907→                              </div>
+  1908→                            )}
+  1909→                          </div>
+  1910→
+  1911→                          {/* Circular Gauge */}
+  1912→                          <div className="flex items-center justify-center my-2">
+  1913→                            <div className="relative" style={{ width: 110, height: 110 }}>
+  1914→                              <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
+  1915→                                {/* Decorative outer ring */}
+  1916→                                <circle cx="50" cy="50" r="48" fill="none" stroke={ikuColor} strokeWidth="0.3" opacity="0.15" />
+  1917→                                {/* Track */}
+  1918→                                <circle cx="50" cy="50" r={radius} fill="none" stroke={ikuColor} strokeWidth="7" opacity="0.1" />
+  1919→                                {/* Fill */}
+  1920→                                <circle
+  1921→                                  cx="50" cy="50" r={radius}
+  1922→                                  fill="none"
+  1923→                                  stroke={ikuColor}
+  1924→                                  strokeWidth="7"
+  1925→                                  strokeLinecap="round"
+  1926→                                  strokeDasharray={circ}
+  1927→                                  strokeDashoffset={iku.value > 0 ? offset : circ}
+  1928→                                  className="kpi-glass-ring-fill"
+  1929→                                  style={{ "--card-accent": ikuColor } as React.CSSProperties}
+  1930→                                />
+  1931→                              </svg>
+  1932→                              {/* Center content */}
+  1933→                              <div className="absolute inset-0 flex flex-col items-center justify-center">
+  1934→                                <span
+  1935→                                  className="text-2xl font-black leading-none font-mono"
+  1936→                                  style={iku.value > 0 ? {
+  1937→                                    background: `linear-gradient(135deg, ${ikuColor}, ${ikuColor}cc)`,
+  1938→                                    WebkitBackgroundClip: "text",
+  1939→                                    WebkitTextFillColor: "transparent",
+  1940→                                  } : { color: "#E2E8F0" }}
+  1941→                                >
+  1942→                                  {iku.value.toFixed(1)}
+  1943→                                </span>
+  1944→                                <span className="text-[10px] font-bold text-slate-500 mt-0.5">PERSEN</span>
+  1945→                              </div>
+  1946→                            </div>
+  1947→                          </div>
+  1948→
+  1949→                          {/* Bottom: Coverage */}
+  1950→                          <div className="flex items-center justify-center gap-1.5 mt-2">
+  1951→                            <div className="flex gap-0.5">
+  1952→                              {Array.from({ length: coverage.total }).map((_, i) => (
+  1953→                                <div
+  1954→                                  key={i}
+  1955→                                  className="w-1.5 h-1.5 rounded-full transition-all"
+  1956→                                  style={{
+  1957→                                    backgroundColor: i < coverage.filled ? ikuColor : "rgba(255,255,255,0.1)",
+  1958→                                  }}
+  1959→                                />
+  1960→                              ))}
+  1961→                            </div>
+  1962→                            <span className="text-[10px] font-semibold" style={{ color: isComplete ? "#10B981" : "#F59E0B" }}>
+  1963→                              {coverage.filled}/{coverage.total} prodi
+  1964→                            </span>
+  1965→                          </div>
+  1966→                        </div>
+  1967→                      </div>
+  1968→                    );
+  1969→                  })}
+  1970→                </div>
+  1971→                </div>
+  1972→
+  1973→                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  1974→                  {/* Radar Chart */}
+  1975→                  <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
+  1976→                    <CardHeader className="pb-2">
+  1977→                      <CardTitle className="text-base font-semibold gradient-text">Radar Pencapaian IKU</CardTitle>
+  1978→                      <CardDescription>Gabungan dari {prodiIds.length} program studi</CardDescription>
+  1979→                    </CardHeader>
+  1980→                    <CardContent>
+  1981→                      <ChartContainer config={radarConfig} className="h-[300px] w-full">
+  1982→                        <RadarChart data={ikuValues.map((v) => ({ iku: v.shortTitle, value: v.value }))}>
+  1983→                          <PolarGrid stroke="rgba(255,255,255,0.06)" />
+  1984→                          <PolarAngleAxis dataKey="iku" tick={{ fontSize: 10, fill: "#94A3B8" }} />
+  1985→                          <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 10, fill: "#64748B" }} />
+  1986→                          <Radar name="Capaian" dataKey="value" stroke={PRIMARY} fill={SECONDARY} fillOpacity={0.15} strokeWidth={2} />
+  1987→                          <ChartTooltip content={<ChartTooltipContent />} />
+  1988→                        </RadarChart>
+  1989→                      </ChartContainer>
+  1990→                    </CardContent>
+  1991→                  </Card>
+  1992→
+  1993→                  {/* Bar Chart */}
+  1994→                  <Card className="glass-card overflow-hidden transition-all duration-300 hover:shadow-xl">
+  1995→                    <CardHeader className="pb-2">
+  1996→                      <CardTitle className="text-base font-semibold gradient-text">Capaian per IKU</CardTitle>
+  1997→                      <CardDescription>Persentase capaian setiap indikator</CardDescription>
+  1998→                    </CardHeader>
+  1999→                    <CardContent>
+  2000→                      <ChartContainer config={barConfig} className="h-[300px] w-full">
+
+[showing lines 1501-2000 of 2274; use offset=2001 with limit to continue reading]

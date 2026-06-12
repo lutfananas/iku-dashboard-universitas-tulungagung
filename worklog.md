@@ -216,3 +216,115 @@ Stage Summary:
 - Header animated gradient: violet→cyan→rose
 - Sidebar: sleek dark with neon violet accent on active items
 - Zero lint errors, dev server running successfully
+
+## 2026-03-05 — Apple Liquid Glass + Super Retina Redesign
+
+### Summary
+Complete redesign of the IKU Dashboard from dark theme to Apple-inspired clean white theme with Liquid Glass effects and Super Retina tone colors matching the UNITA logo (crimson red, royal blue, gold).
+
+### Changes Made
+
+#### 1. Color Constants (page.tsx lines 46-69)
+- **PRIMARY**: `#8B5CF6` (Electric Violet) → `#E53E3E` (Clean Crimson Red — UNITA logo red, Super Retina)
+- **SECONDARY**: `#06B6D4` (Cyan) → `#3B82F6` (Clean Blue — UNITA logo blue, Super Retina)
+- **GOLD**: `#FBBF24` → `#F6AD55` (Warm Gold, Super Retina version)
+- **ACCENT**: `#F43F5E` (Rose) → `#8B5CF6` (Violet accent, Apple-like)
+- **CHART_COLORS**: Updated to Super Retina palette matching IKU colors
+- **IKU_COLORS**: Updated to Super Retina — iku1: Red, iku2: Blue, iku3: Amber/Gold, iku5: Emerald, iku7: Violet, iku9: Cyan, iku12: Pink
+- Added new constants: `PRIMARY_LIGHT`, `PRIMARY_DARK`, `SECONDARY_LIGHT`, `SECONDARY_DARK`, `GOLD_LIGHT`
+- Removed: `NAVY`, `NAVY_LIGHT` (no longer needed for light theme)
+
+#### 2. globals.css — Complete Rewrite
+- **Removed**: All dark theme styles (dark backgrounds, neon glow, header-premium, kpi-glass-card with dark bento, modern-sidebar dark, modern-card dark, etc.)
+- **Added**: Apple Liquid Glass Design System with:
+  - `liquid-glass` — translucent white with backdrop-blur, subtle multi-layer shadows
+  - `liquid-glass-elevated` — for sidebar/header with heavier blur
+  - `kpi-apple` — KPI card with top color bar, hover lift effect
+  - `sidebar-apple` — light off-white with blur
+  - `header-apple` — white with blur
+  - `input-apple` — light background with blue focus ring
+  - `tab-apple` — active: white with shadow, inactive: gray text
+  - `btn-apple` — spring-like hover/active transitions
+  - `badge-apple` — pill-shaped, semibold
+  - `bg-mesh-apple` — subtle gradient mesh background (#F5F5F7)
+  - `header-gradient-apple` — crimson → blue gradient animation
+  - Apple-style animations: `appleFadeIn`, `appleTitleSlide`, `appleWave1/2`, `logoPulse`, `badgeAppleShimmer`, `appleParticleRise`
+  - Apple-style scrollbar with subtle gray thumb
+- **Updated**: CSS custom properties to light theme values (background: #F5F5F7, foreground: #1D1D1F, etc.)
+
+#### 3. Header Section
+- Animated gradient background: crimson → deep crimson → blue → deep blue
+- Subtle mesh gradient overlay with Apple colors
+- Floating orbs updated to crimson/blue/gold tones
+- Subtle grid overlay
+- Particles: white/gold dots rising
+- Logo: crimson-blue-gold ring animation (not neon)
+- Title: Apple slide-in animation
+- IKU Badge: gold shimmer (not violet glow)
+- Wave bottom edge: points to #F5F5F7 (Apple light gray) instead of dark background
+
+#### 4. Sidebar
+- Background: light off-white with blur (`sidebar-apple`)
+- Logo: subtle pulse ring with blue tint
+- Text: gray-800/gray-500 (dark text on light background)
+- Active item: white background with crimson left border, subtle shadow
+- Year selector: clean white input
+- Fakultas items: gray text, hover gray-50 background
+- Prodi items: selected state with crimson left border and white background
+
+#### 5. KPI Cards
+- `kpi-glass-card` class updated to liquid glass white with:
+  - 3px top color bar matching IKU color
+  - Circular gauge with clean Apple-style ring (no neon glow/drop-shadow)
+  - Tabular nums for percentage display
+  - Clean gray labels
+  - Coverage dots: filled = IKU color, unfilled = rgba(0,0,0,0.06)
+  - Hover: subtle lift + shadow deepen
+
+#### 6. Chart Containers
+- All `glass-card` → `liquid-glass`
+- Chart grid lines: `rgba(0,0,0,0.04)` (subtle light theme)
+- Axis text colors: #86868B (Apple gray) and #AEAEB2 (light gray)
+- Radar chart: PRIMARY fill with 12% opacity
+- Bar chart: PRIMARY (crimson) fill
+
+#### 7. Tables
+- Clean white rows with subtle borders
+- Header: light background `rgba(0,0,0,0.02)` or `rgba(229,62,62,0.04)`
+- Border: `border-gray-100`
+- Hover: `bg-gray-50`
+- Zero-value text: `rgba(0,0,0,0.1)` instead of white/15%
+
+#### 8. Form Inputs
+- `modern-input` updated for light theme: light background, blue focus ring
+- Save button: Blue (#3B82F6) background, white text, `btn-apple` class
+- Form info boxes: rounded-xl, light background, border-left with IKU color
+
+#### 9. Tabs
+- `iku-tabs` + `tab-apple` class for both form and dashboard tabs
+- Background: `rgba(0,0,0,0.03)` (light gray)
+- Active: white with shadow
+- Inactive: gray text
+
+#### 10. SPMI Tab
+- Status colors updated for light theme:
+  - Backgrounds: `bg-emerald-50`, `bg-amber-50`, `bg-orange-50`, `bg-red-50`
+  - Badge: light background with dark text
+  - Icons: `text-emerald-600`, `text-amber-600`, etc.
+- SPMI section headers: light background `rgba(229,62,62,0.04)` instead of violet
+- Accordion items: `liquid-glass` with `hover:bg-gray-50`
+- Content cards: `bg-white` instead of `bg-[#16162A]`
+- Detail items: `rgba(0,0,0,0.02)` background instead of dark
+
+#### 11. Main Container & Footer
+- Background: `bg-mesh-apple` (subtle gradient mesh on light gray)
+- Footer: `#F5F5F7` background, gray text, subtle top border
+- Mobile overlay: `bg-black/30` instead of `bg-black/50`
+- Loading screen: `bg-mesh-apple` with blue spinner
+
+### Verification
+- ✅ Lint passed with no errors
+- ✅ Dev server running without errors
+- ✅ All functionality preserved (purely visual redesign)
+- ✅ No new packages added
+- ✅ Responsive design maintained
